@@ -7,10 +7,10 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li>
+        <li key={1}>
           <Link to={PATHS.clients}>Klienter</Link>
         </li>,
-        <li>
+        <li key={2}>
           <Link to="/signout">Logga ut</Link>
         </li>
       ];

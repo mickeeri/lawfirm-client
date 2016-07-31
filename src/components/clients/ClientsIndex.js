@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchClients } from '../../actions/index';
 import ClientRow from './ClientRow';
-// import '../styles/table.css';
+import '../../styles/s-ui-table.css';
 
 class ClientsIndex extends Component {
   componentWillMount() {
@@ -14,7 +14,7 @@ class ClientsIndex extends Component {
     return (
       <div className="index-wrapper">
         <h1 className="index-header">Klientregister</h1>
-        <table>
+        <table className="ui celled striped table">
           <thead>
             <tr>
               <th>Namn</th>
@@ -27,6 +27,11 @@ class ClientsIndex extends Component {
               <ClientRow key={client.id} client={client} />
             )}
           </tbody>
+          <tfoot>
+            <tr><th colSpan="3">
+              Pagination goes here.
+            </th>
+          </tr></tfoot>
         </table>
       </div>
     );
