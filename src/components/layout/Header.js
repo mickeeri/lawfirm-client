@@ -8,22 +8,28 @@ class Header extends Component {
     if (this.props.authenticated) {
       return [
         <li key={1}>
+          <Link to={PATHS.lawsuits}>Ärenden</Link>
+        </li>,
+        <li key={2}>
           <Link to={PATHS.clients}>Klienter</Link>
         </li>,
-        <li key={2}>
-          <Link to={PATHS.signOut}>Logga ut</Link>
-        </li>
-      ];
-    } else {
-      return [
-        <li key={1}>
-          <Link to={PATHS.signIn}>Logga in</Link>
+        <li key={3}>
+          <Link to="/">Jävsök</Link>
         </li>,
-        <li key={2}>
-          <Link to='sad'>Registera</Link>
+        <li key={4}>
+          <Link to={PATHS.signOut}>Logga ut</Link>
         </li>,
       ];
     }
+
+    return [
+      <li key={1}>
+        <Link to={PATHS.signIn}>Logga in</Link>
+      </li>,
+      <li key={2}>
+        <Link to="sad">Registera</Link>
+      </li>,
+    ];
   }
   render() {
     return (
