@@ -31,7 +31,7 @@ const renderField = field => (
 );
 
 const SignInForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting, errorMessage } = props;
+  const { handleSubmit, submitting, errorMessage } = props;
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`}>
       <Field name="email" icon="user icon" type="email" component={renderField} placeholder="E-post" />
