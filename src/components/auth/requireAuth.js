@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { PATHS } from '../../constants';
 
 export default (ComposedComponent) => {
   class Authentication extends Component {
@@ -10,7 +11,7 @@ export default (ComposedComponent) => {
     componentWillMount() {
       // If not authenticated, redirect too root path.
       if (!this.props.authenticated) {
-        this.context.router.push('/inlogg');
+        this.context.router.push(PATHS.signIn);
       }
     }
 

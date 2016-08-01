@@ -11,13 +11,13 @@ class Header extends Component {
           <Link to={PATHS.clients}>Klienter</Link>
         </li>,
         <li key={2}>
-          <Link to="/signout">Logga ut</Link>
+          <Link to={PATHS.signOut}>Logga ut</Link>
         </li>
       ];
     } else {
       return [
         <li key={1}>
-          <Link to="/signin">Logga in</Link>
+          <Link to={PATHS.signIn}>Logga in</Link>
         </li>,
         <li key={2}>
           <Link to='sad'>Registera</Link>
