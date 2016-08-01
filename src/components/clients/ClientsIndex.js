@@ -21,7 +21,12 @@ class ClientsIndex extends Component {
             (query) => dispatch(fetchClients({ query, page: 1 }))
           }
         />
-        <Paginator meta={meta} />
+        <Paginator
+          meta={meta}
+          onPaginate={
+            (page) => dispatch(fetchClients({ query: '', page }))
+          }
+        />
         <ClientsTable clients={clients} />
       </div>
     );

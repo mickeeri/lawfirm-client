@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { fetchClients } from '../../actions/index';
 
-const Paginator = ({ meta, dispatch }) => {
+const Paginator = ({ meta, onPaginate }) => {
   const renderPaginations = () => {
     const paginationItems = [];
     const { total_pages, current_page } = meta;
@@ -12,7 +10,7 @@ const Paginator = ({ meta, dispatch }) => {
           className={`item ${i === current_page ? 'active' : ''}`}
           key={i}
           onClick={() => {
-            dispatch(fetchClients({ query: '', page: i }));
+            onPaginate(i);
           }}
         >{i}</a>
       );
@@ -27,7 +25,7 @@ const Paginator = ({ meta, dispatch }) => {
         className={`${meta.current_page === 1 ? 'disabled' : ''} icon item`}
         onClick={() => {
           if (meta.previous_page) {
-            dispatch(fetchClients({ query: '', page: meta.previous_page }));
+            onPaginate(meta.previous_page);
           }
         }}
       ><i className="left chevron icon"></i></a>
@@ -37,7 +35,7 @@ const Paginator = ({ meta, dispatch }) => {
         className={`${meta.current_page === meta.total_pages ? 'disabled' : ''} icon item`}
         onClick={() => {
           if (meta.next_page) {
-            dispatch(fetchClients({ query: '', page: meta.next_page }));
+            onPaginate(meta.next_page);
           }
         }}
       ><i className="right chevron icon"></i></a>
@@ -46,7 +44,6 @@ const Paginator = ({ meta, dispatch }) => {
 };
 
 Paginator.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   meta: PropTypes.shape({
     total_pages: PropTypes.number,
     current_page: PropTypes.number,
@@ -54,7 +51,8 @@ Paginator.propTypes = {
     next_page: PropTypes.number,
     total_entries: PropTypes.number,
   }).isRequired,
+  onPaginate: PropTypes.func.isRequired,
 };
 
-export default connect()(Paginator);
+export default Paginator;
 
