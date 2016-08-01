@@ -8,7 +8,6 @@ import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
-import './styles/s-ui-container.css';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
