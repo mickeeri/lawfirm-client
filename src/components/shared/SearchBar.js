@@ -1,17 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchClients } from '../../actions';
+import React, { PropTypes } from 'react';
+import _ from 'lodash';
 
-class SearchBar extends Component {
-  render() {
-    const { onSearch } = this.props;
-    return (
-      <div className="ui icon input">
-        <input name="search" type="text" placeholder="Sök" onChange={(e) => onSearch(e.target.value)} />
-        <i className="search icon" />
-      </div>
-    );
-  }
-}
+const SearchBar = ({ onSearch }) => {
+  // Delay search request a little bit.
+  const handleOnSearch = _.debounce((query) => {
+    onSearch(query);
+  }, 300);
+
+  return (
+    <div className="ui icon input">
+      <input
+        name="search"
+        type="text"
+        placeholder="Sök"
+        onChange={e => { handleOnSearch(e.target.value); }}
+      />
+      <i className="search icon" />
+    </div>
+  );
+};
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
