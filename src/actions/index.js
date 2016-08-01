@@ -11,7 +11,7 @@ export const authError = (error) => (
   { type: AUTH_ERROR, payload: error }
 );
 
-export const signinUser = ({ email, password }) => (dispatch) => {
+export const signInUser = ({ email, password }) => (dispatch) => {
   axios.post(`${ROOT_URL}/authenticate`, { auth: { email, password } }).then(
     response => {
       // Update state to indicate user is authenticated.
@@ -29,20 +29,24 @@ export const signinUser = ({ email, password }) => (dispatch) => {
   );
 };
 
+export const signOutUser = () => {
+  localStorage.removeItem('auth_token');
+  return { type: UNAUTH_USER };
+};
+
 //-------------------------
 // Clients
 //-------------------------
-export const fetchClients = () => (dispatch) => {
-  axios.get(`${ROOT_URL}/clients`, {
+export const fetchClients = ({ query, page }) => (dispatch) => {
+  axios.get(`${ROOT_URL}/clients?query=${query}&page=${page}`, {
     headers: { Authorization: localStorage.getItem('auth_token') },
   }).then(
     response => {
-      dispatch( {type: FETCH_CLIENTS, payload: response.data.clients, });
+      dispatch({ type: FETCH_CLIENTS, payload: response.data });
     }
   ).catch(
     error => {
       console.error('Fel uppstod', error);
     }
-  )
-}
-
+  );
+};
