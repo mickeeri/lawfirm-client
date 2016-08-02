@@ -56,7 +56,11 @@ export const fetchClients = ({ query, page }) => (dispatch) => {
     }
   ).catch(
     error => {
-      console.error('Fel uppstod', error);
+      if (error.response.status === 401 ||
+        error.response.status === 403) {
+        dispatch(signOutUser());
+      }
+      console.error('Fel uppstod', error.response.data.message);
     }
   );
 };
@@ -71,7 +75,11 @@ export const fetchClient = (clientId) => (dispatch) => {
     }
   ).catch(
     error => {
-      console.error('Fel uppstod', error);
+      if (error.response.status === 401 ||
+        error.response.status === 403) {
+        dispatch(signOutUser());
+      }
+      console.error('Fel uppstod', error.response.data.message);
     }
   );
 };
@@ -79,17 +87,44 @@ export const fetchClient = (clientId) => (dispatch) => {
 //-------------------------
 // Lawsuits
 //-------------------------
-export const fetchLawsuits = ({ query, page }) => (dispatch) => {
+export const fetchLawsuits = ({ query = '', page = 1, status = 'only_active' }) => (dispatch) => {
   const firmId = localStorage.getItem('firm_id');
-  axios.get(`${ROOT_URL}/firm/${firmId}/lawsuits?query=${query}&page=${page}`, {
+  axios.get(`${ROOT_URL}/firm/${firmId}/lawsuits?query=${query}&page=${page}&status=${status}`, {
     headers: { Authorization: localStorage.getItem('auth_token') },
   }).then(
     response => {
-      dispatch({ type: FETCH_LAWSUITS, payload: response.data });
+      dispatch({ type: FETCH_LAWSUITS, payload: response.data, query });
     }
   ).catch(
     error => {
-      console.error('Fel uppstod', error);
+      if (error.response.status === 401 ||
+        error.response.status === 403) {
+        dispatch(signOutUser());
+      }
+      console.error('Fel uppstod', error.response.data.message);
+    }
+  );
+};
+
+export const fetchLawsuit = (lawsuitId) => (dispatch) => {
+  const firmId = localStorage.getItem('firm_id');
+  axios.get(`${ROOT_URL}/firm/${firmId}/lawsuits/${lawsuitId}`, {
+    headers: { Authorization: localStorage.getItem('auth_token') },
+  }).then(
+    response => {
+      dispatch({ type: FETCH_LAWSUIT, payload: response.data });
+    }
+  ).catch(
+    error => {
+      if (error.response) {
+        if (error.response.status === 401 ||
+          error.response.status === 403) {
+          console.error(error.response.data.message);
+          dispatch(signOutUser());
+        }
+        console.error(error.response.data.message);
+      }
+      console.error(error.message);
     }
   );
 };
