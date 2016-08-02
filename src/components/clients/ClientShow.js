@@ -3,7 +3,7 @@ import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import ClientInfo from './ClientInfo';
 
-class ClientsShow extends Component {
+class ClientShow extends Component {
   componentWillMount() {
     this.props.fetchClient(this.props.params.id);
   }
@@ -35,7 +35,7 @@ class ClientsShow extends Component {
   }
 }
 
-ClientsShow.propTypes = {
+ClientShow.propTypes = {
   client: PropTypes.shape({
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
@@ -43,10 +43,11 @@ ClientsShow.propTypes = {
     id: PropTypes.number,
   }),
   fetchClient: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => (
  { client: state.clients.client }
 );
 
-export default connect(mapStateToProps, actions)(ClientsShow);
+export default connect(mapStateToProps, actions)(ClientShow);
