@@ -12,7 +12,8 @@ class LawsuitsIndex extends Component {
   }
 
   render() {
-    const { lawsuits, meta, dispatch } = this.props;
+    let checkbox;
+    const { lawsuits, meta, dispatch, filter } = this.props;
     return (
       <div className="ui segment index">
         <h1 className="ui header">Ärenden</h1>
@@ -27,6 +28,17 @@ class LawsuitsIndex extends Component {
             (page) => dispatch(fetchLawsuits({ query: '', page }))
           }
         />
+        <label htmlFor="">
+          <input
+            type="checkbox"
+            onChange={() => {
+              const status = checkbox.checked ? 'all' : 'only_active';
+              dispatch(fetchLawsuits({ status, filter.query }));
+            }}
+            ref={node => { checkbox = node; }}
+          />
+          Visa arkiverade ärenden
+        </label>
         <LawsuitsTable lawsuits={lawsuits} />
       </div>
     );
@@ -40,14 +52,18 @@ LawsuitsIndex.propTypes = {
   lawsuits: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,
-    court: PropTypes.string.isRequired,
+    court: PropTypes.string,
+    case_number: PropTypes.string,
     closed: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
 };
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state) => {
+  return (
   { lawsuits: state.lawsuits.all,
-    meta: state.lawsuits.meta }
-);
+    meta: state.lawsuits.meta,
+    filter: state.lawsuits.filter }
+  );
+};
 
 export default connect(mapStateToProps, { fetchLawsuits })(LawsuitsIndex);
