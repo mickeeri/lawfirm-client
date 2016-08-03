@@ -5,40 +5,36 @@ import '../../styles/table.css';
 import SearchBar from '../shared/SearchBar';
 import Paginator from '../shared/Paginator';
 import LawsuitsTable from './LawsuitsTable';
+import StatusCheckbox from './StatusCheckbox';
 
 class LawsuitsIndex extends Component {
   componentWillMount() {
-    this.props.fetchLawsuits({ query: '', page: 1 });
+    this.props.fetchLawsuits({ filter: this.props.filter });
   }
 
   render() {
-    let checkbox;
     const { lawsuits, meta, dispatch, filter } = this.props;
     return (
       <div className="ui segment index">
         <h1 className="ui header">Ärenden</h1>
         <SearchBar
           onSearch={
-            (query) => dispatch(fetchLawsuits({ query, page: 1 }))
+            (query) => dispatch(fetchLawsuits({ filter: { query, page: 1, status: filter.status } }))
           }
         />
         <Paginator
           meta={meta}
           onPaginate={
-            (page) => dispatch(fetchLawsuits({ query: '', page }))
+            (page) => dispatch(fetchLawsuits({ filter: { query: '', page, status: filter.status } }))
           }
         />
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              const status = checkbox.checked ? 'all' : 'only_active';
-              dispatch(fetchLawsuits({ status, filter.query }));
-            }}
-            ref={node => { checkbox = node; }}
-          />
-          Visa arkiverade ärenden
-        </label>
+        <StatusCheckbox
+          onCheck={
+            (newFilter) => dispatch(fetchLawsuits(newFilter))
+          }
+          filter={filter}
+          meta={meta}
+        />
         <LawsuitsTable lawsuits={lawsuits} />
       </div>
     );
@@ -56,6 +52,11 @@ LawsuitsIndex.propTypes = {
     case_number: PropTypes.string,
     closed: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
+  filter: PropTypes.shape({
+    query: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
+    status: PropTypes.oneOf(['only_active', 'all']).isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => {

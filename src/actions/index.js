@@ -87,13 +87,13 @@ export const fetchClient = (clientId) => (dispatch) => {
 //-------------------------
 // Lawsuits
 //-------------------------
-export const fetchLawsuits = ({ query = '', page = 1, status = 'only_active' }) => (dispatch) => {
+export const fetchLawsuits = ({ filter }) => (dispatch) => {
   const firmId = localStorage.getItem('firm_id');
-  axios.get(`${ROOT_URL}/firm/${firmId}/lawsuits?query=${query}&page=${page}&status=${status}`, {
+  axios.get(`${ROOT_URL}/firm/${firmId}/lawsuits?query=${filter.query}&page=${filter.page}&status=${filter.status}`, {
     headers: { Authorization: localStorage.getItem('auth_token') },
   }).then(
     response => {
-      dispatch({ type: FETCH_LAWSUITS, payload: response.data, query });
+      dispatch({ type: FETCH_LAWSUITS, payload: response.data, filter });
     }
   ).catch(
     error => {

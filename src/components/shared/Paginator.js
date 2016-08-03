@@ -21,7 +21,6 @@ const Paginator = ({ meta, onPaginate }) => {
   return (
     <div className="ui pagination menu">
       <a
-        href="#"
         className={`${meta.current_page === 1 ? 'disabled' : ''} icon item`}
         onClick={() => {
           if (meta.previous_page) {
@@ -31,7 +30,6 @@ const Paginator = ({ meta, onPaginate }) => {
       ><i className="left chevron icon"></i></a>
       {renderPaginations(meta)}
       <a
-        href="#"
         className={`${meta.current_page === meta.total_pages ? 'disabled' : ''} icon item`}
         onClick={() => {
           if (meta.next_page) {

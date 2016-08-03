@@ -18,7 +18,7 @@ class ClientsIndex extends Component {
         <h1 className="ui header">Klientregister</h1>
         <SearchBar
           onSearch={
-            (query) => dispatch(fetchClients({ query, page: 1 }))
+            (query) => dispatch(fetchClients({ query }))
           }
         />
         <Paginator
