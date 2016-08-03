@@ -1,11 +1,12 @@
+import '../../styles/table.css';
+import LawsuitsTable from './LawsuitsTable';
+import Paginator from '../shared/Paginator';
 import React, { Component, PropTypes } from 'react';
+import SearchBar from '../shared/SearchBar';
+import StatusCheckbox from './StatusCheckbox';
+import UsersDropdown from '../shared/UsersDropdown';
 import { connect } from 'react-redux';
 import { fetchLawsuits } from '../../actions/index';
-import '../../styles/table.css';
-import SearchBar from '../shared/SearchBar';
-import Paginator from '../shared/Paginator';
-import LawsuitsTable from './LawsuitsTable';
-import StatusCheckbox from './StatusCheckbox';
 
 class LawsuitsIndex extends Component {
   componentWillMount() {
@@ -14,18 +15,35 @@ class LawsuitsIndex extends Component {
 
   render() {
     const { lawsuits, meta, dispatch, filter } = this.props;
+
+    if (lawsuits.length === 0) {
+      return (
+        <div className="ui segment index">
+          return <div className="ui huge active centered inline loader"></div>
+        </div>
+      );
+    }
+
     return (
       <div className="ui segment index">
         <h1 className="ui header">Ärenden</h1>
         <SearchBar
           onSearch={
-            (query) => dispatch(fetchLawsuits({ filter: { query, page: 1, status: filter.status } }))
+            (query) => dispatch(
+              fetchLawsuits({ filter: {
+                query, page: 1, status: filter.status, userId: filter.userId,
+              } })
+            )
           }
         />
         <Paginator
           meta={meta}
           onPaginate={
-            (page) => dispatch(fetchLawsuits({ filter: { query: '', page, status: filter.status } }))
+            (page) => dispatch(
+              fetchLawsuits({ filter: {
+                query: '', page, status: filter.status, userId: filter.userId,
+              } })
+            )
           }
         />
         <StatusCheckbox
@@ -34,6 +52,16 @@ class LawsuitsIndex extends Component {
           }
           filter={filter}
           meta={meta}
+        />
+        <UsersDropdown
+          selectedUser={meta.current_user_id}
+          onDropdownChange={
+            (newUserId) => dispatch(
+              fetchLawsuits({ filter: {
+                query: filter.query, page: 1, status: filter.status, userId: newUserId,
+              } })
+            )
+          }
         />
         <LawsuitsTable lawsuits={lawsuits} />
       </div>

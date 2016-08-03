@@ -5,4 +5,5 @@ export const FETCH_CLIENTS = 'fetch_clients';
 export const UNAUTH_USER = 'unauth_user';
 export const FETCH_LAWSUITS = 'fetch_lawsuits';
 export const FETCH_LAWSUIT = 'fetch_lawsuit';
+export const FETCH_USERS = 'fetch_users';
 
