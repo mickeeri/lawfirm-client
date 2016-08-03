@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     query: '',
     page: 1,
     status: 'only_active',
+    userId: 0,
   },
 };
 
