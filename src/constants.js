@@ -5,13 +5,18 @@ export const PATHS = {
   lawsuits: '/arenden',
   signIn: '/inloggning',
   signOut: '/utloggning',
-  signUp: '/registrering',
+  userSignUp: '/registrering',
 };
 
 export const MESSAGES = {
   emailInvalid: 'E-post har fel format',
   emailRequired: 'E-post måste anges',
   passwordRequired: 'Lösenord måste anges',
+  lastNameRequired: 'Efternamn måste anges',
+  firstNameRequired: 'Förnamn måste anges',
+  passwordConfirmationMismatch: 'Lösenordsbekräftelse och lösenord stämmer inte överens',
+  passwordConfirmationRequired: 'Bekräfta lösenord',
+  firmRequired: 'Firma måste anges',
 };
 
 export const USER_ID_LS_KEY = 'signed_in_user_id';

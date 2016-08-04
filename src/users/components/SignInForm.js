@@ -1,19 +1,18 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { MESSAGES } from '../../constants';
-import '../../styles/form.css';
+import { EMAIL_REQUIRED, EMAIL_INVALID, PASSWORD_REQUIRED } from '../constants';
 
 const validate = values => {
   const errors = {};
 
   if (!values.email) {
-    errors.email = MESSAGES.emailRequired;
+    errors.email = EMAIL_REQUIRED;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = MESSAGES.emailInvalid;
+    errors.email = EMAIL_INVALID;
   }
 
   if (!values.password) {
-    errors.password = MESSAGES.passwordRequired;
+    errors.password = PASSWORD_REQUIRED;
   }
 
   return errors;
@@ -46,8 +45,6 @@ const SignInForm = (props) => {
 
 SignInForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool,
-  reset: PropTypes.func,
   submitting: PropTypes.bool,
   errorMessage: PropTypes.string,
 };

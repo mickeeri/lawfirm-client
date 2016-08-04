@@ -8,7 +8,7 @@ const StatusCheckbox = ({ onCheck, filter }) => {
         type="checkbox"
         name="status-checkbox"
         onChange={() => {
-          const status = checkbox.checked ? 'all' : 'only_active';
+          const status = checkbox.checked ? 'all' : 'active';
           onCheck({ filter: { query: filter.query, page: 1, status, userId: filter.userId } });
         }}
         ref={node => { checkbox = node; }}

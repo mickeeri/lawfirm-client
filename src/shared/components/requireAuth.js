@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { PATHS } from '../../constants';
+import { USER_SIGNIN_PATH } from '../../users';
 
 export default (ComposedComponent) => {
   class Authentication extends Component {
@@ -11,7 +11,7 @@ export default (ComposedComponent) => {
     componentWillMount() {
       // If not authenticated, redirect too root path.
       if (!this.props.authenticated) {
-        this.context.router.push(PATHS.signIn);
+        this.context.router.push(USER_SIGNIN_PATH);
       }
     }
 
@@ -30,9 +30,11 @@ export default (ComposedComponent) => {
     authenticated: PropTypes.bool,
   };
 
-  const mapStateToProps = (state) => (
-    { authenticated: state.auth.authenticated }
-  );
+  const mapStateToProps = (state) => {
+    return (
+      { authenticated: state.users.authenticated }
+    );
+  };
 
   return connect(mapStateToProps)(Authentication);
 };

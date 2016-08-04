@@ -1,30 +1,52 @@
+import '../../styles/table.css';
+import ClientsTable from './ClientsTable';
+import Paginator from '../shared/Paginator';
 import React, { Component, PropTypes } from 'react';
+import SearchBar from '../shared/SearchBar';
+import UsersDropdown from '../users/UsersDropdown';
 import { connect } from 'react-redux';
 import { fetchClients } from '../../actions/index';
-import '../../styles/table.css';
-import SearchBar from '../shared/SearchBar';
-import Paginator from '../shared/Paginator';
-import ClientsTable from './ClientsTable';
+import { USER_ID_LS_KEY } from '../../constants';
 
 class ClientsIndex extends Component {
   componentWillMount() {
-    this.props.fetchClients({ query: '', page: 1 });
+    this.props.fetchClients({ filter: this.props.filter });
   }
 
   render() {
-    const { clients, meta, dispatch } = this.props;
+    const { clients, meta, dispatch, filter } = this.props;
+    const { page, userId, query } = filter;
+
+    if (clients.length === 0) {
+      return (
+        <div className="ui segment index">
+          return <div className="ui huge active centered inline loader"></div>
+        </div>
+      );
+    }
+
     return (
       <div className="ui segment index">
         <h1 className="ui header">Klientregister</h1>
         <SearchBar
           onSearch={
-            (query) => dispatch(fetchClients({ query }))
+            (newQuery) => dispatch(
+              fetchClients({ filter: { query: newQuery, page, userId } })
+            )
           }
         />
         <Paginator
           meta={meta}
           onPaginate={
-            (page) => dispatch(fetchClients({ query: '', page }))
+            (newPage) => dispatch(
+              fetchClients({ filter: { page: newPage, query: '', userId } })
+            )
+          }
+        />
+        <UsersDropdown
+          selectedUser={parseInt(localStorage.getItem(USER_ID_LS_KEY), 10)}
+          onDropdownChange={
+            (newUserId) => dispatch(fetchClients({ filter: { query, page: 1, userId: newUserId } }))
           }
         />
         <ClientsTable clients={clients} />
@@ -43,11 +65,17 @@ ClientsIndex.propTypes = {
     last_name: PropTypes.string.isRequired,
     personal_number: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  filter: PropTypes.shape({
+    query: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => (
   { clients: state.clients.all,
-    meta: state.clients.meta }
+    meta: state.clients.meta,
+    filter: state.clients.filter }
 );
 
 export default connect(mapStateToProps, { fetchClients })(ClientsIndex);

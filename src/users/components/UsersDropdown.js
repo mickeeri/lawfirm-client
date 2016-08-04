@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../../actions/index';
-import './UsersDropdown.css';
+import * as actions from '../actions';
+import '../styles/UsersDropdown.css';
 
 class UsersDropdown extends Component {
   componentWillMount() {
@@ -10,15 +10,22 @@ class UsersDropdown extends Component {
 
   render() {
     let dropdown;
-    const { users, selectedUser, onDropdownChange } = this.props;
+    const { users, onDropdownChange, currentUserId } = this.props;
+
+    if (!users) {
+      return <div>Laddar användare</div>;
+    }
+
     return (
       <div>
-        <div className="ui sub header">Handläggare</div>
+        <label htmlFor="users">Handläggare</label>
         <select
           name="users"
           className="ui normal dropdown"
-          value={selectedUser}
+          defaultValue={currentUserId}
+          ref={node => { dropdown = node; }}
           onChange={(e) => {
+            dropdown.value = e.target.value;
             onDropdownChange(e.target.value);
           }}
           required
@@ -40,14 +47,17 @@ UsersDropdown.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     full_name: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  selectedUser: PropTypes.number.isRequired,
+  }).isRequired),
+  currentUserId: PropTypes.number,
   onDropdownChange: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => (
-  { users: state.users.all }
-);
+const mapStateToProps = (state) => {
+  return (
+    { users: state.users.all,
+      currentUserId: state.users.currentUserId }
+  );
+};
 
-export default connect(mapStateToProps, { fetchUsers })(UsersDropdown);
+export default connect(mapStateToProps, actions)(UsersDropdown);

@@ -1,11 +1,27 @@
 import { FETCH_CLIENTS, FETCH_CLIENT } from '../actions/types';
 
-const clientsReducer = (state = { all: [], client: null, meta: {} }, action) => {
+const INITIAL_STATE = {
+  all: [],
+  client: null,
+  meta: {},
+  filter: {
+    query: '',
+    page: 1,
+    userId: 0,
+  },
+};
+
+const clientsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_CLIENT:
       return { ...state, client: action.payload.client };
     case FETCH_CLIENTS:
-      return { ...state, all: action.payload.clients, meta: action.payload.meta };
+      return {
+        ...state,
+        all: action.payload.clients,
+        meta: action.payload.meta,
+        filter: action.filter,
+      };
     default:
       return state;
   }

@@ -1,12 +1,12 @@
 import '../../styles/table.css';
 import LawsuitsTable from './LawsuitsTable';
-import Paginator from '../shared/Paginator';
+import Paginator from '../../shared/components/Paginator';
 import React, { Component, PropTypes } from 'react';
-import SearchBar from '../shared/SearchBar';
+import SearchBar from '../../shared/components/SearchBar';
 import StatusCheckbox from './StatusCheckbox';
-import UsersDropdown from '../shared/UsersDropdown';
+import { UsersDropdown } from '../../users';
 import { connect } from 'react-redux';
-import { fetchLawsuits } from '../../actions/index';
+import * as actions from '../actions';
 
 class LawsuitsIndex extends Component {
   componentWillMount() {
@@ -14,12 +14,12 @@ class LawsuitsIndex extends Component {
   }
 
   render() {
-    const { lawsuits, meta, dispatch, filter } = this.props;
+    const { lawsuits, meta, filter, fetchLawsuits } = this.props;
 
-    if (lawsuits.length === 0) {
+    if (!lawsuits) {
       return (
         <div className="ui segment index">
-          return <div className="ui huge active centered inline loader"></div>
+          <div className="ui huge active centered inline loader"></div>
         </div>
       );
     }
@@ -29,40 +29,44 @@ class LawsuitsIndex extends Component {
         <h1 className="ui header">Ärenden</h1>
         <SearchBar
           onSearch={
-            (query) => dispatch(
-              fetchLawsuits({ filter: {
-                query, page: 1, status: filter.status, userId: filter.userId,
-              } })
-            )
+            (query) => fetchLawsuits({
+              filter: {
+                query,
+                status: filter.status,
+                userId: filter.userId,
+              },
+            })
           }
         />
         <Paginator
           meta={meta}
           onPaginate={
-            (page) => dispatch(
-              fetchLawsuits({ filter: {
-                query: '', page, status: filter.status, userId: filter.userId,
-              } })
-            )
+            (page) => fetchLawsuits({
+              filter: {
+                page,
+                status: filter.status,
+                userId: filter.userId,
+              },
+            })
           }
         />
         <StatusCheckbox
-          onCheck={
-            (newFilter) => dispatch(fetchLawsuits(newFilter))
-          }
+          onCheck={(newFilter) => fetchLawsuits(newFilter)}
           filter={filter}
           meta={meta}
         />
         <UsersDropdown
-          selectedUser={meta.current_user_id}
           onDropdownChange={
-            (newUserId) => dispatch(
-              fetchLawsuits({ filter: {
-                query: filter.query, page: 1, status: filter.status, userId: newUserId,
-              } })
-            )
+            (newUserId) => fetchLawsuits({
+              filter: {
+                query: filter.query,
+                status: filter.status,
+                userId: newUserId,
+              },
+            })
           }
         />
+
         <LawsuitsTable lawsuits={lawsuits} />
       </div>
     );
@@ -83,7 +87,8 @@ LawsuitsIndex.propTypes = {
   filter: PropTypes.shape({
     query: PropTypes.string.isRequired,
     page: PropTypes.number.isRequired,
-    status: PropTypes.oneOf(['only_active', 'all']).isRequired,
+    status: PropTypes.oneOf(['active', 'all']).isRequired,
+    userId: PropTypes.number.isRequired,
   }).isRequired,
 };
 
@@ -95,4 +100,4 @@ const mapStateToProps = (state) => {
   );
 };
 
-export default connect(mapStateToProps, { fetchLawsuits })(LawsuitsIndex);
+export default connect(mapStateToProps, actions)(LawsuitsIndex);
