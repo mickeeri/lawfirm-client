@@ -40,6 +40,7 @@ class ClientsIndex extends Component {
           <div className="four wide column"></div>
           <div className="six wide column">
             <SearchBar
+              label="Sök på namn eller personnummer"
               onSearch={
                 (query) => fetchClients({
                   filter: {

@@ -44,6 +44,7 @@ class LawsuitsIndex extends Component {
           </div>
           <div className="six wide column">
             <SearchBar
+              label="Sök på huvudklient eller ärende"
               onSearch={
                 (query) => fetchLawsuits({
                   filter: {

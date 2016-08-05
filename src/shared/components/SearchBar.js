@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, label }) => {
   let input;
 
   // Delay search request.
@@ -10,8 +10,8 @@ const SearchBar = ({ onSearch }) => {
   }, 300);
 
   return (
-    <div>
-      <label htmlFor="search">Sök på huvudklient eller ärende</label>
+    <div className="SearchBar">
+      <label htmlFor="search">{label}</label>
       <div className="ui icon fluid input">
         <input
           name="search"
