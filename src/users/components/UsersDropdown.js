@@ -17,7 +17,7 @@ class UsersDropdown extends Component {
     }
 
     return (
-      <div>
+      <div className="UsersDropdown">
         <label htmlFor="users">Handläggare</label>
         <select
           name="users"
