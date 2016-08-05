@@ -1,24 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 import LawsuitInfo from './LawsuitInfo';
 
 class LawsuitShow extends Component {
   componentWillMount() {
-    this.props.fetchLawsuit(this.props.params.id);
+    this.props.fetchLawsuits({ filter: {}, id: this.props.params.id });
   }
 
   render() {
     const { lawsuit } = this.props;
 
-    if (!lawsuit) {
-      return <div className="ui huge active centered inline loader"></div>;
-    }
-
     return (
       <div className="ui stackable grid">
         <div className="two column row">
-          <div className="column">
+          <div className="column ui segment">
             <LawsuitInfo lawsuit={lawsuit} />
           </div>
           <div className="column">
@@ -34,6 +30,8 @@ class LawsuitShow extends Component {
     );
   }
 }
+
+//
 
 // LawsuitShow.propTypes = {
 //   lawsuit: PropTypes.shape({

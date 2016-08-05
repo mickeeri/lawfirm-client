@@ -1,12 +1,10 @@
-import '../../styles/table.css';
-import LawsuitsTable from './LawsuitsTable';
-import Paginator from '../../shared/components/Paginator';
-import React, { Component, PropTypes } from 'react';
-import SearchBar from '../../shared/components/SearchBar';
-import StatusCheckbox from './StatusCheckbox';
-import { UsersDropdown } from '../../users';
 import { connect } from 'react-redux';
+import { SearchBar, Paginator } from '../../shared';
+import { UsersDropdown } from '../../users';
 import * as actions from '../actions';
+import LawsuitsTable from './LawsuitsTable';
+import React, { Component, PropTypes } from 'react';
+import StatusCheckbox from './StatusCheckbox';
 
 class LawsuitsIndex extends Component {
   componentWillMount() {
@@ -25,7 +23,7 @@ class LawsuitsIndex extends Component {
     }
 
     return (
-      <div className="ui segment index">
+      <div className="LawsuitsIndex ui segment index">
         <h1 className="ui header">Ärenden</h1>
         <SearchBar
           onSearch={
@@ -66,7 +64,6 @@ class LawsuitsIndex extends Component {
             })
           }
         />
-
         <LawsuitsTable lawsuits={lawsuits} />
       </div>
     );
@@ -88,7 +85,7 @@ LawsuitsIndex.propTypes = {
     query: PropTypes.string.isRequired,
     page: PropTypes.number.isRequired,
     status: PropTypes.oneOf(['active', 'all']).isRequired,
-    userId: PropTypes.number.isRequired,
+    userId: PropTypes.string.isRequired,
   }).isRequired,
 };
 

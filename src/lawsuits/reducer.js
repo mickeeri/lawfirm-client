@@ -17,6 +17,7 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
     case FETCH_LAWSUITS_SUCCESS:
       return {
         ...state,
+        lawsuit: action.response.lawsuit,
         all: action.response.lawsuits,
         meta: action.response.meta,
         filter: action.filter,

@@ -3,14 +3,15 @@ import React from 'react';
 import Welcome from './components/Welcome';
 import { Route, IndexRoute } from 'react-router';
 import { UserRoutes } from './users';
-import { LawsuitRoutes } from './lawsuits';
+import { LawsuitsIndexRoute, LawsuitShowRoute } from './lawsuits';
 import { ClientRoutes } from './clients';
 
 export default (
   <Route path="/" component={App} >
     <IndexRoute components={Welcome} />
     {UserRoutes}
-    {LawsuitRoutes}
+    {LawsuitsIndexRoute}
+    {LawsuitShowRoute}
     {ClientRoutes}
   </Route>
 );

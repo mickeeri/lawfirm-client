@@ -1,14 +1,14 @@
-import { FETCH_LAWSUITS_SUCCESS, FETCH_LAWSUITS_FAILURE } from './actionTypes';
+import { FETCH_LAWSUITS_SUCCESS, FETCH_LAWSUITS_FAILURE, FETCH_LAWSUIT_SUCCESS, FETCH_LAWSUIT_FAILURE } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
 
-export const fetchLawsuits = ({ filter }) => (dispatch) => {
-  return api.fetchLawsuits(filter).then(
+export const fetchLawsuits = (props) => (dispatch) => {
+  return api.fetchLawsuits(props).then(
     response => {
       dispatch({
         type: FETCH_LAWSUITS_SUCCESS,
         response: response.data,
-        filter,
+        filter: props.filter,
       });
     },
     error => {
@@ -20,8 +20,31 @@ export const fetchLawsuits = ({ filter }) => (dispatch) => {
         type: FETCH_LAWSUITS_FAILURE,
         errorMessage: error.response.data.message || 'Fel uppstod när ärenden skulle hämtas.',
       });
-    });
+    }
+  );
 };
+
+// export const fetchLawsuit = (id) => (dispatch) => {
+//   return api.fetchLawsuit(id).then(
+//     response => {
+//       dispatch({
+//         type: FETCH_LAWSUIT_SUCCESS,
+//         response: response.data,
+//       });
+//     },
+//     error => {
+//       if (error.response.status === 401) {
+//         dispatch(signOutUser());
+//       }
+//
+//       dispatch({
+//         type: FETCH_LAWSUIT_FAILURE,
+//         errorMessage: error.response.data.message || 'Ett fel uppstod när ärende skulle hämtas.',
+//       });
+//     }
+//   );
+// };
+
 
 
 
