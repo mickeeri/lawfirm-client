@@ -1,15 +1,15 @@
 import './index.css';
+import { AUTH_TOKEN_LS_KEY } from './shared';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { SIGNIN_SUCCESS } from './users';
+import createLogger from 'redux-logger';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import thunk from 'redux-thunk';
-import routes from './routes';
-import { createStore, applyMiddleware } from 'redux';
-import { Router, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
 import reducers from './reducers';
-import { SIGNIN_SUCCESS } from './users';
-import { AUTH_TOKEN_LS_KEY } from './shared';
-import createLogger from 'redux-logger';
+import routes from './routes';
+import thunk from 'redux-thunk';
 
 const middlewares = [thunk];
 if (process.env.NODE_ENV !== 'production') {
