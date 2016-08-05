@@ -1,18 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import { CLIENTS_PATH } from '../../clients';
 import { connect } from 'react-redux';
+import { LAWSUITS_PATH } from '../../lawsuits';
 import { Link } from 'react-router';
-import { PATHS } from '../../constants';
-import { USER_SIGNIN_PATH } from '../../users';
+import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, USER_SIGNUP_PATH } from '../../users';
+import React, { Component, PropTypes } from 'react';
 
 class Header extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
         <li key={1}>
-          <Link to={PATHS.lawsuits}>Ärenden</Link>
+          <Link to={LAWSUITS_PATH}>Ärenden</Link>
         </li>,
         <li key={2}>
-          <Link to={PATHS.clients}>Klienter</Link>
+          <Link to={CLIENTS_PATH}>Klienter</Link>
         </li>,
         <li key={3}>
           <Link to="/">Jävskontroll</Link>
@@ -21,7 +22,7 @@ class Header extends Component {
           <Link to="/">Sammanställning</Link>
         </li>,
         <li key={5}>
-          <Link to={PATHS.signOut}>Logga ut</Link>
+          <Link to={USER_SIGNOUT_PATH}>Logga ut</Link>
         </li>,
       ];
     }
@@ -31,7 +32,7 @@ class Header extends Component {
         <Link to={USER_SIGNIN_PATH}>Logga in</Link>
       </li>,
       <li key={2}>
-        <Link to="sad">Registera</Link>
+        <Link to={USER_SIGNUP_PATH}>Registera</Link>
       </li>,
     ];
   }
