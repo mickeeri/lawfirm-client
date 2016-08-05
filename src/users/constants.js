@@ -4,6 +4,8 @@ export const API_USERS_PATH = '/users';
 
 // Routes
 export const USER_SIGNIN_PATH = '/logga-in';
+export const USER_SIGNUP_PATH = '/registrera-konto';
+export const USER_SIGNOUT_PATH = '/logga-ut';
 
 // Messages
 export const EMAIL_REQUIRED = 'E-post måste anges';
