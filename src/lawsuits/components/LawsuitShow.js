@@ -31,15 +31,9 @@ class LawsuitShow extends Component {
   }
 }
 
-//
-
-// LawsuitShow.propTypes = {
-//   lawsuit: PropTypes.shape({
-
-//   }),
-//   fetchLawsuit: PropTypes.func.isRequired,
-//   params: PropTypes.object.isRequired,
-// };
+LawsuitShow.propTypes = {
+  lawsuit: PropTypes.object,
+}
 
 const mapStateToProps = (state) => (
  { lawsuit: state.lawsuits.lawsuit }

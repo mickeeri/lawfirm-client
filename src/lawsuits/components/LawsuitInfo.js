@@ -45,4 +45,8 @@ const LawsuitInfo = ({ lawsuit }) => {
   );
 };
 
+LawsuitInfo.propTypes = {
+  lawsuit: PropTypes.object,
+}
+
 export default LawsuitInfo;
