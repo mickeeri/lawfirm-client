@@ -8,3 +8,8 @@ body {
 .content-right {
   text-align: right;
 }
+
+/* Tables */
+.index {
+  min-height: 1000px;
+}

@@ -1,12 +1,9 @@
-import '../../styles/table.css';
-import ClientsTable from './ClientsTable';
-import Paginator from '../shared/Paginator';
-import React, { Component, PropTypes } from 'react';
-import SearchBar from '../shared/SearchBar';
-import UsersDropdown from '../users/UsersDropdown';
 import { connect } from 'react-redux';
-import { fetchClients } from '../../actions/index';
-import { USER_ID_LS_KEY } from '../../constants';
+import { SearchBar, Paginator } from '../../shared';
+import { UsersDropdown } from '../../users';
+import * as actions from '../actions';
+import ClientsTable from './ClientsTable';
+import React, { Component, PropTypes } from 'react';
 
 class ClientsIndex extends Component {
   componentWillMount() {
@@ -14,10 +11,9 @@ class ClientsIndex extends Component {
   }
 
   render() {
-    const { clients, meta, dispatch, filter } = this.props;
-    const { page, userId, query } = filter;
+    const { clients, meta, filter, fetchClients } = this.props;
 
-    if (clients.length === 0) {
+    if (!clients) {
       return (
         <div className="ui segment index">
           return <div className="ui huge active centered inline loader"></div>
@@ -26,27 +22,37 @@ class ClientsIndex extends Component {
     }
 
     return (
-      <div className="ui segment index">
+      <div className=" ClientsIndex ui segment index">
         <h1 className="ui header">Klientregister</h1>
         <SearchBar
           onSearch={
-            (newQuery) => dispatch(
-              fetchClients({ filter: { query: newQuery, page, userId } })
-            )
+            (query) => fetchClients({
+              filter: {
+                query,
+                userId: filter.userId,
+              },
+            })
           }
         />
         <Paginator
           meta={meta}
           onPaginate={
-            (newPage) => dispatch(
-              fetchClients({ filter: { page: newPage, query: '', userId } })
-            )
+            (page) => fetchClients({
+              filter: {
+                page,
+                userId: filter.userId,
+              },
+            })
           }
         />
         <UsersDropdown
-          selectedUser={parseInt(localStorage.getItem(USER_ID_LS_KEY), 10)}
           onDropdownChange={
-            (newUserId) => dispatch(fetchClients({ filter: { query, page: 1, userId: newUserId } }))
+            (newUserId) => fetchClients({
+              filter: {
+                query: filter.query,
+                userId: newUserId,
+              },
+            })
           }
         />
         <ClientsTable clients={clients} />
@@ -56,7 +62,6 @@ class ClientsIndex extends Component {
 }
 
 ClientsIndex.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   fetchClients: PropTypes.func.isRequired,
   meta: PropTypes.object.isRequired,
   clients: PropTypes.arrayOf(PropTypes.shape({
@@ -66,16 +71,18 @@ ClientsIndex.propTypes = {
     personal_number: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   filter: PropTypes.shape({
-    query: PropTypes.string.isRequired,
-    page: PropTypes.number.isRequired,
-    userId: PropTypes.number.isRequired,
+    query: PropTypes.string,
+    page: PropTypes.number,
+    userId: PropTypes.string,
   }).isRequired,
 };
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state) => {
+return (
   { clients: state.clients.all,
     meta: state.clients.meta,
     filter: state.clients.filter }
 );
+}
 
-export default connect(mapStateToProps, { fetchClients })(ClientsIndex);
+export default connect(mapStateToProps, actions)(ClientsIndex);
