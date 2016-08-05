@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { USER_SIGNIN_PATH } from '../../users';
 
-export default (ComposedComponent) => {
+const requireAuth = (ComposedComponent) => {
   class Authentication extends Component {
     static contextTypes = {
-      router: React.PropTypes.object,
+      router: PropTypes.object,
     }
 
     componentWillMount() {
@@ -38,3 +38,5 @@ export default (ComposedComponent) => {
 
   return connect(mapStateToProps)(Authentication);
 };
+
+export default requireAuth;
