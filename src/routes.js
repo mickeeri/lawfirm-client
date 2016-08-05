@@ -2,14 +2,16 @@ import App from './App';
 import React from 'react';
 import Welcome from './components/Welcome';
 import { Route, IndexRoute } from 'react-router';
-import UserRoutes from './users/routes';
+import { UserRoutes } from './users';
 import { LawsuitRoutes } from './lawsuits';
+import { ClientRoutes } from './clients';
 
 export default (
   <Route path="/" component={App} >
     <IndexRoute components={Welcome} />
     {UserRoutes}
     {LawsuitRoutes}
+    {ClientRoutes}
   </Route>
 );
 
