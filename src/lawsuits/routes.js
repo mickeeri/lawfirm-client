@@ -1,14 +1,14 @@
+import { LAWSUITS_PATH, LAWSUIT_PATH } from './constants';
 import { Route } from 'react-router';
-import React from 'react';
+import LawsuitShow from './components/LawsuitShow';
 import LawsuitsIndex from './components/LawsuitsIndex';
-import { LAWSUITS_PATH } from './constants';
-import { requireAuth } from '../shared';
+import React from 'react';
+import requireAuth from '../shared/hocs/requireAuth';
 
-const LawsuitRoutes = (
+export const LawsuitsIndexRoute = (
   <Route path={LAWSUITS_PATH} components={requireAuth(LawsuitsIndex)} />
-);
+)
 
-export default LawsuitRoutes;
-
-
-// <Route path={`${PATHS.lawsuit}/:id`} component={requireAuth(LawsuitShow)} />
+export const LawsuitShowRoute = (
+  <Route path={`${LAWSUIT_PATH}:id`} component={requireAuth(LawsuitShow)} />
+)
