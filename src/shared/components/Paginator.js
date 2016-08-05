@@ -53,4 +53,3 @@ Paginator.propTypes = {
 };
 
 export default Paginator;
-

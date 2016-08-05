@@ -24,37 +24,54 @@ class ClientsIndex extends Component {
     return (
       <div className=" ClientsIndex ui segment index">
         <h1 className="ui header">Klientregister</h1>
-        <SearchBar
-          onSearch={
-            (query) => fetchClients({
-              filter: {
-                query,
-                userId: filter.userId,
-              },
-            })
-          }
-        />
-        <Paginator
-          meta={meta}
-          onPaginate={
-            (page) => fetchClients({
-              filter: {
-                page,
-                userId: filter.userId,
-              },
-            })
-          }
-        />
-        <UsersDropdown
-          onDropdownChange={
-            (newUserId) => fetchClients({
-              filter: {
-                query: filter.query,
-                userId: newUserId,
-              },
-            })
-          }
-        />
+        <div className="ui grid">
+          <div className="six wide column">
+            <UsersDropdown
+              onDropdownChange={
+                (newUserId) => fetchClients({
+                  filter: {
+                    query: filter.query,
+                    userId: newUserId,
+                  },
+                })
+              }
+            />
+          </div>
+          <div className="four wide column"></div>
+          <div className="six wide column">
+            <SearchBar
+              onSearch={
+                (query) => fetchClients({
+                  filter: {
+                    query,
+                    userId: filter.userId,
+                  },
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="ui grid">
+          <div className="six wide column">
+            <button className="ui primary labeled icon button">
+              <i className="user icon"></i>Lägg till klient
+            </button>
+          </div>
+          <div className="four wide column"></div>
+          <div className="six wide column">
+            <Paginator
+              meta={meta}
+              onPaginate={
+                (page) => fetchClients({
+                  filter: {
+                    page,
+                    userId: filter.userId,
+                  },
+                })
+              }
+            />
+          </div>
+        </div>
         <ClientsTable clients={clients} />
       </div>
     );

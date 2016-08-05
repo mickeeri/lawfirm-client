@@ -21,7 +21,7 @@ class UsersDropdown extends Component {
         <label htmlFor="users">Handläggare</label>
         <select
           name="users"
-          className="ui normal dropdown"
+          className="ui fluid dropdown"
           defaultValue={currentUserId}
           ref={node => { dropdown = node; }}
           onChange={(e) => {

@@ -24,9 +24,7 @@ const LawsuitsTable = ({ lawsuits }) => (
     <tfoot>
       <tr>
         <th colSpan="6">
-          <button className="ui right floated small primary labeled icon button">
-            <i className="law icon"></i>Lägg till ärende
-          </button>
+
         </th>
       </tr>
     </tfoot>

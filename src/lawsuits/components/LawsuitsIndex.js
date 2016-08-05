@@ -25,45 +25,61 @@ class LawsuitsIndex extends Component {
     return (
       <div className="LawsuitsIndex ui segment index">
         <h1 className="ui header">Ärenden</h1>
-        <SearchBar
-          onSearch={
-            (query) => fetchLawsuits({
-              filter: {
-                query,
-                status: filter.status,
-                userId: filter.userId,
-              },
-            })
-          }
-        />
-        <Paginator
-          meta={meta}
-          onPaginate={
-            (page) => fetchLawsuits({
-              filter: {
-                page,
-                status: filter.status,
-                userId: filter.userId,
-              },
-            })
-          }
-        />
-        <StatusCheckbox
-          onCheck={(newFilter) => fetchLawsuits(newFilter)}
-          filter={filter}
-          meta={meta}
-        />
-        <UsersDropdown
-          onDropdownChange={
-            (newUserId) => fetchLawsuits({
-              filter: {
-                query: filter.query,
-                status: filter.status,
-                userId: newUserId,
-              },
-            })
-          }
-        />
+        <div className="ui stackable grid">
+          <div className="six wide column">
+            <UsersDropdown
+              onDropdownChange={
+                (newUserId) => fetchLawsuits({
+                  filter: {
+                    query: filter.query,
+                    status: filter.status,
+                    userId: newUserId,
+                  },
+                })
+              }
+            />
+          </div>
+          <div className="four wide column computer only">
+
+          </div>
+          <div className="six wide column">
+            <SearchBar
+              onSearch={
+                (query) => fetchLawsuits({
+                  filter: {
+                    query,
+                    status: filter.status,
+                    userId: filter.userId,
+                  },
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="ui stackable grid">
+          <div className="six wide column">
+            <StatusCheckbox
+              onCheck={(newFilter) => fetchLawsuits(newFilter)}
+              filter={filter}
+              meta={meta}
+            />
+          </div>
+          <div className="four wide column computer only"></div>
+          <div className="six wide column">
+            <Paginator
+              meta={meta}
+              onPaginate={
+                (page) => fetchLawsuits({
+                  filter: {
+                    page,
+                    status: filter.status,
+                    userId: filter.userId,
+                  },
+                })
+              }
+            />
+          </div>
+        </div>
         <LawsuitsTable lawsuits={lawsuits} />
       </div>
     );

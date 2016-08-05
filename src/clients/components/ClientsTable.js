@@ -16,13 +16,7 @@ const ClientsTable = ({ clients }) => (
       )}
     </tbody>
     <tfoot>
-      <tr>
-        <th colSpan="4">
-          <button className="ui right floated small primary labeled icon button">
-            <i className="user icon"></i>Lägg till klient
-          </button>
-        </th>
-      </tr>
+
     </tfoot>
   </table>
 );
