@@ -11,7 +11,6 @@ class ClientShow extends Component {
   render() {
     const { client } = this.props;
 
-
     return (
       <div className="ui stackable grid">
         <div className="two column row">
@@ -29,6 +28,15 @@ class ClientShow extends Component {
             </div>
             <div className="ui segment">
               <h2 className="ui header">Motparter</h2>
+            </div>
+            <div className="ui segment">
+              <h3 className="ui header">Inställningar</h3>
+              <button className="negative labeled icon ui button">
+                <i className="remove user icon"></i>Radera
+              </button>
+              <button className="ui primary labeled icon button">
+                <i className="edit icon"></i>Redigera
+              </button>
             </div>
           </div>
         </div>

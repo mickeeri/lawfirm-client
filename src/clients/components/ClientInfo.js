@@ -4,7 +4,7 @@ import { generateLetterTemplate } from '../../shared';
 import { CLIENTS_PATH } from '../constants';
 
 
-const ClientInfo = ({ client }) => {  
+const ClientInfo = ({ client }) => {
   return (
     <div className="ClientInfo">
       <h2 className="ui header">{client.first_name} {client.last_name}</h2>
@@ -61,15 +61,6 @@ const ClientInfo = ({ client }) => {
       <div className="ui section divider"></div>
       <h3 className="ui header">Anteckningar</h3>
       <p>{client.note}</p>
-
-      <div className="ui section divider"></div>
-      <h3 className="ui header">Inställningar</h3>
-      <button className="negative labeled icon ui button">
-        <i className="remove user icon"></i>Radera klient
-      </button>
-      <button className="ui primary labeled icon button">
-        <i className="edit icon"></i>Redigera
-      </button>
 
       <div className="ui section divider"></div>
       <Link to={CLIENTS_PATH} className="ui small labeled icon button">
