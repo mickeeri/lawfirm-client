@@ -9,41 +9,34 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li key={1}>
-          <Link to={LAWSUITS_PATH}>Ärenden</Link>
-        </li>,
-        <li key={2}>
-          <Link to={CLIENTS_PATH}>Klienter</Link>
-        </li>,
-        <li key={3}>
-          <Link to="/">Jävskontroll</Link>
-        </li>,
-        <li key={4}>
-          <Link to="/">Sammanställning</Link>
-        </li>,
-        <li key={5}>
-          <Link to={USER_SIGNOUT_PATH}>Logga ut</Link>
-        </li>,
+          <Link key="1" className="item" activeClassName="active"  to={LAWSUITS_PATH}>Ärenden</Link>
+        ,
+          <Link key="2" className="item" activeClassName="active"  to={CLIENTS_PATH}>Klienter</Link>
+        ,
+          <Link key="3" className="item" activeClassName="active" to="/jav">Jävskontroll</Link>
+        ,
+          <Link key="4" className="item" activeClassName="active" to="/sammanstallning">Sammanställning</Link>
+        ,
+          <div className="right menu">
+            <Link key="5" className="item" activeClassName="active" to={USER_SIGNOUT_PATH}>Logga ut</Link>
+          </div>
+        ,
       ];
     }
 
     return [
-      <li key={1}>
-        <Link to={USER_SIGNIN_PATH}>Logga in</Link>
-      </li>,
-      <li key={2}>
-        <Link to={USER_SIGNUP_PATH}>Registera</Link>
-      </li>,
+        <Link key="1" className="item" activeClassName="active" to={USER_SIGNIN_PATH}>Logga in</Link>
+      ,
+        <Link key="2" className="item" activeClassName="active" to={USER_SIGNUP_PATH}>Skapa konto</Link>
+      ,
     ];
   }
   render() {
     return (
-      <nav>
-        <Link to="/">OrdoCliens</Link>
-        <ul>
-          {this.renderLinks()}
-        </ul>
-      </nav>
+      <div className="ui stackable menu">
+        <Link to="/" className="item">OrdoCliens</Link>
+        {this.renderLinks()}
+      </div>
     );
   }
 }
