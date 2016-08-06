@@ -7,7 +7,7 @@ import { SIGNIN_SUCCESS } from './users';
 import createLogger from 'redux-logger';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reducers from './reducers';
+import reducers from './rootReducer';
 import routes from './routes';
 import thunk from 'redux-thunk';
 
