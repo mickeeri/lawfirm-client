@@ -15,12 +15,37 @@ body {
   text-align: right;
 }
 
-/* Tables */
+/******************************************/
+/* Index pages */
+/*****************************************/
 .index {
   min-height: 1000px;
+}
+
+.index .loader {
+  margin-top: 100px !important;
 }
 
 /* Show arvhived checkbox segment */
 .index .segment {
   padding: 0.8em;
+}
+
+/*.menu .item:hover {
+  background: #6CC071 !important;
+  color: white !important;
+}*/
+
+
+select {
+  background-color: white;
+}
+
+
+/******************************************/
+/* Forms */
+/*****************************************/
+.error {
+  color: #9F3A38;
+  font-size: 1em;
 }
