@@ -1,17 +1,28 @@
 import App from './App';
 import React from 'react';
-import Welcome from './components/Welcome';
+import Welcome from './shared/components/Welcome';
+import { AUTH_TOKEN_LS_KEY } from './shared';
 import { Route, IndexRoute } from 'react-router';
-import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, UserSignIn, UserSignOut } from './users';
+import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, USER_SIGNUP_PATH, UserSignIn, UserSignOut, UserSignUp } from './users';
 import { LAWSUITS_PATH, LawsuitsIndex, LawsuitShow } from './lawsuits';
 import { ClientShow, ClientsIndex, CLIENTS_PATH } from './clients';
 import requireAuth from './shared/hocs/requireAuth';
 
+
+let indexComponent;
+
+if (localStorage.getItem(AUTH_TOKEN_LS_KEY)) {
+  indexComponent = LawsuitsIndex;
+} else {
+  indexComponent = Welcome;
+}
+
 export default (
   <Route path="/" component={App} >
-    <IndexRoute components={Welcome} />
+    <IndexRoute components={indexComponent} />
     <Route path={USER_SIGNIN_PATH} components={UserSignIn} />
     <Route path={USER_SIGNOUT_PATH} components={UserSignOut} />
+    <Route path={USER_SIGNUP_PATH} components={UserSignUp} />
     <Route path={LAWSUITS_PATH} components={requireAuth(LawsuitsIndex)} />
     <Route path={`${LAWSUITS_PATH}/:id`} component={requireAuth(LawsuitShow)} />
     <Route path={CLIENTS_PATH} components={requireAuth(ClientsIndex)} />
