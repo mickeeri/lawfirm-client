@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 const UserSignIn = props => {
   return (
     <div className="ui grid centered left aligned">
-      <div className="ui column raised segment fifteen wide mobile six wide computer column">
-        <SignInForm onSubmit={props.signInUser} errorMessage={props.errorMessage} />
+      <div className="ui fifteen wide mobile six wide computer column">
+        <div className="ui raised segment">
+          <SignInForm onSubmit={props.signInUser} errorMessage={props.errorMessage} />
+        </div>
       </div>
     </div>
   );

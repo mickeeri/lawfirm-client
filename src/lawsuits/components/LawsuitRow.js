@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { LAWSUIT_PATH } from '../constants';
+import { LAWSUITS_PATH } from '../constants';
 import moment from 'moment';
+import { CLIENTS_PATH } from '../../clients';
 
 
 const LawsuitRow = ({ lawsuit }) => {
@@ -9,13 +10,13 @@ const LawsuitRow = ({ lawsuit }) => {
   return (
     <tr>
       <td>
-        <Link to={`${lawsuit.primary_client.id}`}>
+        <Link to={`${CLIENTS_PATH}/${lawsuit.primary_client.id}`}>
           {lawsuit.primary_client.name}
         </Link>
       </td>
       <td>{lawsuit.primary_client.personal_number}</td>
       <td>{lawsuit.type}</td>
-      <td><Link to={`${LAWSUIT_PATH}${lawsuit.id}`}>{lawsuit.slug}</Link></td>
+      <td><Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>{lawsuit.slug}</Link></td>
       <td>{moment(lawsuit.created_at).format('L')}</td>
       <td className="center aligned">
         {lawsuit.closed ? <i className="large red remove icon"></i> :

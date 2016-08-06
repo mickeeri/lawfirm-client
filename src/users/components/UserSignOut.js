@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 
 class SignOut extends Component {
   componentWillMount() {
@@ -8,7 +8,12 @@ class SignOut extends Component {
   }
 
   render() {
-    return <div>Hejdå! Kom tillbaka snart.</div>;
+    return (
+      <div className="ui segment">
+        <h3>Du är nu utloggad</h3>
+        <p>Kom tillbaka snart.</p>
+      </div>
+    )
   }
 }
 

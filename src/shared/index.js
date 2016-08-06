@@ -3,3 +3,4 @@
 export { default as SearchBar } from './components/SearchBar';
 export { default as Paginator } from './components/Paginator';
 export * from './constants';
+export * from './utils/docxGenerator'
