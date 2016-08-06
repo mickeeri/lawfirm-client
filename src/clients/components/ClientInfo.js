@@ -1,33 +1,66 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { PATHS } from '../../constants';
-import { generateLetterTemplate } from '../../utils/docxGenerator';
+import { generateLetterTemplate } from '../../shared';
+import { CLIENTS_PATH } from '../constants';
 
 
-const ClientInfo = ({ client }) => {
+const ClientInfo = ({ client }) => {  
   return (
     <div className="ClientInfo">
       <h2 className="ui header">{client.first_name} {client.last_name}</h2>
       <div className="ui divider"></div>
-      <p>Handläggare: {client.user.full_name}</p>
-      <p>Personnummer: {client.personal_number}</p>
-      <p>E-post:</p>
-      <p>Mobil:</p>
-      <p>Telefon:</p>
+
+      <div className="ui list">
+        <div className="item">
+          <div className="header">Handläggare</div>
+          <div>{client.user.full_name}</div>
+        </div>
+
+        <div className="item">
+          <div className="header">Personnummer</div>
+          <div>{client.personal_number}</div>
+        </div>
+
+        <div className="item">
+          <div className="header">E-post</div>
+          <div>{client.email}</div>
+        </div>
+
+        <div className="item">
+          <div className="header">Mobil</div>
+          <div>{client.mobile}</div>
+        </div>
+
+        <div className="item">
+          <div className="header">Telefon</div>
+          <div>{client.phone_number}</div>
+        </div>
+      </div>
 
       <div className="ui section divider"></div>
       <h3 className="ui header">Adress</h3>
-      <p>C/O</p>
-      <p>Gatuadress</p>
-      <p>Posadress</p>
-      <p>Ort</p>
+
+      <div className="ui list">
+        {client.co ?
+        <div className="item">{`C/O ${client.co}` }</div>
+        : ''}
+
+        <div className="item">
+          {client.street}
+        </div>
+
+        <div className="item">
+          {client.post_code} {client.city}
+        </div>
+      </div>
+
       <button onClick={() => generateLetterTemplate(client)} className="ui small labeled icon button">
         <i className="left file word outline icon" />Brevmall
       </button>
 
       <div className="ui section divider"></div>
       <h3 className="ui header">Anteckningar</h3>
-      <p>Lorem ipusm...</p>
+      <p>{client.note}</p>
 
       <div className="ui section divider"></div>
       <h3 className="ui header">Inställningar</h3>
@@ -39,7 +72,7 @@ const ClientInfo = ({ client }) => {
       </button>
 
       <div className="ui section divider"></div>
-      <Link to={PATHS.clients} className="ui small labeled icon button">
+      <Link to={CLIENTS_PATH} className="ui small labeled icon button">
         <i className="left chevron icon"></i>Tillbaka till klientregister
       </Link>
     </div>

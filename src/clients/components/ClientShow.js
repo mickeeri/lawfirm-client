@@ -15,11 +15,13 @@ class ClientShow extends Component {
     return (
       <div className="ui stackable grid">
         <div className="two column row">
-          <div className="column ui segment">
-            {client ?
-              <ClientInfo client={client} /> :
-              <div className="ui big active centered inline loader"></div>
-            }
+          <div className="column">
+            <div className="ui segment">
+              {client ?
+                <ClientInfo client={client} /> :
+                <div className="ui large active centered inline text loader">Hämtar klienter...</div>
+              }
+            </div>
           </div>
           <div className="column">
             <div className="ui segment">
