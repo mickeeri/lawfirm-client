@@ -13,3 +13,7 @@ export const fetchUsers = () => {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };
+
+export const createUser = (params) => {
+  return axios.post(`${API_ROOT_URL}${API_USERS_PATH}`, { user: params });
+}

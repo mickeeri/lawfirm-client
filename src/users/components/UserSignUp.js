@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import UserForm from './UserForm';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 
 
@@ -19,7 +19,7 @@ UserSignUp.propTypes = {
 };
 
 const mapStateToProps = (state) => (
-  { errorMessage: state.auth.error }
+  { errorMessage: state.users.error }
 );
 
 export default connect(mapStateToProps, actions)(UserSignUp);

@@ -5,12 +5,13 @@ import {
   SIGNOUT_USER,
   FETCH_USERS_FAILURE,
   FETCH_USERS_SUCCESS,
+  CREATE_USER_FAILURE,
 } from './actionTypes';
 import * as api from './api';
 import { browserHistory } from 'react-router';
 import { LAWSUITS_PATH } from '../lawsuits';
 import { AUTH_TOKEN_LS_KEY } from '../shared';
-import { FETCH_USERS_FAILURE_MESSAGE, SIGNIN_ERROR_MESSAGE } from './constants';
+import { FETCH_USERS_FAILURE_MESSAGE, SIGNIN_ERROR_MESSAGE, CREATE_USER_FAILURE_MESSAGE } from './constants';
 
 export const authError = (error) => (
   { type: AUTH_ERROR, error }
@@ -26,7 +27,7 @@ export const signInUser = ({ email, password }) => (dispatch) => {
     error => {
       dispatch({
         type: SIGNIN_FAILURE,
-        errorMessage: error.message || SIGNIN_ERROR_MESSAGE,
+        errorMessage: error.response.data.message || SIGNIN_ERROR_MESSAGE,
       });
     });
 };
@@ -57,3 +58,18 @@ export const fetchUsers = () => (dispatch) => {
   );
 };
 
+export const createUser = (params) => (dispatch) => {
+  return api.createUser(params).then(
+    response => {
+      localStorage.setItem(AUTH_TOKEN_LS_KEY, response.data.auth_token);
+      dispatch({ type: SIGNIN_SUCCESS })
+      browserHistory.push(LAWSUITS_PATH);
+    },
+    error => {
+      dispatch({
+        type: CREATE_USER_FAILURE,
+        errorMessage: error.response.data.message || CREATE_USER_FAILURE_MESSAGE,
+      });
+    }
+  );
+};

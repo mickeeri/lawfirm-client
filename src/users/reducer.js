@@ -1,4 +1,10 @@
-import { SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT_USER, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from './actionTypes';
+import { SIGNIN_SUCCESS,
+         SIGNIN_FAILURE,
+         SIGNOUT_USER,
+         FETCH_USERS_SUCCESS,
+         FETCH_USERS_FAILURE,
+         CREATE_USER_FAILURE,
+       } from './actionTypes';
 
 const usersReducer = (state = {}, action) => {
   switch (action.type) {
@@ -15,6 +21,7 @@ const usersReducer = (state = {}, action) => {
         currentUserId: action.response.meta.current_user_id,
       };
     case FETCH_USERS_FAILURE:
+    case CREATE_USER_FAILURE:
       return { ...state, errorMessage: action.errorMessage };
     default:
       return state;
@@ -22,4 +29,3 @@ const usersReducer = (state = {}, action) => {
 };
 
 export default usersReducer;
-

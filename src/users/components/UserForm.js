@@ -1,44 +1,49 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { createUser } from '../../actions';
-import '../../styles/form.css';
-import { MESSAGES } from '../../constants';
+import { FIRST_NAME_REQ_MESSAGE,
+         LAST_NAME_REQ_MESSAGE,
+         EMAIL_REQ_MESSAGE,
+         EMAIL_INVALID_MESSAGE,
+         PASSWORD_MISMATCH_MESSAGE,
+         PASSWORD_REQ_MESSAGE,
+         PASSWORD_CONFIRMATION_REQ_MESSAGE,
+        } from '../constants';
 
 const validate = values => {
   const errors = {};
 
   // Firm validation
   if (!values.firm) {
-    errors.first_name = MESSAGES.firmRequired;
+    errors.first_name = EMAIL_REQ_MESSAGE;
   }
 
   // Name validation
   if (!values.first_name) {
-    errors.first_name = MESSAGES.firstNameRequired;
+    errors.first_name = FIRST_NAME_REQ_MESSAGE;
   }
 
   if (!values.last_name) {
-    errors.last_name = MESSAGES.lastNameRequired;
+    errors.last_name = LAST_NAME_REQ_MESSAGE;
   }
 
   // Email validation
   if (!values.email) {
-    errors.email = MESSAGES.emailRequired;
+    errors.email = EMAIL_REQ_MESSAGE;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = MESSAGES.emailInvalid;
+    errors.email = EMAIL_INVALID_MESSAGE;
   }
 
   // Password validation
   if (!values.password) {
-    errors.password = MESSAGES.passwordRequired;
+    errors.password = PASSWORD_REQ_MESSAGE;
   }
 
   if (!values.password_confirmation) {
-    errors.password_confirmation = MESSAGES.passwordConfirmationRequired;
+    errors.password_confirmation = PASSWORD_CONFIRMATION_REQ_MESSAGE;
   }
 
   if (values.password !== values.password_confirmation) {
-    errors.password_confirmation = MESSAGES.passwordConfirmationMismatch;
+    errors.password_confirmation = PASSWORD_MISMATCH_MESSAGE;
   }
 
   return errors;
@@ -63,7 +68,7 @@ const UserForm = props => {
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`}>
       <Field
         name="firm"
-        icon="user icon"
+        icon="building icon"
         type="text"
         component={renderField}
         placeholder="Firma"
@@ -84,7 +89,7 @@ const UserForm = props => {
       />
       <Field
         name="email"
-        icon="user icon"
+        icon="mail outline icon"
         type="email"
         component={renderField}
         placeholder="E-post"
@@ -125,5 +130,4 @@ export default reduxForm({
   form: 'PostsNew',
   fields: ['email', 'last_name', 'first_name', 'password', 'password_confirmation'],
   validate,
-}, null, { createUser })(UserForm);
-
+})(UserForm);
