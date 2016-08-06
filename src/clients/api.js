@@ -2,12 +2,24 @@ import axios from 'axios';
 import { API_ROOT_URL, AUTH_TOKEN_LS_KEY } from '../shared';
 import { API_CLIENTS_PATH } from './constants';
 
-export const fetchClients = (filter) => {
-  const { userId, query = '', page = 1 } = filter;
+/**
+ * Get request to fetch single or collection of clients.
+ * @param  {object} props containing filter and userId.
+ * @return {Promise}      
+ */
+export const fetchClients = (props) => {
+  let url;
 
-  const queryString = `?query=${query}&page=${page}&user_id=${userId}`;
+  // Get single client.
+  if (props.id) {
+    url = `${API_ROOT_URL}${API_CLIENTS_PATH}/${props.id}`;
+  } else { // Get collection of lawsuits.
+    const { userId = '', query = '', page = 1 } = props.filter;
+    const queryString = `?query=${query}&page=${page}&user_id=${userId}`;
+    url = `${API_ROOT_URL}${API_CLIENTS_PATH}${queryString}`;
+  }
 
-  return axios.get(`${API_ROOT_URL}${API_CLIENTS_PATH}${queryString}`, {
+  return axios.get(url , {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };

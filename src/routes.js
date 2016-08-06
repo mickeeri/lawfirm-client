@@ -2,17 +2,20 @@ import App from './App';
 import React from 'react';
 import Welcome from './components/Welcome';
 import { Route, IndexRoute } from 'react-router';
-import { UserRoutes } from './users';
+import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, UserSignIn, UserSignOut } from './users';
 import { LawsuitsIndexRoute, LawsuitShowRoute } from './lawsuits';
-import { ClientRoutes } from './clients';
+import { ClientShow, ClientsIndex, CLIENTS_PATH } from './clients';
+import requireAuth from './shared/hocs/requireAuth';
 
 export default (
   <Route path="/" component={App} >
     <IndexRoute components={Welcome} />
-    {UserRoutes}
+    <Route path={USER_SIGNIN_PATH} components={UserSignIn} />
+    <Route path={USER_SIGNOUT_PATH} components={UserSignOut} />
     {LawsuitsIndexRoute}
     {LawsuitShowRoute}
-    {ClientRoutes}
+    <Route path={CLIENTS_PATH} components={requireAuth(ClientsIndex)} />
+    <Route path={`${CLIENTS_PATH}/:id`} components={requireAuth(ClientShow)} />
   </Route>
 );
 

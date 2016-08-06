@@ -1,25 +1,25 @@
 import React, { Component, PropTypes } from 'react';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 import ClientInfo from './ClientInfo';
 
 class ClientShow extends Component {
   componentWillMount() {
-    this.props.fetchClient(this.props.params.id);
+    this.props.fetchClients( { filter: {}, id:  this.props.params.id });
   }
 
   render() {
     const { client } = this.props;
 
-    if (!client) {
-      return <div className="ui active centered inline loader"></div>;
-    }
 
     return (
       <div className="ui stackable grid">
         <div className="two column row">
-          <div className="column">
-            <ClientInfo client={client} />
+          <div className="column ui segment">
+            {client ?
+              <ClientInfo client={client} /> :
+              <div className="ui big active centered inline loader"></div>
+            }
           </div>
           <div className="column">
             <div className="ui segment">

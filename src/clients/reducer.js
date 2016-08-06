@@ -16,6 +16,7 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
     case FETCH_CLIENTS_SUCCESS:
       return {
         ...state,
+        client: action.response.client,
         all: action.response.clients,
         meta: action.response.meta,
         filter: action.filter,

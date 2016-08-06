@@ -6,9 +6,10 @@ import { generateLetterTemplate } from '../../utils/docxGenerator';
 
 const ClientInfo = ({ client }) => {
   return (
-    <div className="ui segment">
+    <div className="ClientInfo">
       <h2 className="ui header">{client.first_name} {client.last_name}</h2>
       <div className="ui divider"></div>
+      <p>Handläggare: {client.user.full_name}</p>
       <p>Personnummer: {client.personal_number}</p>
       <p>E-post:</p>
       <p>Mobil:</p>

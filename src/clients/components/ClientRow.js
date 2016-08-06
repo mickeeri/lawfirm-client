@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { PATHS } from '../../constants';
+import { CLIENTS_PATH } from '../constants';
 
 const ClientRow = ({ client }) => (
   <tr>
     <td>
       <Link
-        to={`${PATHS.client}/${client.id}`}
+        to={`${CLIENTS_PATH}/${client.id}`}
       >{client.last_name}, {client.first_name}
       </Link>
     </td>
