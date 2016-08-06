@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { EMAIL_REQUIRED, EMAIL_INVALID, PASSWORD_REQUIRED } from '../constants';
+import { EMAIL_REQ_MESSAGE, PASSWORD_REQ_MESSAGE, EMAIL_INVALID_MESSAGE } from '../../shared';
 
 const validate = values => {
   const errors = {};
 
   if (!values.email) {
-    errors.email = EMAIL_REQUIRED;
+    errors.email = EMAIL_REQ_MESSAGE;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = EMAIL_INVALID;
+    errors.email = EMAIL_INVALID_MESSAGE;
   }
 
   if (!values.password) {
-    errors.password = PASSWORD_REQUIRED;
+    errors.password = PASSWORD_REQ_MESSAGE;
   }
 
   return errors;
