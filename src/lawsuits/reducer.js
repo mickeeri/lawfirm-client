@@ -1,4 +1,10 @@
-import { FETCH_LAWSUITS_SUCCESS, FETCH_LAWSUITS_FAILURE } from './actionTypes';
+import {
+  FETCH_LAWSUITS_SUCCESS,
+  FETCH_LAWSUITS_FAILURE,
+  COI_SEARCH_SUCCESS,
+  COI_SEARCH_FAILURE,
+  RESET_LAWSUITS,
+} from './actionTypes';
 
 const INITIAL_STATE = {
   all: [],
@@ -23,6 +29,14 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
         filter: action.filter,
         errorMessage: '',
       };
+    case COI_SEARCH_SUCCESS:
+      return {
+        ...state,
+        all: action.response.lawsuits,
+      }
+    case RESET_LAWSUITS:
+      return INITIAL_STATE;
+    case COI_SEARCH_FAILURE:
     case FETCH_LAWSUITS_FAILURE:
       return {
         ...state,

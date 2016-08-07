@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { LAWSUITS_PATH } from '../../lawsuits';
 import { Link } from 'react-router';
 import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, USER_SIGNUP_PATH } from '../../users';
+import { COI_SEARCH_PATH } from '../../lawsuits';
 import React, { Component, PropTypes } from 'react';
 
 class Header extends Component {
@@ -13,12 +14,12 @@ class Header extends Component {
         ,
           <Link key="2" className="item" activeClassName="active"  to={CLIENTS_PATH}>Klienter</Link>
         ,
-          <Link key="3" className="item" activeClassName="active" to="/jav">Jävskontroll</Link>
+          <Link key="3" className="item" activeClassName="active" to={COI_SEARCH_PATH}>Jävskontroll</Link>
         ,
           <Link key="4" className="item" activeClassName="active" to="/sammanstallning">Sammanställning</Link>
         ,
-          <div className="right menu">
-            <Link key="5" className="item" activeClassName="active" to={USER_SIGNOUT_PATH}>Logga ut</Link>
+          <div className="right menu" key="5">
+            <Link className="item" activeClassName="active" to={USER_SIGNOUT_PATH}>Logga ut</Link>
           </div>
         ,
       ];

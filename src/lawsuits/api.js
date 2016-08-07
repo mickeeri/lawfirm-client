@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT_URL, AUTH_TOKEN_LS_KEY } from '../shared';
-import { API_LAWSUITS_PATH } from './constants';
+import { API_LAWSUITS_PATH, COI_SEARCH_API_PATH } from './constants';
 
 /**
  * Make GET request to fetch single or collection of lawsuits.
@@ -24,3 +24,11 @@ export const fetchLawsuits = (props) => {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };
+
+export const performCOISearch = (props) => {
+  let url = `${API_ROOT_URL}${COI_SEARCH_API_PATH}?query=${props.query}`;
+
+  return axios.get(url , {
+    headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+  });
+}
