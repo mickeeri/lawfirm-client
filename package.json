@@ -2,7 +2,7 @@
   "name": "lawfirm-client",
   "version": "0.0.1",
   "private": true,
-  "homepage": "https://mickeeri.github.io/lawfirm-client"
+  "homepage": "https://mickeeri.github.io/lawfirm-client",
   "devDependencies": {
     "react-scripts": "0.2.0",
     "redux-logger": "^2.6.1"
