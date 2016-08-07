@@ -59,10 +59,6 @@ const ClientInfo = ({ client }) => {
       </button>
 
       <div className="ui section divider"></div>
-      <h3 className="ui header">Anteckningar</h3>
-      <p>{client.note}</p>
-
-      <div className="ui section divider"></div>
       <Link to={CLIENTS_PATH} className="ui small labeled icon button">
         <i className="left chevron icon"></i>Tillbaka till klientregister
       </Link>

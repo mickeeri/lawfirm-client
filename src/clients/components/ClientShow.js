@@ -30,6 +30,10 @@ class ClientShow extends Component {
               <h2 className="ui header">Motparter</h2>
             </div>
             <div className="ui segment">
+              <h3 className="ui header">Anteckningar</h3>
+              <p>{client ? client.note : ''}</p>
+            </div>
+            <div className="ui segment">
               <h3 className="ui header">Inställningar</h3>
               <button className="negative labeled icon ui button">
                 <i className="remove user icon"></i>Radera
