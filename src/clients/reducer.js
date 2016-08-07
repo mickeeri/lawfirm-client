@@ -1,4 +1,10 @@
-import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE, RESET_CLIENTS } from './actionTypes';
+import {
+  FETCH_CLIENTS_SUCCESS,
+  FETCH_CLIENTS_FAILURE,
+  RESET_CLIENTS,
+  CREATE_CLIENT_FAILURE,
+  CREATE_CLIENT_SUCCESS,
+} from './actionTypes';
 
 const INITIAL_STATE = {
   all: [],
@@ -13,6 +19,7 @@ const INITIAL_STATE = {
 
 const clientsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CREATE_CLIENT_SUCCESS:
     case FETCH_CLIENTS_SUCCESS:
       return {
         ...state,
@@ -24,6 +31,7 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
       };
     case RESET_CLIENTS:
       return INITIAL_STATE;
+    case CREATE_CLIENT_FAILURE:
     case FETCH_CLIENTS_FAILURE:
       return {
         ...state,

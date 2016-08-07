@@ -5,7 +5,7 @@ import { API_CLIENTS_PATH } from './constants';
 /**
  * Get request to fetch single or collection of clients.
  * @param  {object} props containing filter and userId.
- * @return {Promise}      
+ * @return {Promise}
  */
 export const fetchClients = (props) => {
   let url;
@@ -23,3 +23,9 @@ export const fetchClients = (props) => {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };
+
+export const createClient = (params) => {
+  return axios.post(`${API_ROOT_URL}${API_CLIENTS_PATH}`, { client: params },
+    { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+  });
+}

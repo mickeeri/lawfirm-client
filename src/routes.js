@@ -4,7 +4,7 @@ import Welcome from './shared/components/Welcome';
 import { Route, IndexRoute } from 'react-router';
 import { USER_SIGNIN_PATH, USER_SIGNOUT_PATH, USER_SIGNUP_PATH, UserSignIn, UserSignOut, UserSignUp } from './users';
 import { LAWSUITS_PATH, LawsuitsIndex, LawsuitShow, COISearch, COI_SEARCH_PATH } from './lawsuits';
-import { ClientShow, ClientsIndex, CLIENTS_PATH } from './clients';
+import { ClientShow, ClientsIndex, ClientNew, CLIENTS_PATH, CLIENT_NEW_PATH } from './clients';
 import requireAuth from './shared/hocs/requireAuth';
 
 export default (
@@ -17,6 +17,7 @@ export default (
     <Route path={`${LAWSUITS_PATH}/:id`} component={requireAuth(LawsuitShow)} />
     <Route path={CLIENTS_PATH} components={requireAuth(ClientsIndex)} />
     <Route path={`${CLIENTS_PATH}/:id`} components={requireAuth(ClientShow)} />
+    <Route path={CLIENT_NEW_PATH} components={requireAuth(ClientNew)} />    
     <Route path={COI_SEARCH_PATH} components={requireAuth(COISearch)} />
   </Route>
 );
