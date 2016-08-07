@@ -4,6 +4,8 @@ import { UsersDropdown } from '../../users';
 import * as actions from '../actions';
 import ClientsTable from './ClientsTable';
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import { CLIENT_NEW_PATH } from '../constants';
 
 class ClientsIndex extends Component {
   componentWillMount() {
@@ -58,9 +60,9 @@ class ClientsIndex extends Component {
         </div>
         <div className="ui grid">
           <div className="six wide column">
-            <button className="ui primary labeled icon button">
-              <i className="user icon"></i>Lägg till klient
-            </button>
+            <Link to={CLIENT_NEW_PATH} className="ui primary labeled icon button">
+                <i className="add user icon"></i>Lägg till klient
+            </Link>
           </div>
           <div className="four wide column"></div>
           <div className="six wide column">
