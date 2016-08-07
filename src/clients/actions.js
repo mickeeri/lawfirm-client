@@ -1,4 +1,4 @@
-import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE } from './actionTypes';
+import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE, RESET_CLIENTS } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
 
@@ -22,3 +22,7 @@ export const fetchClients = (props) => (dispatch) => {
       });
     });
 };
+
+export const resetClients = () => (
+  { type: RESET_CLIENTS }
+)

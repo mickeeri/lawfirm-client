@@ -10,6 +10,10 @@ class ClientsIndex extends Component {
     this.props.fetchClients({ filter: this.props.filter });
   }
 
+  componentWillUnmount() {
+    this.props.resetClients();
+  }
+
   render() {
     const { clients, meta, filter, fetchClients } = this.props;
 

@@ -1,4 +1,4 @@
-import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE } from './actionTypes';
+import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE, RESET_CLIENTS } from './actionTypes';
 
 const INITIAL_STATE = {
   all: [],
@@ -22,6 +22,8 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
         filter: action.filter,
         errorMessage: '',
       };
+    case RESET_CLIENTS:
+      return INITIAL_STATE;
     case FETCH_CLIENTS_FAILURE:
       return {
         ...state,

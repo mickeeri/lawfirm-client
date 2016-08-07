@@ -11,6 +11,10 @@ class LawsuitsIndex extends Component {
     this.props.fetchLawsuits({ filter: this.props.filter });
   }
 
+  componentWillUnmount() {
+    this.props.resetLawsuits();
+  }
+
   render() {
     const { lawsuits, meta, filter, fetchLawsuits } = this.props;
 
