@@ -14,8 +14,10 @@ class LawsuitShow extends Component {
     return (
       <div className="ui stackable grid">
         <div className="two column row">
-          <div className="column ui segment">
-            <LawsuitInfo lawsuit={lawsuit} />
+          <div className="column">
+            <div className="ui segment">
+              <LawsuitInfo lawsuit={lawsuit} />
+            </div>
           </div>
           <div className="column">
             <div className="ui segment">
