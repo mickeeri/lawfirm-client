@@ -1,8 +1,7 @@
-/* What I need from semantic ui
- tables
- forms
 
-*/
+/******************************************/
+/* Layout */
+/*****************************************/
 
 body {
   margin: 0;
@@ -37,15 +36,20 @@ body {
 }*/
 
 
-select {
-  background-color: white;
-}
-
-
 /******************************************/
 /* Forms */
 /*****************************************/
 .error {
   color: #9F3A38;
   font-size: 1em;
+}
+
+label {
+  color: #818a91;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+select {
+  background-color: white;
 }
