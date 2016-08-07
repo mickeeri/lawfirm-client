@@ -7,7 +7,7 @@ import { FIRST_NAME_REQ_MESSAGE,
          PASSWORD_MISMATCH_MESSAGE,
          PASSWORD_REQ_MESSAGE,
          PASSWORD_CONFIRMATION_REQ_MESSAGE,
-        } from '../constants';
+       } from '../../shared';
 
 const validate = values => {
   const errors = {};
@@ -65,7 +65,7 @@ const renderField = field => {
 const UserForm = props => {
   const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
   return (
-    <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`}>
+    <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
       <Field
         name="firm"
         icon="building icon"
@@ -127,7 +127,7 @@ UserForm.propTypes = {
 
 
 export default reduxForm({
-  form: 'PostsNew',
+  form: 'UserForm',
   fields: ['email', 'last_name', 'first_name', 'password', 'password_confirmation'],
   validate,
 })(UserForm);
