@@ -1,12 +1,7 @@
 import axios from 'axios';
 import { API_ROOT_URL, AUTH_TOKEN_LS_KEY } from '../shared';
-import { API_LAWSUITS_PATH, COI_SEARCH_API_PATH } from './constants';
+import { API_LAWSUITS_PATH, COI_SEARCH_API_PATH, LAWSUIT_TYPES_API_PATH } from './constants';
 
-/**
- * Make GET request to fetch single or collection of lawsuits.
- * @param  {object} props
- * @return {Promise}       response from GET request
- */
 export const fetchLawsuits = (props) => {
   let url;
 
@@ -30,5 +25,17 @@ export const performCOISearch = (props) => {
 
   return axios.get(url , {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+  });
+}
+
+export const fetchLawsuitTypes = () => {
+  return axios.get(`${API_ROOT_URL}${LAWSUIT_TYPES_API_PATH}` , {
+    headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+  });
+}
+
+export const createLawsuit = (params) => {
+  return axios.post(`${API_ROOT_URL}${API_LAWSUITS_PATH}`, { lawsuit: params },
+    { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 }

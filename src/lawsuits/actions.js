@@ -1,6 +1,17 @@
-import { FETCH_LAWSUITS_SUCCESS, FETCH_LAWSUITS_FAILURE, COI_SEARCH_SUCCESS, COI_SEARCH_FAILURE, RESET_LAWSUITS } from './actionTypes';
+import {
+  COI_SEARCH_FAILURE,
+  COI_SEARCH_SUCCESS,
+  CREATE_LAWSUIT_FAILURE,
+  CREATE_LAWSUIT_SUCCESS,
+  FETCH_LAWSUITS_FAILURE,
+  FETCH_LAWSUITS_SUCCESS,
+  RESET_LAWSUITS,
+  FETCH_LAWSUIT_TYPES_SUCCESS,
+} from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
+import { CREATE_LAWSUIT_FAILURE_MESSAGE, LAWSUITS_PATH } from './constants';
+import { browserHistory } from 'react-router';
 
 export const fetchLawsuits = (props) => (dispatch) => {
   return api.fetchLawsuits(props).then(
@@ -48,3 +59,37 @@ export const performCOISearch = (props) => (dispatch) => {
 export const resetLawsuits = () => (
   { type: RESET_LAWSUITS }
 )
+
+
+export const fetchLawsuitTypes = () => (dispatch) => {
+  return api.fetchLawsuitTypes().then(
+    response => {
+      dispatch({
+        type: FETCH_LAWSUIT_TYPES_SUCCESS,
+        response: response.data,
+      })
+    },
+    error => {
+      console.error('Fel uppstod när ärendetyper skulle hämtas.');
+    }
+  );
+}
+
+
+export const createLawsuit = (params) => (dispatch) => {
+  return api.createLawsuit(params).then(
+    response => {
+      dispatch({
+        type: CREATE_LAWSUIT_SUCCESS,
+        response: response.data,
+      });
+      browserHistory.push(`${LAWSUITS_PATH}/${response.data.lawsuit.id}`);
+    },
+    error => {
+      dispatch({
+        type: CREATE_LAWSUIT_FAILURE,
+        errorMessage: error.response.data.message || CREATE_LAWSUIT_FAILURE_MESSAGE,
+      });
+    }
+  );
+};
