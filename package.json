@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://mickeeri.github.io/lawfirm-client",
   "devDependencies": {
-    "react-scripts": "0.2.0",
+    "react-scripts": "0.2.1",
     "redux-logger": "^2.6.1"
   },
   "dependencies": {
@@ -16,7 +16,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
-    "redux-form": "^6.0.0-rc.3",
+    "redux-form": "6.0.0-rc.2",
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
