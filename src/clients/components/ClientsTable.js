@@ -15,9 +15,7 @@ const ClientsTable = ({ clients }) => (
         <ClientRow key={client.id} client={client} />
       )}
     </tbody>
-    <tfoot>
-
-    </tfoot>
+    <tfoot />
   </table>
 );
 

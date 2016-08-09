@@ -8,7 +8,7 @@ const ClientInfo = ({ client }) => {
   return (
     <div className="ClientInfo">
       <h2 className="ui header">{client.first_name} {client.last_name}</h2>
-      <div className="ui divider"></div>
+      <div className="ui divider" />
 
       <div className="ui list">
         <div className="item">
@@ -37,12 +37,12 @@ const ClientInfo = ({ client }) => {
         </div>
       </div>
 
-      <div className="ui section divider"></div>
+      <div className="ui section divider" />
       <h3 className="ui header">Adress</h3>
 
       <div className="ui list">
         {client.co ?
-        <div className="item">{`C/O ${client.co}` }</div>
+          <div className="item">{`C/O ${client.co}` }</div>
         : ''}
 
         <div className="item">
@@ -54,13 +54,16 @@ const ClientInfo = ({ client }) => {
         </div>
       </div>
 
-      <button onClick={() => generateLetterTemplate(client)} className="ui small labeled icon button">
+      <button
+        onClick={() => generateLetterTemplate(client)}
+        className="ui small labeled icon button"
+      >
         <i className="left file word outline icon" />Brevmall
       </button>
 
-      <div className="ui section divider"></div>
+      <div className="ui section divider" />
       <Link to={CLIENTS_PATH} className="ui small labeled icon button">
-        <i className="left chevron icon"></i>Tillbaka till klientregister
+        <i className="left chevron icon" />Tillbaka till klientregister
       </Link>
     </div>
   );

@@ -2,11 +2,7 @@ import axios from 'axios';
 import { API_ROOT_URL, AUTH_TOKEN_LS_KEY } from '../shared';
 import { API_CLIENTS_PATH } from './constants';
 
-/**
- * Get request to fetch single or collection of clients.
- * @param  {object} props containing filter and userId.
- * @return {Promise}
- */
+// Get request to fetch single or collection of clients.
 export const fetchClients = (props) => {
   let url;
 
@@ -19,13 +15,13 @@ export const fetchClients = (props) => {
     url = `${API_ROOT_URL}${API_CLIENTS_PATH}${queryString}`;
   }
 
-  return axios.get(url , {
+  return axios.get(url, {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };
 
-export const createClient = (params) => {
-  return axios.post(`${API_ROOT_URL}${API_CLIENTS_PATH}`, { client: params },
+// Create client post request.
+export const createClient = (params) =>
+  axios.post(`${API_ROOT_URL}${API_CLIENTS_PATH}`, { client: params },
     { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
-}

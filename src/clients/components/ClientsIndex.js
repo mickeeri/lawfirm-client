@@ -1,10 +1,10 @@
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { SearchBar, Paginator } from '../../shared';
 import { UsersDropdown } from '../../users';
 import * as actions from '../actions';
 import ClientsTable from './ClientsTable';
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { CLIENT_NEW_PATH } from '../constants';
 
 class ClientsIndex extends Component {
@@ -22,7 +22,7 @@ class ClientsIndex extends Component {
     if (!clients) {
       return (
         <div className="ui segment index">
-          return <div className="ui huge active centered inline loader"></div>
+          return <div className="ui huge active centered inline loader" />
         </div>
       );
     }
@@ -43,7 +43,7 @@ class ClientsIndex extends Component {
               }
             />
           </div>
-          <div className="four wide column"></div>
+          <div className="four wide column" />
           <div className="six wide column">
             <SearchBar
               label="Sök på namn eller personnummer"
@@ -61,10 +61,10 @@ class ClientsIndex extends Component {
         <div className="ui grid">
           <div className="six wide column">
             <Link to={CLIENT_NEW_PATH} className="ui primary labeled icon button">
-                <i className="add user icon"></i>Lägg till klient
+              <i className="add user icon" />Lägg till klient
             </Link>
           </div>
-          <div className="four wide column"></div>
+          <div className="four wide column" />
           <div className="six wide column">
             <Paginator
               meta={meta}
@@ -99,14 +99,13 @@ ClientsIndex.propTypes = {
     page: PropTypes.number,
     userId: PropTypes.string,
   }).isRequired,
+  resetClients: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-return (
+const mapStateToProps = (state) => (
   { clients: state.clients.all,
     meta: state.clients.meta,
     filter: state.clients.filter }
 );
-}
 
 export default connect(mapStateToProps, actions)(ClientsIndex);

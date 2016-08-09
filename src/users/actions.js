@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import {
   AUTH_ERROR,
   CREATE_USER_FAILURE,
@@ -8,10 +9,13 @@ import {
   SIGNOUT_USER,
 } from './actionTypes';
 import * as api from './api';
-import { browserHistory } from 'react-router';
 import { LAWSUITS_PATH } from '../lawsuits';
 import { AUTH_TOKEN_LS_KEY } from '../shared';
-import { FETCH_USERS_FAILURE_MESSAGE, SIGNIN_ERROR_MESSAGE, CREATE_USER_FAILURE_MESSAGE } from './constants';
+import {
+  FETCH_USERS_FAILURE_MESSAGE,
+  SIGNIN_ERROR_MESSAGE,
+  CREATE_USER_FAILURE_MESSAGE,
+} from './constants';
 
 export const authError = (error) => (
   { type: AUTH_ERROR, error }

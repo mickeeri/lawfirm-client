@@ -1,8 +1,15 @@
-import { FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE, RESET_CLIENTS, CREATE_CLIENT_SUCCESS, CREATE_CLIENT_FAILURE } from './actionTypes';
+import { browserHistory } from 'react-router';
+import {
+  CREATE_CLIENT_FAILURE,
+  CREATE_CLIENT_SUCCESS,
+  FETCH_CLIENTS_FAILURE,
+  FETCH_CLIENTS_SUCCESS,
+  RESET_CLIENTS,
+} from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
 import { CREATE_CLIENT_FAILURE_MESSAGE, CLIENTS_PATH } from './constants';
-import { browserHistory } from 'react-router';
+
 
 export const fetchClients = (props) => (dispatch) => {
   return api.fetchClients(props).then(
@@ -27,7 +34,7 @@ export const fetchClients = (props) => (dispatch) => {
 
 export const resetClients = () => (
   { type: RESET_CLIENTS }
-)
+);
 
 export const createClient = (params) => (dispatch) => {
   return api.createClient(params).then(

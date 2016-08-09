@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import * as actions from '../actions';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import { LawsuitsList } from '../../lawsuits';
 
 class ClientShow extends Component {
   componentWillMount() {
-    this.props.fetchClients( { filter: {}, id:  this.props.params.id });
+    this.props.fetchClients({ filter: {}, id: this.props.params.id });
   }
 
   render() {
@@ -15,7 +15,7 @@ class ClientShow extends Component {
     if (!client) {
       return (
         <div className="ui large active centered inline text loader">Hämtar klient...</div>
-      )
+      );
     }
 
     return (
@@ -40,10 +40,10 @@ class ClientShow extends Component {
             <div className="ui segment">
               <h3 className="ui header">Inställningar</h3>
               <button className="negative labeled icon ui button">
-                <i className="remove user icon"></i>Radera
+                <i className="remove user icon" />Radera
               </button>
               <button className="ui primary labeled icon button">
-                <i className="edit icon"></i>Redigera
+                <i className="edit icon" />Redigera
               </button>
             </div>
           </div>
@@ -61,6 +61,7 @@ ClientShow.propTypes = {
     id: PropTypes.number,
   }),
   params: PropTypes.object.isRequired,
+  fetchClients: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (

@@ -1,22 +1,19 @@
+import { closeDialog } from 'redux-dialog';
+import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import LawsuitTypesDropdown from './LawsuitTypesDropdown';
-import { closeDialog } from 'redux-dialog';
-import { connect } from 'react-redux';
-
 
 const validate = values => {
   const errors = {};
 
-
-
   return errors;
-}
+};
 
 const renderField = (field) => {
   return (
     <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
-      <label>{field.input.placeholder}</label>
+      <label htmlFor={field.name}>{field.input.placeholder}</label>
       <div className="ui input">
         <input {...field.input} />
       </div>
@@ -42,7 +39,7 @@ let LawsuitForm = props => {
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
       <div className="field">
-      <LawsuitTypesDropdown />
+        <LawsuitTypesDropdown />
       </div>
       <Field
         name="client_id"
@@ -69,22 +66,25 @@ let LawsuitForm = props => {
           />
         </div>
       </div>
-      <div className="ui divider"></div>
+      <div className="ui divider" />
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
       <div>
         <button
           onClick={(e) => {
             e.preventDefault();
-            props.dispatch(closeDialog('lawsuitFormDialog'))
+            props.dispatch(closeDialog('lawsuitFormDialog'));
           }}
           className="ui button"
-        ><i className="remove icon"></i>Stäng</button>
-        <button className="ui orange button" disabled={pristine || submitting} onClick={reset}>Återställ</button>
+        ><i className="remove icon" />Stäng</button>
+        <button
+          className="ui orange button" disabled={pristine || submitting}
+          onClick={reset}
+        >Återställ</button>
         <button
           type="submit"
           disabled={submitting}
           className="ui button primary"
-        ><i className="checkmark icon"></i>Skapa ärende</button>
+        ><i className="checkmark icon" />Skapa ärende</button>
       </div>
     </form>
   )
@@ -96,6 +96,7 @@ LawsuitForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   errorMessage: PropTypes.string,
+  dispatch: PropTypes.func,
 };
 
 LawsuitForm = reduxForm({
@@ -106,9 +107,9 @@ LawsuitForm = reduxForm({
 
 const mapStateToProps = (state) => (
   { initialValues: {
-      client_id: state.clients.client.id,
-      court: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.court : '',
-      case_number: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.case_number : '' } }
+    client_id: state.clients.client.id,
+    court: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.court : '',
+    case_number: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.case_number : '' } }
 );
 
 export default connect(mapStateToProps, null)(LawsuitForm);

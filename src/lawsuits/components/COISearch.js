@@ -1,6 +1,6 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import React, { Component, PropTypes } from 'react';
 import { SearchBar } from '../../shared';
 import COISearchResult from './COISearchResult';
 
@@ -27,7 +27,7 @@ class COISearch extends Component {
             </div>
           </div>
           <div>
-            <div className="ui divider"></div>
+            <div className="ui divider" />
             <h3 className="ui header">Sökresultat</h3>
             {lawsuits ? <COISearchResult lawsuits={lawsuits} /> : ''}
           </div>
@@ -35,19 +35,16 @@ class COISearch extends Component {
       </div>
     );
   }
-};
+}
 
 COISearch.propTypes = {
   performCOISearch: PropTypes.func.isRequired,
   lawsuits: PropTypes.array,
-}
+  resetLawsuits: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = (state) => {
-  return (
-    { lawsuits: state.lawsuits.all,
-       }
-  )
-}
-
+const mapStateToProps = (state) => (
+  { lawsuits: state.lawsuits.all }
+);
 
 export default connect(mapStateToProps, actions)(COISearch);
