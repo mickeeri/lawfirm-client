@@ -9,7 +9,7 @@ import { CLIENTS_PATH } from '../constants';
 const ClientNew = props => {
   return (
     <div className="ui centered left aligned grid">
-      <div className="eight computer sixteen mobile wide column">
+      <div className="eight wide computer sixteen wide mobile column">
         <div className="ui segment">
           <h1 className="ui header">Lägg till ny klient</h1>
           <ClientForm onSubmit={props.createClient} errorMessage={props.errorMessage} />

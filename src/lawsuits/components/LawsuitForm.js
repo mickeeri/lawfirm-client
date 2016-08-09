@@ -87,8 +87,8 @@ let LawsuitForm = props => {
         ><i className="checkmark icon" />Skapa ärende</button>
       </div>
     </form>
-  )
-}
+  );
+};
 
 LawsuitForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
