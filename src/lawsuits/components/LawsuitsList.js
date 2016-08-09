@@ -4,7 +4,7 @@ import { openDialog } from 'redux-dialog';
 import LawsuitFormDialog from './LawsuitFormDialog';
 
 // List of lawsuits in Client show.
-export const LawsuitsList = ({ clientId, dispatch }) => {
+export const LawsuitsList = ({ dispatch }) => {
   return (
     <div>
       <h2 className="ui header">Ärenden</h2>
@@ -19,5 +19,11 @@ export const LawsuitsList = ({ clientId, dispatch }) => {
     </div>
   );
 }
+
+LawsuitsList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+}
+
+
 
 export default connect()(LawsuitsList);

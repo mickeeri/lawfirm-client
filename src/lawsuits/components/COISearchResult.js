@@ -40,7 +40,6 @@ const COISearchResult = ({ lawsuits }) => {
     );
   }
 
-
   return (
     <div className="COISearchResult">
       {lawsuits.map(lawsuit =>
@@ -48,6 +47,10 @@ const COISearchResult = ({ lawsuits }) => {
       )}
     </div>
   )
+}
+
+COISearchResult.propTypes = {
+  lawsuits: PropTypes.array,
 }
 
 export default COISearchResult;

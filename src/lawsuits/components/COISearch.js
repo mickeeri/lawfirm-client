@@ -37,6 +37,11 @@ class COISearch extends Component {
   }
 };
 
+COISearch.propTypes = {
+  performCOISearch: PropTypes.func.isRequired,
+  lawsuits: PropTypes.array,
+}
+
 const mapStateToProps = (state) => {
   return (
     { lawsuits: state.lawsuits.all,

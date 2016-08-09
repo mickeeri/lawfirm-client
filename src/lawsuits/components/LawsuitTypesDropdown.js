@@ -9,7 +9,6 @@ class LawsuitTypesDropdown extends Component {
   }
 
   render() {
-
     const { lawsuitTypes } = this.props;
 
     if (!lawsuitTypes) {
@@ -33,6 +32,10 @@ class LawsuitTypesDropdown extends Component {
       </div>
     );
   }
+}
+
+LawsuitTypesDropdown.propTypes = {
+  lawsuitTypes: PropTypes.array,
 }
 
 const mapStateToProps = (state) => {
