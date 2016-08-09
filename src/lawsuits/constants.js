@@ -4,7 +4,6 @@ export const LAWSUIT_TYPES_API_PATH = '/lawsuit_types';
 
 // Paths
 export const LAWSUITS_PATH = '/arenden';
-export const LAWSUIT_NEW_PATH = '/skapa-arende';
 export const COI_SEARCH_API_PATH = '/coisearch';
 export const COI_SEARCH_PATH = '/javskontroll';
 
