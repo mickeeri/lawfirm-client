@@ -58,6 +58,13 @@ select {
   font-weight: normal;
 }
 
+input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
+}
+
+
 /******************************************/
 /* Dialogs/Modals */
 /*****************************************/
