@@ -60,7 +60,6 @@ export const resetLawsuits = () => (
   { type: RESET_LAWSUITS }
 )
 
-
 export const fetchLawsuitTypes = () => (dispatch) => {
   return api.fetchLawsuitTypes().then(
     response => {
@@ -74,7 +73,6 @@ export const fetchLawsuitTypes = () => (dispatch) => {
     }
   );
 }
-
 
 export const createLawsuit = (params) => (dispatch) => {
   return api.createLawsuit(params).then(

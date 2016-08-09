@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import LawsuitTypesDropdown from './LawsuitTypesDropdown';
+import { closeDialog } from 'redux-dialog';
+import { connect } from 'react-redux';
+
 
 const validate = values => {
   const errors = {};
@@ -22,25 +25,32 @@ const renderField = (field) => {
   );
 };
 
-const renderTextArea = (field) => {
-  return (
-    <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
-      <label>{field.input.placeholder}</label>
-      <div className="ui input">
-        <textarea {...field.input} />
-      </div>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
-    </div>
-  );
-};
+// const renderTextArea = (field) => {
+//   return (
+//     <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
+//       <label>{field.input.placeholder}</label>
+//       <div className="ui input">
+//         <textarea {...field.input} />
+//       </div>
+//       {field.touched && field.error && <div className="error">{field.error}</div>}
+//     </div>
+//   );
+// };
 
-const LawsuitForm = props => {
+let LawsuitForm = props => {
   const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
       <div className="field">
       <LawsuitTypesDropdown />
       </div>
+      <Field
+        name="client_id"
+        type="text"
+        component="input"
+        placeholder="Klient id"
+        hidden
+      />
       <div className="fields">
         <div className="eleven wide field">
           <Field
@@ -62,8 +72,19 @@ const LawsuitForm = props => {
       <div className="ui divider"></div>
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
       <div>
-        <button type="button" className="ui orange button" disabled={pristine || submitting} onClick={reset}>Återställ</button>
-        <button type="submit" disabled={submitting} className="ui button primary">Lägg till ärende</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            props.dispatch(closeDialog('lawsuitFormDialog'))
+          }}
+          className="ui button"
+        ><i className="remove icon"></i>Stäng</button>
+        <button className="ui orange button" disabled={pristine || submitting} onClick={reset}>Återställ</button>
+        <button
+          type="submit"
+          disabled={submitting}
+          className="ui button primary"
+        ><i className="checkmark icon"></i>Skapa ärende</button>
       </div>
     </form>
   )
@@ -77,14 +98,17 @@ LawsuitForm.propTypes = {
   errorMessage: PropTypes.string,
 };
 
-export default reduxForm({
+LawsuitForm = reduxForm({
   form: 'LawsuitForm',
-  fields: [
-    'lawsuit_type_id',
-    'court',
-    'case_number',
-    'closed',
-    'note',
-  ],
+  enableReinitialize: true,
   validate,
-})(LawsuitForm);
+}, { closeDialog })(LawsuitForm);
+
+const mapStateToProps = (state) => (
+  { initialValues: {
+      client_id: state.clients.client.id,
+      court: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.court : '',
+      case_number: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.case_number : '' } }
+);
+
+export default connect(mapStateToProps, null)(LawsuitForm);

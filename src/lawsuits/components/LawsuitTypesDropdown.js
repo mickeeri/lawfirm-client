@@ -18,10 +18,10 @@ class LawsuitTypesDropdown extends Component {
 
     return (
       <div className="LawsuitTypesDropdown">
-        <label htmlFor="lawsuit_types">Ärendetyp</label>
+        <label htmlFor="lawsuit_type_id">Ärendetyp</label>
         <Field
           className="ui fluid dropdown"
-          name="lawsuit_types"
+          name="lawsuit_type_id"
           component="select"
           defaultValue="0"
         >
