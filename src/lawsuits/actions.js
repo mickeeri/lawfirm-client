@@ -36,8 +36,8 @@ export const fetchLawsuits = (props) => (dispatch) => {
   );
 };
 
-export const performCOISearch = (props) => (dispatch) => {
-  return api.performCOISearch(props).then(
+export const performCOISearch = (props) => (dispatch) =>
+  api.performCOISearch(props).then(
     response => {
       dispatch({
         type: COI_SEARCH_SUCCESS,
@@ -55,14 +55,13 @@ export const performCOISearch = (props) => (dispatch) => {
       });
     }
   );
-};
 
 export const resetLawsuits = () => (
   { type: RESET_LAWSUITS }
 );
 
-export const fetchLawsuitTypes = () => (dispatch) => {
-  return api.fetchLawsuitTypes().then(
+export const fetchLawsuitTypes = () => (dispatch) =>
+  api.fetchLawsuitTypes().then(
     response => {
       dispatch({
         type: FETCH_LAWSUIT_TYPES_SUCCESS,
@@ -73,10 +72,9 @@ export const fetchLawsuitTypes = () => (dispatch) => {
       console.error('Fel uppstod när ärendetyper skulle hämtas.', error.message);
     }
   );
-}
 
-export const createLawsuit = (params) => (dispatch) => {
-  return api.createLawsuit(params).then(
+export const createLawsuit = (params) => (dispatch) =>
+  api.createLawsuit(params).then(
     response => {
       dispatch(closeDialog('lawsuitFormDialog'));
       dispatch({
@@ -92,4 +90,3 @@ export const createLawsuit = (params) => (dispatch) => {
       });
     }
   );
-};

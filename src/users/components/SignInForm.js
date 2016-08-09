@@ -20,9 +20,9 @@ const validate = values => {
 
 const renderField = field => (
   <div className={field.touched && field.error ? 'field error' : 'field'}>
-    <label>{field.input.placeholder}</label>
+    <label htmlFor={field.name}>{field.input.placeholder}</label>
     <div className="ui left icon input">
-      <i className={field.input.icon}></i>
+      <i className={field.input.icon} />
       <input {...field.input} />
     </div>
     {field.touched && field.error && <div className="error">{field.error}</div>}
@@ -33,8 +33,20 @@ const SignInForm = (props) => {
   const { handleSubmit, submitting, errorMessage } = props;
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`}>
-      <Field name="email" icon="user icon" type="email" component={renderField} placeholder="E-post" />
-      <Field name="password" icon="lock icon" type="password" component={renderField} placeholder="Lösenord" />
+      <Field
+        name="email"
+        icon="user icon"
+        type="email"
+        component={renderField}
+        placeholder="E-post"
+      />
+      <Field
+        name="password"
+        icon="lock icon"
+        type="password"
+        component={renderField}
+        placeholder="Lösenord"
+      />
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
       <div>
         <button type="submit" disabled={submitting} className="ui button primary">Logga in</button>

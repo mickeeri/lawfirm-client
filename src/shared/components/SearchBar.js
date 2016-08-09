@@ -22,15 +22,15 @@ const SearchBar = ({ onSearch, label }) => {
           }}
           ref={node => { input = node; }}
         />
-          <i
-            className="ui remove link icon"
-            onClick={() => {
-              // Click reset button to clear input field,
-              // and send empty query.
-              input.value = '';
-              onSearch('');
-            }}
-          ></i>
+        <i
+          className="ui remove link icon"
+          onClick={() => {
+            // Click reset button to clear input field,
+            // and send empty query.
+            input.value = '';
+            onSearch('');
+          }}
+        />
       </div>
     </div>
   );
@@ -38,6 +38,7 @@ const SearchBar = ({ onSearch, label }) => {
 
 SearchBar.propTypes = {
   onSearch: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

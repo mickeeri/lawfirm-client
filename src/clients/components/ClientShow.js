@@ -31,9 +31,6 @@ class ClientShow extends Component {
               <LawsuitsList clientId={client.id} />
             </div>
             <div className="ui segment">
-              <h2 className="ui header">Motparter</h2>
-            </div>
-            <div className="ui segment">
               <h3 className="ui header">Anteckningar</h3>
               <p>{client ? client.note : ''}</p>
             </div>
