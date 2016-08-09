@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 import ClientInfo from './ClientInfo';
+import { LawsuitsList } from '../../lawsuits';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -11,20 +12,23 @@ class ClientShow extends Component {
   render() {
     const { client } = this.props;
 
+    if (!client) {
+      return (
+        <div className="ui large active centered inline text loader">Hämtar klient...</div>
+      )
+    }
+
     return (
       <div className="ui stackable grid">
         <div className="two column row">
           <div className="column">
             <div className="ui segment">
-              {client ?
-                <ClientInfo client={client} /> :
-                <div className="ui large active centered inline text loader">Hämtar klienter...</div>
-              }
+              <ClientInfo client={client} />
             </div>
           </div>
           <div className="column">
             <div className="ui segment">
-              <h2 className="ui header">Ärenden</h2>
+              <LawsuitsList clientId={client.id} />
             </div>
             <div className="ui segment">
               <h2 className="ui header">Motparter</h2>
@@ -56,7 +60,6 @@ ClientShow.propTypes = {
     personal_number: PropTypes.string.isRequired,
     id: PropTypes.number,
   }),
-  fetchClient: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
 };
 

@@ -1,11 +1,11 @@
 import {
   AUTH_ERROR,
-  SIGNIN_SUCCESS,
-  SIGNIN_FAILURE,
-  SIGNOUT_USER,
+  CREATE_USER_FAILURE,
   FETCH_USERS_FAILURE,
   FETCH_USERS_SUCCESS,
-  CREATE_USER_FAILURE,
+  SIGNIN_FAILURE,
+  SIGNIN_SUCCESS,
+  SIGNOUT_USER,
 } from './actionTypes';
 import * as api from './api';
 import { browserHistory } from 'react-router';

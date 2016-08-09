@@ -45,7 +45,7 @@ body {
 }
 
 label {
-  color: #818a91;
+  color: #818a91 !important;
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -56,4 +56,15 @@ select {
 
 .checkbox label {
   font-weight: normal;
+}
+
+/******************************************/
+/* Dialogs/Modals */
+/*****************************************/
+.left {
+  z-index: 0 !important;
+}
+
+.right {
+  z-index: 0 !important;
 }
