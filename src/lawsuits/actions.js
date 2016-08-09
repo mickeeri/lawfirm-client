@@ -1,3 +1,5 @@
+import { closeDialog } from 'redux-dialog';
+import { browserHistory } from 'react-router';
 import {
   COI_SEARCH_FAILURE,
   COI_SEARCH_SUCCESS,
@@ -11,7 +13,6 @@ import {
 import * as api from './api';
 import { signOutUser } from '../users';
 import { CREATE_LAWSUIT_FAILURE_MESSAGE, LAWSUITS_PATH } from './constants';
-import { browserHistory } from 'react-router';
 
 export const fetchLawsuits = (props) => (dispatch) => {
   return api.fetchLawsuits(props).then(
@@ -37,7 +38,7 @@ export const fetchLawsuits = (props) => (dispatch) => {
 
 export const performCOISearch = (props) => (dispatch) => {
   return api.performCOISearch(props).then(
-    response =>  {
+    response => {
       dispatch({
         type: COI_SEARCH_SUCCESS,
         response: response.data,
@@ -53,12 +54,12 @@ export const performCOISearch = (props) => (dispatch) => {
         errorMessage: error.response.data.message || 'Fel uppstod när ärenden skulle hämtas.',
       });
     }
-  )
-}
+  );
+};
 
 export const resetLawsuits = () => (
   { type: RESET_LAWSUITS }
-)
+);
 
 export const fetchLawsuitTypes = () => (dispatch) => {
   return api.fetchLawsuitTypes().then(
@@ -66,10 +67,10 @@ export const fetchLawsuitTypes = () => (dispatch) => {
       dispatch({
         type: FETCH_LAWSUIT_TYPES_SUCCESS,
         response: response.data,
-      })
+      });
     },
     error => {
-      console.error('Fel uppstod när ärendetyper skulle hämtas.');
+      console.error('Fel uppstod när ärendetyper skulle hämtas.', error.message);
     }
   );
 }
@@ -77,6 +78,7 @@ export const fetchLawsuitTypes = () => (dispatch) => {
 export const createLawsuit = (params) => (dispatch) => {
   return api.createLawsuit(params).then(
     response => {
+      dispatch(closeDialog('lawsuitFormDialog'));
       dispatch({
         type: CREATE_LAWSUIT_SUCCESS,
         response: response.data,
