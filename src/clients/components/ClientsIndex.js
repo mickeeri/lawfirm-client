@@ -30,7 +30,7 @@ class ClientsIndex extends Component {
     return (
       <div className=" ClientsIndex ui segment index">
         <h1 className="ui header">Klientregister</h1>
-        <div className="ui grid">
+        <div className="ui stackable grid">
           <div className="six wide column">
             <UsersDropdown
               onDropdownChange={
@@ -43,7 +43,7 @@ class ClientsIndex extends Component {
               }
             />
           </div>
-          <div className="four wide column" />
+          <div className="four wide column computer only" />
           <div className="six wide column">
             <SearchBar
               label="Sök på namn eller personnummer"
@@ -58,13 +58,13 @@ class ClientsIndex extends Component {
             />
           </div>
         </div>
-        <div className="ui grid">
+        <div className="ui stackable grid">
           <div className="six wide column">
             <Link to={CLIENT_NEW_PATH} className="ui primary labeled icon button">
               <i className="add user icon" />Lägg till klient
             </Link>
           </div>
-          <div className="four wide column" />
+          <div className="four wide column computer only" />
           <div className="six wide column">
             <Paginator
               meta={meta}
