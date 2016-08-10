@@ -9,39 +9,57 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <Link key="1" className="item" activeClassName="active" to={LAWSUITS_PATH}>
-          Ärenden
-        </Link>,
-        <Link key="2" className="item" activeClassName="active" to={CLIENTS_PATH}>
-          Klienter
-        </Link>,
-        <Link key="3" className="item" activeClassName="active" to={COI_SEARCH_PATH}>
-          Jävskontroll
-        </Link>,
-        <Link key="4" className="item" activeClassName="active" to="/sammanstallning">
-          Sammanställning
-        </Link>,
-        <div className="right menu" key="5">
-          <Link className="item" activeClassName="active" to={USER_SIGNOUT_PATH}>Logga ut</Link>
-        </div>,
+        <li key="1">
+          <Link className="item" activeClassName="active" to={LAWSUITS_PATH}>
+            Ärenden
+          </Link>
+        </li>,
+        <li key="2">
+          <Link className="item" activeClassName="active" to={CLIENTS_PATH}>
+            Klienter
+          </Link>
+        </li>,
+        <li key="3">
+          <Link className="item" activeClassName="active" to={COI_SEARCH_PATH}>
+            Jävskontroll
+          </Link>
+        </li>,
+        <li key="4">
+          <Link className="item" activeClassName="active" to="/sammanstallning">
+            Sammanställning
+          </Link>
+        </li>,
       ];
     }
 
     return [
-      <Link key="1" className="item" activeClassName="active" to={USER_SIGNIN_PATH}>
-        Logga in
-      </Link>,
-      <Link key="2" className="item" activeClassName="active" to={USER_SIGNUP_PATH}>
-        Skapa konto
-      </Link>,
+      <li key="1">
+        <Link className="item" activeClassName="active" to={USER_SIGNIN_PATH}>
+          Logga in
+        </Link>
+      </li>,
+      <li key="2">
+        <Link className="item" activeClassName="active" to={USER_SIGNUP_PATH}>
+          Skapa konto
+        </Link>
+      </li>,
     ];
   }
   render() {
     return (
-      <div className="ui stackable menu">
-        <Link to="/" className="item">OrdoCliens</Link>
-        {this.renderLinks()}
-      </div>
+      <nav>
+        <ul className="menu start">
+          <li className="brand"><Link to="/" className="item">OrdoCliens</Link></li>
+          {this.renderLinks()}
+        </ul>
+        <ul className="menu end">
+          {this.props.authenticated &&
+            <li className="left">
+              <Link className="item" activeClassName="active" to={USER_SIGNOUT_PATH}>Logga ut</Link>
+            </li>
+          }
+        </ul>
+      </nav>
     );
   }
 }

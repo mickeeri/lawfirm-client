@@ -21,16 +21,16 @@ class LawsuitsIndex extends Component {
     if (!lawsuits) {
       return (
         <div className="ui segment index">
-          <div className="ui huge active centered inline loader"></div>
+          <div className="ui huge active centered inline loader" />
         </div>
       );
     }
 
     return (
-      <div className="LawsuitsIndex ui segment index">
-        <h1 className="ui header">Ärenden</h1>
-        <div className="ui stackable grid">
-          <div className="six wide column">
+      <div className="LawsuitsIndex segment index">
+        <h1>Ärenden</h1>
+        <div className="index-menu-row">
+          <div className="index-menu-column">
             <UsersDropdown
               onDropdownChange={
                 (newUserId) => fetchLawsuits({
@@ -43,10 +43,7 @@ class LawsuitsIndex extends Component {
               }
             />
           </div>
-          <div className="four wide column computer only">
-
-          </div>
-          <div className="six wide column">
+          <div className="index-menu-column">
             <SearchBar
               label="Sök på huvudklient eller ärende"
               onSearch={
@@ -61,16 +58,15 @@ class LawsuitsIndex extends Component {
             />
           </div>
         </div>
-        <div className="ui stackable grid">
-          <div className="six wide column">
+        <div className="index-menu-row">
+          <div className="index-menu-column">
             <StatusCheckbox
               onCheck={(newFilter) => fetchLawsuits(newFilter)}
               filter={filter}
               meta={meta}
             />
           </div>
-          <div className="four wide column computer only"></div>
-          <div className="six wide column">
+          <div className="index-menu-column">
             <Paginator
               meta={meta}
               onPaginate={
@@ -95,6 +91,7 @@ LawsuitsIndex.propTypes = {
   dispatch: PropTypes.func.isRequired,
   fetchLawsuits: PropTypes.func.isRequired,
   meta: PropTypes.object.isRequired,
+  resetLawsuits: PropTypes.func.isRequired,
   lawsuits: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,

@@ -4,97 +4,329 @@
 /*****************************************/
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
   background-color: #F9F9F9;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: .9em;
 }
 
-.content-right {
-  text-align: right;
+/* Mobile */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 1em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    display: flex;
+    justify-content: center;
+  }
+
+  .content {
+    width: 1200px;
+  }
+
+  .index {
+    min-height: 1000px;
+  }
+}
+
+input, button, a, .checkbox {
+  box-sizing: border-box;
 }
 
 /******************************************/
-/* Index pages */
+/* Buttons */
 /*****************************************/
-.index {
-  min-height: 1000px;
+
+.button {
+  font-size: inherit !important;
 }
 
-.index .loader {
-  margin-top: 100px !important;
+.button .fa {
+  margin-right: .3em;
 }
-
-/* Show arvhived checkbox segment */
-.index .segment {
-  padding: 0.8em;
-}
-
-/*.menu .item:hover {
-  background: #6CC071 !important;
-  color: white !important;
-}*/
-
 
 /******************************************/
-/* Forms */
+/* Segment */
 /*****************************************/
-.error {
-  color: #9F3A38;
-  font-size: 1em;
-}
 
-label {
-  color: #818a91 !important;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-select {
-  background-color: white;
-}
-
-.checkbox label {
-  font-weight: normal;
-}
-
-.ClientForm {
+.segment {
   margin-top: 30px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,0.04);
+  padding: 1rem;
 }
 
 @media screen and (max-width: 768px) {
-  input, textarea {
-    font-size: 16px !important;
+  .segment {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
+.user-sign-in {
+  width: 350px;
+}
+
+.user-sign-up {
+  width: 700px;
+}
+
+/******************************************/
+/* Index menu */
+/*****************************************/
+
+.index-menu-column {
+  margin-top: 1.5em;
+}
+
+.index-menu-column .button {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .index-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  .button {
-    margin-bottom: 10px !important;
+  .index-dropdown {
+    width: 300px;
+  }
+
+  .index-searchbar {
+    width: 300px;
+  }
+
+  .index-menu-row {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .index-menu-column {
+    width: 400px;
+    margin-top: 0;
+  }
+}
+
+/******************************************/
+/* Checkbox */
+/*****************************************/
+
+.checkbox {
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: .28rem;
+  padding: 0.8em;
+  position: relative;
+  width: 200px;
+}
+
+.checkbox, .checkbox label, .checkbox input {
+  cursor: pointer;
+}
+
+.checkbox label {
+  padding-left: 1.5em;
+}
+
+.checkbox input {
+  position: absolute;
+  top: .89em;
+  left: .6em;
+  z-index: 3;
+  width: 17px;
+  height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  .checkbox {
+    max-width: auto;
     width: 100%;
+    padding-top: .9em;
+    font-size: 1.1em;
   }
 
-  .labeled {
-    width: auto;
+  .checkbox input {
+    width: 19px;
+    height: 19px;
   }
 }
 
 /******************************************/
-/* Dialogs/Modals */
+/* Pagination */
 /*****************************************/
-.left {
-  z-index: 0 !important;
+
+.pagination-menu {
+  border: 1px solid rgba(34,36,38,.15);
+  border-left: 0;
+  border-radius: .3em;
+  display: inline-flex;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
 }
 
-.right {
-  z-index: 0 !important;
+.pagination-menu a {
+  padding: 0.8em 1.1em;
+  transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+  border-left: 1px solid rgba(34,36,38,.15);
+  cursor: pointer;
+}
+
+.pagination-menu .disabled {
+  color: rgba(40,40,40,.3);
+}
+
+.pagination-menu .active {
+  background: #F3F3F3;
+}
+
+@media screen and (max-width: 768px) {
+  .pagination-menu {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pagination-menu a {
+    border-right: 1px solid rgba(34,36,38,.15);
+  }
 }
 
 /******************************************/
-/* Other *
+/* Header */
 /*****************************************/
 
-.borderless {
-  border: none !important;
-  box-shadow: none !important;
-  padding-left: 0 !important;
-  padding-bottom: 0 !important;
+header {
+  background: #FFFFFF;
+  border-bottom: 1px solid #d9d9d9;
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,0.04);
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav .brand {
+  font-weight: bold;
+}
+
+nav a {
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  padding: 10px;
+}
+
+nav a.active {
+  background: rgba(0,0,0,.05)
+}
+
+nav a:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.03);
+  color: rgba(0, 0, 0, 0.95);
+}
+
+/* Menu on larger screens */
+@media screen and (min-width: 768px) {
+  header {
+    display: flex;
+    justify-content: center;
+  }
+
+  nav {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  nav ul {
+    display: flex;
+  }
+
+  nav ul.end {
+    justify-content: flex-end;
+  }
+
+  nav li .left {
+    justify-content: flex-start;
+  }
+}
+
+/******************************************/
+/* Form */
+/*****************************************/
+
+.field {
+  margin: 1em 0;
+  display: block;
+  width: 100%;
+}
+
+label {
+  font-size: .9em;
+  color: #818a91;
+  font-weight: bold;
+}
+
+input, select {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  outline: none;
+  box-shadow: 0em 0em 0em 0em transparent inset;
+  transition: color 0.1s ease, border-color 0.1s ease;
+  border-radius: 0.28571429rem;
+  tap-highlight-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+select {
+  padding: .4em;
+}
+
+input {
+  padding: .6em 1em .5em 1em;
+}
+
+
+
+input:focus {
+  border-color: #85B7D9;
+}
+
+.field.error input {
+  box-shadow: 0px 0px 0px 100px #FFFAF0 inset !important;
+  border-color: #E0B4B4 !important;
+}
+
+.error-helper {
+  color: red;
+  margin-top: .2em;
+  font-size: .9em;
+}
+
+.icon-input .fa {
+  position: relative;
+  z-index: 1;
+  left: 10px;
+  top: 1px;
+  width: 0;
+  color: #818a91;
+}
+
+.icon-input input {
+  padding-left: 2em;
 }

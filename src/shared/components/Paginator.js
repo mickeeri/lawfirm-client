@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Icon } from 'react-fa';
 
 const Paginator = ({ meta, onPaginate }) => {
   const renderPaginations = () => {
@@ -19,7 +20,7 @@ const Paginator = ({ meta, onPaginate }) => {
   };
 
   return (
-    <div className="ui pagination menu">
+    <div className="pagination-menu">
       <a
         className={`${meta.current_page === 1 ? 'disabled' : ''} icon item`}
         onClick={() => {
@@ -27,7 +28,7 @@ const Paginator = ({ meta, onPaginate }) => {
             onPaginate(meta.previous_page);
           }
         }}
-      ><i className="left chevron icon"></i></a>
+      ><Icon name="chevron-left" /></a>
       {renderPaginations(meta)}
       <a
         className={`${meta.current_page === meta.total_pages ? 'disabled' : ''} icon item`}
@@ -36,7 +37,7 @@ const Paginator = ({ meta, onPaginate }) => {
             onPaginate(meta.next_page);
           }
         }}
-      ><i className="right chevron icon"></i></a>
+      ><Icon name="chevron-right" /></a>
     </div>
   );
 };

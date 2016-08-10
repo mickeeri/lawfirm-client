@@ -21,12 +21,15 @@
     "moment": "^2.14.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-fa": "^4.1.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
     "redux-dialog": "0.0.7",
     "redux-form": "6.0.0-rc.3",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "semantic-ui-button": "^2.2.2",
+    "semantic-ui-table": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

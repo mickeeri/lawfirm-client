@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { Icon } from 'react-fa';
 import { SearchBar, Paginator } from '../../shared';
 import { UsersDropdown } from '../../users';
 import * as actions from '../actions';
@@ -28,10 +29,10 @@ class ClientsIndex extends Component {
     }
 
     return (
-      <div className=" ClientsIndex ui segment index">
-        <h1 className="ui header">Klientregister</h1>
-        <div className="ui stackable grid">
-          <div className="six wide column">
+      <div className=" ClientsIndex segment index">
+        <h1>Klientregister</h1>
+        <div className="index-menu-row">
+          <div className="index-menu-column">
             <UsersDropdown
               onDropdownChange={
                 (newUserId) => fetchClients({
@@ -43,8 +44,7 @@ class ClientsIndex extends Component {
               }
             />
           </div>
-          <div className="four wide column computer only" />
-          <div className="six wide column">
+          <div className="index-menu-column">
             <SearchBar
               label="Sök på namn eller personnummer"
               onSearch={
@@ -58,14 +58,13 @@ class ClientsIndex extends Component {
             />
           </div>
         </div>
-        <div className="ui stackable grid">
-          <div className="six wide column">
-            <Link to={CLIENT_NEW_PATH} className="ui primary labeled icon button">
-              <i className="add user icon" />Lägg till klient
+        <div className="index-menu-row">
+          <div className="index-menu-column">
+            <Link to={CLIENT_NEW_PATH} className="ui primary button">
+              <Icon name="user-plus" />Lägg till klient
             </Link>
           </div>
-          <div className="four wide column computer only" />
-          <div className="six wide column">
+          <div className="index-menu-column">
             <Paginator
               meta={meta}
               onPaginate={

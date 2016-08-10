@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Icon } from 'react-fa';
 import { EMAIL_REQ_MESSAGE, PASSWORD_REQ_MESSAGE, EMAIL_INVALID_MESSAGE } from '../../shared';
 
 const validate = values => {
@@ -21,11 +22,11 @@ const validate = values => {
 const renderField = field => (
   <div className={field.touched && field.error ? 'field error' : 'field'}>
     <label htmlFor={field.name}>{field.input.placeholder}</label>
-    <div className="ui left icon input">
-      <i className={field.input.icon} />
+    <div className="icon-input">
+      <Icon name={field.input.icon} />
       <input {...field.input} />
     </div>
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+    {field.touched && field.error && <div className="error-helper">{field.error}</div>}
   </div>
 );
 
@@ -35,14 +36,14 @@ const SignInForm = (props) => {
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`}>
       <Field
         name="email"
-        icon="user icon"
+        icon="user"
         type="email"
         component={renderField}
         placeholder="E-post"
       />
       <Field
         name="password"
-        icon="lock icon"
+        icon="lock"
         type="password"
         component={renderField}
         placeholder="Lösenord"
