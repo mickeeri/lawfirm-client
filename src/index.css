@@ -58,6 +58,10 @@ select {
   font-weight: normal;
 }
 
+.ClientForm {
+  margin-top: 30px;
+}
+
 @media screen and (max-width: 768px) {
   input, textarea {
     font-size: 16px !important;
@@ -73,13 +77,6 @@ select {
   }
 }
 
-/*.ui .button .column {
-  margin-bottom: 10px !important;
-}*/
-
-
-
-
 /******************************************/
 /* Dialogs/Modals */
 /*****************************************/
@@ -89,4 +86,15 @@ select {
 
 .right {
   z-index: 0 !important;
+}
+
+/******************************************/
+/* Other *
+/*****************************************/
+
+.borderless {
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-bottom: 0 !important;
 }

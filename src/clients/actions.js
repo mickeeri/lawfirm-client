@@ -5,6 +5,7 @@ import {
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
   RESET_CLIENTS,
+  TOGGLE_EDIT,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
@@ -36,8 +37,12 @@ export const resetClients = () => (
   { type: RESET_CLIENTS }
 );
 
-export const createClient = (params) => (dispatch) => {
-  return api.createClient(params).then(
+export const toggleEdit = () => (
+  { type: TOGGLE_EDIT }
+);
+
+export const createClient = (params) => (dispatch) =>
+  api.createClient(params).then(
     response => {
       dispatch({
         type: CREATE_CLIENT_SUCCESS,
@@ -52,4 +57,3 @@ export const createClient = (params) => (dispatch) => {
       });
     }
   );
-};

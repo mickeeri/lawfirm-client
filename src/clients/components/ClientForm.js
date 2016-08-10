@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import {
   FIRST_NAME_REQ_MESSAGE,
   LAST_NAME_REQ_MESSAGE,
@@ -29,34 +30,23 @@ const validate = values => {
   return errors;
 };
 
-const renderField = (field) => {
-  return (
-    <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}` }>
-      <label htmlFor={field.name}>{field.input.placeholder}</label>
-      <div className="ui input">
-        <input {...field.input} />
-      </div>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
+const renderField = (field) =>
+  <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}` }>
+    <label htmlFor={field.name}>{field.input.placeholder}</label>
+    <div className="ui input">
+      <input {...field.input} />
     </div>
-  );
-};
+    {field.touched && field.error && <div className="error">{field.error}</div>}
+  </div>;
 
-const renderTextArea = (field) => {
+let ClientForm = props => {
+  const { handleSubmit, submitting, errorMessage, pristine, reset, edit, toggleEdit } = props;
   return (
-    <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}` }>
-      <label htmlFor={field.name}>{field.input.placeholder}</label>
-      <div className="ui input">
-        <textarea {...field.input} />
-      </div>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
-    </div>
-  );
-};
-
-const ClientForm = props => {
-  const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
-  return (
-    <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className={`ClientForm ui form ${errorMessage ? 'error' : ''}`}
+      noValidate
+    >
       <div className="two fields">
         <Field
           name="first_name"
@@ -132,17 +122,10 @@ const ClientForm = props => {
           />
         </div>
       </div>
-      <div className="ui section divider" />
-      <Field
-        name="note"
-        type="textarea"
-        component={renderTextArea}
-        placeholder="Anteckning"
-        rows={2}
-      />
       <div className="ui divider" />
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
       <div>
+        {edit && <button className="ui button" onClick={toggleEdit}>Avbryt</button>}
         <button
           type="button"
           className="ui orange button" disabled={pristine || submitting}
@@ -152,7 +135,7 @@ const ClientForm = props => {
           type="submit"
           disabled={submitting}
           className="ui button primary"
-        >Lägg till klient</button>
+        >{ edit ? 'Spara ändringar' : 'Lägg till klient' }</button>
       </div>
     </form>
   );
@@ -164,9 +147,18 @@ ClientForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   errorMessage: PropTypes.string,
+  edit: PropTypes.bool.isRequired,
+  toggleEdit: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
+ClientForm = reduxForm({
   form: 'ClientForm',
   validate,
 })(ClientForm);
+
+const mapStateToProps = (state) => (
+  { initialValues: state.clients.client,
+    edit: state.clients.edit }
+);
+
+export default connect(mapStateToProps, null)(ClientForm);

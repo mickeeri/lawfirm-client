@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
+import ClientForm from './ClientForm';
 import { LawsuitsList } from '../../lawsuits';
 
 class ClientShow extends Component {
@@ -10,7 +11,7 @@ class ClientShow extends Component {
   }
 
   render() {
-    const { client } = this.props;
+    const { client, edit, toggleEdit, createClient, errorMessage } = this.props;
 
     if (!client) {
       return (
@@ -23,7 +24,17 @@ class ClientShow extends Component {
         <div className="two column row">
           <div className="column">
             <div className="ui segment">
-              <ClientInfo client={client} />
+              <button className="ui tiny right floated basic button" onClick={toggleEdit}>
+                <i className="edit icon" />
+                Ändra
+              </button>
+              {edit ?
+                <ClientForm
+                  onSubmit={createClient}
+                  errorMessage={errorMessage}
+                  toggleEdit={toggleEdit} /> :
+                <ClientInfo client={client} />
+              }
             </div>
           </div>
           <div className="column">
@@ -38,9 +49,6 @@ class ClientShow extends Component {
               <h3 className="ui header">Inställningar</h3>
               <button className="negative labeled icon ui button">
                 <i className="remove user icon" />Radera
-              </button>
-              <button className="ui primary labeled icon button">
-                <i className="edit icon" />Redigera
               </button>
             </div>
           </div>
@@ -59,10 +67,14 @@ ClientShow.propTypes = {
   }),
   params: PropTypes.object.isRequired,
   fetchClients: PropTypes.func.isRequired,
+  edit: PropTypes.bool.isRequired,
+  toggleEdit: PropTypes.func,
+  createClient: PropTypes.func,
 };
 
 const mapStateToProps = (state) => (
- { client: state.clients.client }
+ { client: state.clients.client,
+   edit: state.clients.edit }
 );
 
 export default connect(mapStateToProps, actions)(ClientShow);

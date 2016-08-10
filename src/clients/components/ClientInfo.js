@@ -9,7 +9,6 @@ const ClientInfo = ({ client }) => {
     <div className="ClientInfo">
       <h2 className="ui header">{client.first_name} {client.last_name}</h2>
       <div className="ui divider" />
-
       <div className="ui list">
         <div className="item">
           <div className="header">Handläggare</div>

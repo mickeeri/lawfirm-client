@@ -21,7 +21,16 @@ export const fetchClients = (props) => {
 };
 
 // Create client post request.
-export const createClient = (params) =>
-  axios.post(`${API_ROOT_URL}${API_CLIENTS_PATH}`, { client: params },
+export const createClient = (params) => {
+  const url = `${API_ROOT_URL}${API_CLIENTS_PATH}`;
+
+  if (params.id) {
+    return axios.put(`${url}/${params.id}`, { client: params },
+      { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+    });
+  }
+
+  return axios.post(url, { client: params },
     { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
+};
