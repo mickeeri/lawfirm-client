@@ -49,23 +49,25 @@ const validate = values => {
   return errors;
 };
 
-const renderField = field => {
-  return (
-    <div className={field.touched && field.error ? 'field error' : 'field'}>
-      <label>{field.input.placeholder}</label>
-      <div className="ui left icon input">
-        <i className={field.input.icon}></i>
-        <input {...field.input} />
-      </div>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
+const renderField = field =>
+  <div className={field.touched && field.error ? 'field error' : 'field'}>
+    <label htmlFor={field.name}>{field.input.placeholder}</label>
+    <div className="ui left icon input">
+      <i className={field.input.icon} />
+      <input {...field.input} />
     </div>
-  );
-};
+    {field.touched && field.error && <div className="error-helper">{field.error}</div>}
+  </div>;
+
 
 const UserForm = props => {
   const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
   return (
-    <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className={`UserForm ui form ${errorMessage ? 'error' : ''}`}
+      noValidate
+    >
       <Field
         name="firm"
         icon="building icon"
@@ -73,20 +75,26 @@ const UserForm = props => {
         component={renderField}
         placeholder="Firma"
       />
-      <Field
-        name="first_name"
-        icon="user icon"
-        type="text"
-        component={renderField}
-        placeholder="Förnamn"
-      />
-      <Field
-        name="last_name"
-        icon="user icon"
-        type="text"
-        component={renderField}
-        placeholder="Efternamn"
-      />
+
+      <div className="two-fields">
+        <Field
+          name="first_name"
+          icon="user icon"
+          type="text"
+          component={renderField}
+          placeholder="Förnamn"
+        />
+        <Field
+          name="last_name"
+          icon="user icon"
+          type="text"
+          component={renderField}
+          placeholder="Efternamn"
+        />
+      </div>
+
+      <div className="ui divider" />
+
       <Field
         name="email"
         icon="mail outline icon"
@@ -94,24 +102,39 @@ const UserForm = props => {
         component={renderField}
         placeholder="E-post"
       />
-      <Field
-        name="password"
-        icon="lock icon"
-        type="password"
-        component={renderField}
-        placeholder="Lösenord"
-      />
-      <Field
-        name="password_confirmation"
-        icon="lock icon"
-        type="password"
-        component={renderField}
-        placeholder="Bekräfta lösenord"
-      />
+      <div className="two-fields">
+        <Field
+          name="password"
+          icon="lock icon"
+          type="password"
+          component={renderField}
+          placeholder="Lösenord"
+        />
+        <Field
+          name="password_confirmation"
+          icon="lock icon"
+          type="password"
+          component={renderField}
+          placeholder="Bekräfta lösenord"
+        />
+      </div>
+
+      <div className="ui divider" />
+
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
-      <div>
-        <button type="button" className="ui orange button" disabled={pristine || submitting} onClick={reset}>Återställ</button>
-        <button type="submit" disabled={submitting} className="ui button primary">Registrera</button>
+
+      <div className="button-group">
+        <button
+          type="button"
+          className="ui orange button"
+          disabled={pristine || submitting} onClick={reset}
+        >Återställ</button>
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className="ui button primary"
+        >Registrera</button>
       </div>
     </form>
   );
@@ -128,6 +151,5 @@ UserForm.propTypes = {
 
 export default reduxForm({
   form: 'UserForm',
-  fields: ['email', 'last_name', 'first_name', 'password', 'password_confirmation'],
   validate,
 })(UserForm);

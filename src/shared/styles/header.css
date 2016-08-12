@@ -19,17 +19,6 @@ nav ul {
   text-transform: uppercase;
 }
 
-a::before {
-  position: absolute;
-  content: 'asasd';
-  top: 0;
-  right: 0;
-  height: 20px;
-  width: 10px;
-  background: black;
-  z-index: 99;
-}
-
 nav a {
   font-size: 14px;
   text-decoration: none;

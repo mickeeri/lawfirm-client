@@ -75,16 +75,16 @@ input, button, a, .checkbox {
 /******************************************/
 /* Custom pages */
 /*****************************************/
-.user-sign-in {
-  width: 350px;
-}
 
-.user-sign-up {
-  width: 700px;
-}
 
-.new-client {
-  width: 600px;
+@media screen and (min-width: 768px) {
+  .user-sign-in {
+    width: 350px;
+  }
+
+  .user-sign-up, .new-client {
+    width: 500px;
+  }
 }
 
 /******************************************/
