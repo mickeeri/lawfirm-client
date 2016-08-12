@@ -71,12 +71,20 @@ input, button, a, .checkbox {
   justify-content: center;
 }
 
+
+/******************************************/
+/* Custom pages */
+/*****************************************/
 .user-sign-in {
   width: 350px;
 }
 
 .user-sign-up {
   width: 700px;
+}
+
+.new-client {
+  width: 600px;
 }
 
 /******************************************/
@@ -301,8 +309,6 @@ input {
   padding: .6em 1em .5em 1em;
 }
 
-
-
 input:focus {
   border-color: #85B7D9;
 }
@@ -329,4 +335,114 @@ input:focus {
 
 .icon-input input {
   padding-left: 2em;
+}
+
+.two-fields {
+  display: flex;
+  margin-left: -10px;
+}
+
+.two-fields .field {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+/* ClientForm address fields */
+.address-fields {
+  display: flex;
+  margin-left: -10px;
+}
+
+.address-fields .field {
+  margin: 5px 0 30px 10px;
+  width: auto;
+}
+
+.address-fields .field:first-child {
+  flex-shrink: 4;
+  flex-grow: 1;
+}
+
+.address-fields .field:last-child {
+  flex-shrink: 1;
+  flex-grow: 6;
+}
+
+.button-group {
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .button {
+    width: 100%;
+    margin-top: 10px !important;
+  }
+
+  .two-fields {
+    flex-wrap: wrap;
+  }
+}
+
+/******************************************/
+/* Show pages */
+/*****************************************/
+
+.column .segment {
+  margin-top: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .show-grid {
+    display: flex;
+    margin-left: -15px;
+    margin-top: 15px;
+  }
+
+  .column {
+    margin-left: 15px;
+    flex-basis: 50%;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}
+
+/******************************************/
+/* Typography */
+/*****************************************/
+
+.header {
+  font-weight: bold;
+  margin-top: .5em;
+}
+
+/******************************************/
+/* Messages */
+/*****************************************/
+
+.error-message {
+  color: #9F3A38;
+  margin-bottom: 10px;
+}
+
+.error-message .fa {
+  margin-right: 5px;
+}
+
+
+/******************************************/
+/* Misc */
+/*****************************************/
+
+a {
+  cursor: pointer;
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1e70bf;
+}
+
+a .fa {
+  margin-right: .2em;
 }

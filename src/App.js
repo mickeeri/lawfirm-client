@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import 'semantic-ui-table/table.css';
 import 'semantic-ui-button/button.css';
+import 'semantic-ui-divider/divider.css';
+import './shared/styles/modal.css';
 import Header from './shared/components/Header';
 
 const App = (props) =>
