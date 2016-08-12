@@ -19,8 +19,8 @@ import {
 } from './constants';
 
 
-export const fetchClients = (props) => (dispatch) => {
-  return api.fetchClients(props).then(
+export const fetchClients = (props) => (dispatch) =>
+  api.fetchClients(props).then(
     response => {
       dispatch({
         type: FETCH_CLIENTS_SUCCESS,
@@ -38,7 +38,6 @@ export const fetchClients = (props) => (dispatch) => {
         errorMessage: error.response.data.message || 'Fel uppstod när klienter skulle hämtas.',
       });
     });
-};
 
 export const resetClients = () => (
   { type: RESET_CLIENTS }
@@ -48,7 +47,7 @@ export const toggleEdit = () => (
   { type: TOGGLE_EDIT }
 );
 
-export const deleteClient = (id) => (dispatch) => {
+export const deleteClient = (id) => (dispatch) =>
   api.deleteClient(id).then(
     () => {
       dispatch(closeDialog('confirmDeleteDialog'));
@@ -64,7 +63,6 @@ export const deleteClient = (id) => (dispatch) => {
       });
     }
   );
-};
 
 export const createClient = (params) => (dispatch) =>
   api.createClient(params).then(

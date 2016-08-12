@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Icon } from 'react-fa';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
