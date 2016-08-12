@@ -3,6 +3,7 @@ import 'semantic-ui-table/table.css';
 import 'semantic-ui-button/button.css';
 import 'semantic-ui-divider/divider.css';
 import './shared/styles/modal.css';
+import './shared/styles/header.css';
 import Header from './shared/components/Header';
 
 const App = (props) =>

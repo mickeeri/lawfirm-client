@@ -209,70 +209,6 @@ input, button, a, .checkbox {
   }
 }
 
-/******************************************/
-/* Header */
-/*****************************************/
-
-header {
-  background: #FFFFFF;
-  border-bottom: 1px solid #d9d9d9;
-  box-shadow: 0 1px 1px 1px rgba(0,0,0,0.04);
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav .brand {
-  font-weight: bold;
-}
-
-nav a {
-  font-size: 14px;
-  text-decoration: none;
-  transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
-  color: rgba(0, 0, 0, 0.87);
-  display: block;
-  padding: 10px;
-}
-
-nav a.active {
-  background: rgba(0,0,0,.05)
-}
-
-nav a:hover {
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.03);
-  color: rgba(0, 0, 0, 0.95);
-}
-
-/* Menu on larger screens */
-@media screen and (min-width: 768px) {
-  header {
-    display: flex;
-    justify-content: center;
-  }
-
-  nav {
-    width: 1200px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  nav ul {
-    display: flex;
-  }
-
-  nav ul.end {
-    justify-content: flex-end;
-  }
-
-  nav li .left {
-    justify-content: flex-start;
-  }
-}
 
 /******************************************/
 /* Form */
@@ -410,9 +346,9 @@ input:focus {
 /* Typography */
 /*****************************************/
 
-.header {
-  font-weight: bold;
+h4 {
   margin-top: .5em;
+  margin-bottom: .1em;
 }
 
 /******************************************/
