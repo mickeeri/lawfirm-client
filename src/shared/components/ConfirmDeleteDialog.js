@@ -1,5 +1,5 @@
 import reduxDialog from 'redux-dialog';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import React, { PropTypes } from 'react';
 
 const ConfirmDeleteDialog = ({ deleteFunc, label, errorMessage, close }) =>

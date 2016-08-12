@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import { generateLetterTemplate } from '../../shared';
 import { CLIENTS_PATH } from '../constants';
 

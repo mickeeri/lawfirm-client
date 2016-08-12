@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import { ConfirmDeleteDialog } from '../../shared';

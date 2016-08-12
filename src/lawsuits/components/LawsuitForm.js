@@ -1,6 +1,6 @@
 import { closeDialog } from 'redux-dialog';
 import { connect } from 'react-redux';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import LawsuitTypesDropdown from './LawsuitTypesDropdown';

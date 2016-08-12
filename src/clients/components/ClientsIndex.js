@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import { SearchBar, Paginator } from '../../shared';
 import { UsersDropdown } from '../../users';
 import * as actions from '../actions';

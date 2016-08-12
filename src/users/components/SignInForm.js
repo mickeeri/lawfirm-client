@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Icon } from 'react-fa';
+import Icon from 'react-fa';
 import { EMAIL_REQ_MESSAGE, PASSWORD_REQ_MESSAGE, EMAIL_INVALID_MESSAGE } from '../../shared';
 
 const validate = values => {
