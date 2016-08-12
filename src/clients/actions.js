@@ -1,7 +1,10 @@
 import { browserHistory } from 'react-router';
+import { closeDialog } from 'redux-dialog';
 import {
   CREATE_CLIENT_FAILURE,
   CREATE_CLIENT_SUCCESS,
+  DELETE_CLIENT_SUCCESS,
+  DELETE_CLIENT_FAILURE,
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
   RESET_CLIENTS,
@@ -9,7 +12,11 @@ import {
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
-import { CREATE_CLIENT_FAILURE_MESSAGE, CLIENTS_PATH } from './constants';
+import {
+  CREATE_CLIENT_FAILURE_MESSAGE,
+  CLIENTS_PATH,
+  DELETE_CLIENT_FAILURE_MESSAGE,
+} from './constants';
 
 
 export const fetchClients = (props) => (dispatch) => {
@@ -40,6 +47,24 @@ export const resetClients = () => (
 export const toggleEdit = () => (
   { type: TOGGLE_EDIT }
 );
+
+export const deleteClient = (id) => (dispatch) => {
+  api.deleteClient(id).then(
+    () => {
+      dispatch(closeDialog('confirmDeleteDialog'));
+      dispatch({
+        type: DELETE_CLIENT_SUCCESS,
+      });
+      browserHistory.push(CLIENTS_PATH);
+    },
+    error => {
+      dispatch({
+        type: DELETE_CLIENT_FAILURE,
+        errorMessage: error.response.data.message || DELETE_CLIENT_FAILURE_MESSAGE,
+      });
+    }
+  );
+};
 
 export const createClient = (params) => (dispatch) =>
   api.createClient(params).then(

@@ -1,6 +1,8 @@
 import {
   CREATE_CLIENT_FAILURE,
   CREATE_CLIENT_SUCCESS,
+  DELETE_CLIENT_SUCCESS,
+  DELETE_CLIENT_FAILURE,
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
   RESET_CLIENTS,
@@ -41,6 +43,7 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
       return INITIAL_STATE;
     case CREATE_CLIENT_FAILURE:
     case FETCH_CLIENTS_FAILURE:
+    case DELETE_CLIENT_FAILURE:
       return {
         ...state,
         errorMessage: action.errorMessage,
