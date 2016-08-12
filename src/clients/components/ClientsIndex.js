@@ -86,13 +86,13 @@ class ClientsIndex extends Component {
 
 ClientsIndex.propTypes = {
   fetchClients: PropTypes.func.isRequired,
-  meta: PropTypes.object.isRequired,
+  meta: PropTypes.object,
   clients: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
     personal_number: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  }).isRequired),
   filter: PropTypes.shape({
     query: PropTypes.string,
     page: PropTypes.number,
