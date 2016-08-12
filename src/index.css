@@ -239,6 +239,7 @@ input, select {
 
 select {
   padding: .4em;
+  background: #fff;
 }
 
 input {

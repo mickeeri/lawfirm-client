@@ -5,11 +5,9 @@ import * as actions from '../actions';
 
 
 const UserSignIn = props =>
-  <div className="ui grid centered left aligned">
-    <div className="ui sixteen wide mobile six wide computer column">
-      <div className="ui raised segment">
-        <SignInForm onSubmit={props.signInUser} errorMessage={props.errorMessage} />
-      </div>
+  <div className="centered">
+    <div className="segment user-sign-in">
+      <SignInForm onSubmit={props.signInUser} errorMessage={props.errorMessage} />
     </div>
   </div>;
 

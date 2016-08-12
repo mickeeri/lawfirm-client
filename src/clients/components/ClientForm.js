@@ -47,7 +47,7 @@ let ClientForm = props => {
       className={`ClientForm ui form ${errorMessage ? 'error' : ''}`}
       noValidate
     >
-      <div className="two fields">
+      <div className="two-fields">
         <Field
           name="first_name"
           type="text"
@@ -70,14 +70,14 @@ let ClientForm = props => {
         placeholder="Personnummer"
         required
       />
-      <h4 className="ui dividing header">Kontakt</h4>
+      <h4 className="dividing-header">Kontakt</h4>
       <Field
         name="email"
         type="email"
         component={renderField}
         placeholder="E-post"
       />
-      <div className="two fields">
+      <div className="two-fields">
         <Field
           name="mobile"
           type="phone"
@@ -91,7 +91,7 @@ let ClientForm = props => {
           placeholder="Telefon"
         />
       </div>
-      <h4 className="ui dividing header">Adress</h4>
+      <h4 className="dividing-header">Adress</h4>
       <Field
         name="co"
         type="text"
@@ -104,33 +104,32 @@ let ClientForm = props => {
         component={renderField}
         placeholder="Gatuadress"
       />
-      <div className="fields">
-        <div className="four wide field">
-          <Field
-            name="post_code"
-            type="text"
-            component={renderField}
-            placeholder="Postnummer"
-          />
-        </div>
-        <div className="twelve wide field">
-          <Field
-            name="city"
-            type="text"
-            component={renderField}
-            placeholder="Ort"
-          />
-        </div>
+      <div className="address-fields">
+        <Field
+          name="post_code"
+          type="text"
+          component={renderField}
+          placeholder="Postnummer"
+        />
+        <Field
+          name="city"
+          type="text"
+          component={renderField}
+          placeholder="Ort"
+        />
       </div>
-      <div className="ui divider" />
+      <div className="divider" />
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
-      <div>
-        {edit && <button className="ui button" onClick={toggleEdit}>Avbryt</button>}
+      <div className="button-group">
+        {edit && <button className="ui button" onClick={(e) => {
+          e.preventDefault();
+          toggleEdit();
+        }}>Avbryt</button>}
         <button
           type="button"
           className="ui orange button" disabled={pristine || submitting}
           onClick={reset}
-        >Återställ</button>
+        >Återställ formulär</button>
         <button
           type="submit"
           disabled={submitting}

@@ -6,20 +6,16 @@ import * as actions from '../actions';
 import { CLIENTS_PATH } from '../constants';
 
 
-const ClientNew = props => {
-  return (
-    <div className="ui centered left aligned grid">
-      <div className="eight wide computer sixteen wide mobile column">
-        <div className="ui segment">
-          <h1 className="ui header">Lägg till ny klient</h1>
-          <ClientForm onSubmit={props.createClient} errorMessage={props.errorMessage} />
-          <div className="ui divider" />
-          <Link to={CLIENTS_PATH} className="ui small button">Tillbaka</Link>
-        </div>
-      </div>
+const ClientNew = props =>
+  <div className="ClientNew centered">
+    <div className="segment new-client">
+      <h1>Lägg till ny klient</h1>
+      <ClientForm onSubmit={props.createClient} errorMessage={props.errorMessage} />
+      <div className="ui divider" />
+      <Link to={CLIENTS_PATH} className="ui small button">Tillbaka</Link>
     </div>
-  );
-};
+  </div>;
+
 
 ClientNew.propTypes = {
   createClient: PropTypes.func.isRequired,

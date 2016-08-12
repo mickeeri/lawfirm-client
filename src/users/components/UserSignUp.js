@@ -1,17 +1,15 @@
+import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import UserForm from './UserForm';
 import * as actions from '../actions';
-import { connect } from 'react-redux';
 
-
-const UserSignUp = props => {
-  return (
-    <div className="ui segment">
-      <h1 className="ui header">Registrera dig som ny användare</h1>
-      <UserForm onSubmit={props.createUser} errorMessage={props.errorMessage} />
+const UserSignUp = ({ createUser, errorMessage }) =>
+  <div className="centered">
+    <div className="segment user-sign-up">
+      <h1 className="header">Registrera dig som ny användare</h1>
+      <UserForm onSubmit={createUser} errorMessage={errorMessage} />
     </div>
-  );
-};
+  </div>;
 
 UserSignUp.propTypes = {
   createUser: PropTypes.func.isRequired,

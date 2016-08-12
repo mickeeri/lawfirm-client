@@ -1,5 +1,6 @@
 import { closeDialog } from 'redux-dialog';
 import { connect } from 'react-redux';
+import { Icon } from 'react-fa';
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import LawsuitTypesDropdown from './LawsuitTypesDropdown';
@@ -10,29 +11,16 @@ const validate = values => {
   return errors;
 };
 
-const renderField = (field) => {
-  return (
-    <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
-      <label htmlFor={field.name}>{field.input.placeholder}</label>
-      <div className="ui input">
-        <input {...field.input} />
-      </div>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
+const renderField = (field) =>
+  // eslint-disable-next-line
+  <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
+    <label htmlFor={field.name}>{field.input.placeholder}</label>
+    <div className="ui input">
+      <input {...field.input} />
     </div>
-  );
-};
+    {field.touched && field.error && <div className="error">{field.error}</div>}
+  </div>;
 
-// const renderTextArea = (field) => {
-//   return (
-//     <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}`}>
-//       <label>{field.input.placeholder}</label>
-//       <div className="ui input">
-//         <textarea {...field.input} />
-//       </div>
-//       {field.touched && field.error && <div className="error">{field.error}</div>}
-//     </div>
-//   );
-// };
 
 let LawsuitForm = props => {
   const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
@@ -41,6 +29,7 @@ let LawsuitForm = props => {
       <div className="field">
         <LawsuitTypesDropdown />
       </div>
+
       <Field
         name="client_id"
         type="text"
@@ -48,44 +37,45 @@ let LawsuitForm = props => {
         placeholder="Klient id"
         hidden
       />
-      <div className="fields">
-        <div className="eleven wide field">
-          <Field
-            name="court"
-            type="text"
-            component={renderField}
-            placeholder="Domstol"
-          />
-        </div>
-        <div className="five wide field">
-          <Field
-            name="case_number"
-            type="text"
-            component={renderField}
-            placeholder="Målnummer"
-          />
-        </div>
-      </div>
+
+      <Field
+        name="court"
+        type="text"
+        component={renderField}
+        placeholder="Domstol"
+      />
+
+      <Field
+        name="case_number"
+        type="text"
+        component={renderField}
+        placeholder="Målnummer"
+      />
+
       <div className="ui divider" />
-      {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
-      <div>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            props.dispatch(closeDialog('lawsuitFormDialog'));
-          }}
-          className="ui button"
-        ><i className="remove icon" />Stäng</button>
-        <button
-          className="ui orange button" disabled={pristine || submitting}
-          onClick={reset}
-        >Återställ</button>
-        <button
-          type="submit"
-          disabled={submitting}
-          className="ui button primary"
-        ><i className="checkmark icon" />Skapa ärende</button>
-      </div>
+
+      {errorMessage && <div className="error-message">
+        <Icon name="exclamation-circle" />{errorMessage}
+      </div>}
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          props.dispatch(closeDialog('lawsuitFormDialog'));
+        }}
+        className="ui button"
+      ><Icon name="times" />Stäng</button>
+
+      <button
+        className="ui orange button" disabled={pristine || submitting}
+        onClick={reset}
+      >Återställ</button>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="ui button primary"
+      ><Icon name="check" />Skapa ärende</button>
     </form>
   );
 };
@@ -101,7 +91,6 @@ LawsuitForm.propTypes = {
 
 LawsuitForm = reduxForm({
   form: 'LawsuitForm',
-  enableReinitialize: true,
   validate,
 }, { closeDialog })(LawsuitForm);
 

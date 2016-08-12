@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import '../styles/UsersDropdown.css';
 
 class UsersDropdown extends Component {
   componentWillMount() {
@@ -17,7 +16,7 @@ class UsersDropdown extends Component {
     }
 
     return (
-      <div className="UsersDropdown">
+      <div className="UsersDropdown dropdown">
         <label htmlFor="users">Handläggare</label>
         <select
           name="users"
@@ -53,11 +52,9 @@ UsersDropdown.propTypes = {
   fetchUsers: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return (
-    { users: state.users.all,
-      currentUserId: state.users.currentUserId }
-  );
-};
+const mapStateToProps = (state) => ({
+  users: state.users.all,
+  currentUserId: state.users.currentUserId,
+});
 
 export default connect(mapStateToProps, actions)(UsersDropdown);

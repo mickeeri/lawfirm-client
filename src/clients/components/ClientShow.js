@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Icon } from 'react-fa';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
 import { LawsuitsList } from '../../lawsuits';
+import ClientDeleteButton from './ClientDeleteButton';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -20,37 +22,33 @@ class ClientShow extends Component {
     }
 
     return (
-      <div className="ui stackable grid">
-        <div className="two column row">
-          <div className="column">
-            <div className="ui segment">
-              <button className="ui tiny right floated basic button" onClick={toggleEdit}>
-                <i className="edit icon" />
-                Ändra
-              </button>
-              {edit ?
-                <ClientForm
-                  onSubmit={createClient}
-                  errorMessage={errorMessage}
-                  toggleEdit={toggleEdit} /> :
-                <ClientInfo client={client} />
-              }
-            </div>
+      <div className="show-grid">
+        <div className="column">
+          <div className="segment">
+            <a onClick={toggleEdit}>
+              <i className="edit icon" />
+              Ändra
+            </a>
+            {edit ?
+              <ClientForm
+                onSubmit={createClient}
+                errorMessage={errorMessage}
+                toggleEdit={toggleEdit}
+              /> :
+              <ClientInfo client={client} />
+            }
           </div>
-          <div className="column">
-            <div className="ui segment">
-              <LawsuitsList clientId={client.id} />
-            </div>
-            <div className="ui segment">
-              <h3 className="ui header">Anteckningar</h3>
-              <p>{client ? client.note : ''}</p>
-            </div>
-            <div className="ui segment">
-              <h3 className="ui header">Inställningar</h3>
-              <button className="negative labeled icon ui button">
-                <i className="remove user icon" />Radera
-              </button>
-            </div>
+        </div>
+        <div className="column">
+          <div className="segment">
+            <LawsuitsList />
+          </div>
+          <div className="segment">
+            <h3 >Anteckningar</h3>
+            <p>{ client ? client.note : ''}</p>
+          </div>
+          <div className="segment">
+            <ClientDeleteButton />
           </div>
         </div>
       </div>
@@ -70,6 +68,7 @@ ClientShow.propTypes = {
   edit: PropTypes.bool.isRequired,
   toggleEdit: PropTypes.func,
   createClient: PropTypes.func,
+  errorMessage: PropTypes.string,
 };
 
 const mapStateToProps = (state) => (

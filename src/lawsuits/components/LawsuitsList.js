@@ -1,27 +1,25 @@
 import React, { PropTypes } from 'react';
+import { Icon } from 'react-fa';
 import { connect } from 'react-redux';
 import { openDialog } from 'redux-dialog';
 import LawsuitFormDialog from './LawsuitFormDialog';
 
 // List of lawsuits in Client show.
-export const LawsuitsList = ({ dispatch }) => {
-  return (
-    <div>
-      <h2 className="ui header">Ärenden</h2>
-      <LawsuitFormDialog />
-      <button
-        className="primary labeled icon ui button"
-        onClick={() => dispatch(openDialog('lawsuitFormDialog'))}
-      >
-        <i className="law icon"></i>
-        Lägg till ärende
-      </button>
-    </div>
-  );
-}
+const LawsuitsList = ({ dispatch }) =>
+  <div>
+    <h2>Ärenden</h2>
+    <LawsuitFormDialog />
+    <button
+      className="ui primary button"
+      onClick={() => dispatch(openDialog('lawsuitFormDialog'))}
+    >
+      <Icon name="plus" />Lägg till ärende
+    </button>
+  </div>;
+
 
 LawsuitsList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-}
+};
 
 export default connect()(LawsuitsList);

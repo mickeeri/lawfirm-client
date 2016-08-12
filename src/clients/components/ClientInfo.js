@@ -1,72 +1,58 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import { Icon } from 'react-fa';
 import { generateLetterTemplate } from '../../shared';
 import { CLIENTS_PATH } from '../constants';
 
 
-const ClientInfo = ({ client }) => {
-  return (
-    <div className="ClientInfo">
-      <h2 className="ui header">{client.first_name} {client.last_name}</h2>
-      <div className="ui divider" />
-      <div className="ui list">
-        <div className="item">
-          <div className="header">Handläggare</div>
-          <div>{client.user.full_name}</div>
-        </div>
+const ClientInfo = ({ client }) =>
+  <div className="ClientInfo">
+    <h2>{client.first_name} {client.last_name}</h2>
 
-        <div className="item">
-          <div className="header">Personnummer</div>
-          <div>{client.personal_number}</div>
-        </div>
+    <div className="ui divider" />
 
-        <div className="item">
-          <div className="header">E-post</div>
-          <div>{client.email}</div>
-        </div>
+    <h4>Handläggare</h4>
+    <div>{client.user.full_name}</div>
 
-        <div className="item">
-          <div className="header">Mobil</div>
-          <div>{client.mobile}</div>
-        </div>
+    <h4>Personnummer</h4>
+    <div>{client.personal_number}</div>
 
-        <div className="item">
-          <div className="header">Telefon</div>
-          <div>{client.phone_number}</div>
-        </div>
-      </div>
+    <h4>E-post</h4>
+    <div>{client.email}</div>
 
-      <div className="ui section divider" />
-      <h3 className="ui header">Adress</h3>
+    <h4>Mobil</h4>
+    <div>{client.mobile}</div>
 
-      <div className="ui list">
-        {client.co ?
-          <div className="item">{`C/O ${client.co}` }</div>
-        : ''}
+    <h4>Telefon</h4>
+    <div>{client.phone_number}</div>
 
-        <div className="item">
-          {client.street}
-        </div>
+    <div className="ui divider" />
 
-        <div className="item">
-          {client.post_code} {client.city}
-        </div>
-      </div>
+    <h4>Adress</h4>
 
-      <button
-        onClick={() => generateLetterTemplate(client)}
-        className="ui small labeled icon button"
-      >
-        <i className="left file word outline icon" />Brevmall
-      </button>
+    {client.co ?
+      <div>{`C/O ${client.co}` }</div>
+    : ''}
 
-      <div className="ui section divider" />
-      <Link to={CLIENTS_PATH} className="ui small labeled icon button">
-        <i className="left chevron icon" />Tillbaka till klientregister
-      </Link>
+    <div>
+      {client.street}
     </div>
-  );
-};
+
+    <div>
+      {client.post_code} {client.city}
+    </div>
+
+    <a onClick={() => generateLetterTemplate(client)}>
+      <Icon name="envelope" />Brevmall
+    </a>
+
+    <div className="ui section divider" />
+
+    <Link to={CLIENTS_PATH}>
+      <Icon name="chevron-left" />Tillbaka till klientregister
+    </Link>
+  </div>
+
 
 ClientInfo.propTypes = {
   client: PropTypes.object.isRequired,
