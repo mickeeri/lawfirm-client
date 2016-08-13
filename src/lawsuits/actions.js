@@ -5,17 +5,24 @@ import {
   COI_SEARCH_SUCCESS,
   CREATE_LAWSUIT_FAILURE,
   CREATE_LAWSUIT_SUCCESS,
+  DELETE_LAWSUIT_SUCCESS,
   FETCH_LAWSUITS_FAILURE,
   FETCH_LAWSUITS_SUCCESS,
+  LAWSUIT_FAILURE,
   RESET_LAWSUITS,
   FETCH_LAWSUIT_TYPES_SUCCESS,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
-import { CREATE_LAWSUIT_FAILURE_MESSAGE, LAWSUITS_PATH } from './constants';
+import {
+  CREATE_LAWSUIT_FAILURE_MESSAGE,
+  LAWSUITS_PATH,
+  DELETE_LAWSUIT_FAILURE_MESSAGE,
+} from './constants';
+import { CONFIRM_DELETE_MODAL_NAME } from '../shared';
 
-export const fetchLawsuits = (props) => (dispatch) => {
-  return api.fetchLawsuits(props).then(
+export const fetchLawsuits = (props) => (dispatch) =>
+  api.fetchLawsuits(props).then(
     response => {
       dispatch({
         type: FETCH_LAWSUITS_SUCCESS,
@@ -34,7 +41,6 @@ export const fetchLawsuits = (props) => (dispatch) => {
       });
     }
   );
-};
 
 export const performCOISearch = (props) => (dispatch) =>
   api.performCOISearch(props).then(
@@ -69,7 +75,25 @@ export const fetchLawsuitTypes = () => (dispatch) =>
       });
     },
     error => {
-      console.error('Fel uppstod när ärendetyper skulle hämtas.', error.message);
+      dispatch({
+        type: LAWSUIT_FAILURE,
+        errorMessage: error.response.data.message || 'Fel uppstod när ärendetyper skulle hämtas.',
+      });
+    }
+  );
+
+export const deleteLawsuit = (id) => (dispatch) =>
+  api.deleteLawsuit(id).then(
+    () => {
+      dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
+      dispatch({ type: DELETE_LAWSUIT_SUCCESS });
+      browserHistory.push(LAWSUITS_PATH);
+    },
+    error => {
+      dispatch({
+        type: LAWSUIT_FAILURE,
+        errorMessage: error.response.data.message || DELETE_LAWSUIT_FAILURE_MESSAGE,
+      });
     }
   );
 
