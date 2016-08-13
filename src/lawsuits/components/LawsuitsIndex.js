@@ -1,9 +1,9 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { SearchBar, Paginator } from '../../shared';
 import { UsersDropdown } from '../../users';
 import * as actions from '../actions';
 import LawsuitsTable from './LawsuitsTable';
-import React, { Component, PropTypes } from 'react';
 import StatusCheckbox from './StatusCheckbox';
 
 class LawsuitsIndex extends Component {
@@ -90,7 +90,7 @@ class LawsuitsIndex extends Component {
 LawsuitsIndex.propTypes = {
   dispatch: PropTypes.func.isRequired,
   fetchLawsuits: PropTypes.func.isRequired,
-  meta: PropTypes.object.isRequired,
+  meta: PropTypes.object,
   resetLawsuits: PropTypes.func.isRequired,
   lawsuits: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -100,19 +100,17 @@ LawsuitsIndex.propTypes = {
     closed: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
   filter: PropTypes.shape({
-    query: PropTypes.string.isRequired,
+    query: PropTypes.string,
     page: PropTypes.number.isRequired,
     status: PropTypes.oneOf(['active', 'all']).isRequired,
     userId: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return (
-  { lawsuits: state.lawsuits.all,
-    meta: state.lawsuits.meta,
-    filter: state.lawsuits.filter }
-  );
-};
+const mapStateToProps = (state) => ({
+  lawsuits: state.lawsuits.all,
+  meta: state.lawsuits.meta,
+  filter: state.lawsuits.filter,
+});
 
 export default connect(mapStateToProps, actions)(LawsuitsIndex);

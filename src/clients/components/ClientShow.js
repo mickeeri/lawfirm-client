@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
-import { LawsuitsList } from '../../lawsuits';
-import ClientDeleteButton from './ClientDeleteButton';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -40,14 +38,12 @@ class ClientShow extends Component {
         </div>
         <div className="column">
           <div className="segment">
-            <LawsuitsList />
           </div>
           <div className="segment">
             <h3 >Anteckningar</h3>
             <p>{ client ? client.note : ''}</p>
           </div>
           <div className="segment">
-            <ClientDeleteButton />
           </div>
         </div>
       </div>
