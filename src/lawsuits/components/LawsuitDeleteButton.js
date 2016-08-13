@@ -3,35 +3,34 @@ import Icon from 'react-fa';
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import ConfirmDeleteDialog from '../../shared/components/ConfirmDeleteDialog';
+import { deleteLawsuit } from '../actions';
 import { CONFIRM_DELETE_MODAL_NAME } from '../../shared';
-import { deleteClient } from '../actions';
 
-const ClientDeleteButton = ({ dispatch, clientId, errorMessage }) =>
-  <div className="ClientDeleteButton">
-    <h3 >Inställningar</h3>
+const LawsuitDeleteButton = ({ dispatch, lawsuitId, errorMessage }) =>
+  <div className="LawsuitDeleteButton">
     <ConfirmDeleteDialog
-      label="klient"
+      label="ärende"
       errorMessage={errorMessage}
-      deleteFunc={() => { dispatch(deleteClient(clientId)); }}
+      deleteFunc={() => { dispatch(deleteLawsuit(lawsuitId)); }}
       close={() => { dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME)); }}
     />
     <button
       className="negative ui button"
       onClick={() => dispatch(openDialog(CONFIRM_DELETE_MODAL_NAME))}
     >
-      <Icon name="user-times" />Radera
+      <Icon name="times" />Radera ärende
     </button>
   </div>;
 
-ClientDeleteButton.propTypes = {
+LawsuitDeleteButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  clientId: PropTypes.number.isRequired,
+  lawsuitId: PropTypes.number.isRequired,
   errorMessage: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => (
-  { clientId: state.clients.client.id,
-    errorMessage: state.clients.errorMessage }
-);
+const mapStateToProps = (state) => ({
+  lawsuitId: state.lawsuits.lawsuit.id,
+  errorMessage: state.lawsuits.errorMessage,
+});
 
-export default connect(mapStateToProps, null)(ClientDeleteButton);
+export default connect(mapStateToProps, null)(LawsuitDeleteButton);

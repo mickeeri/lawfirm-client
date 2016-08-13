@@ -7,6 +7,7 @@ import {
   FETCH_LAWSUIT_TYPES_SUCCESS,
   CREATE_LAWSUIT_SUCCESS,
   CREATE_LAWSUIT_FAILURE,
+  LAWSUIT_FAILURE,
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -38,18 +39,19 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         all: action.response.lawsuits,
-      }
+      };
     case RESET_LAWSUITS:
       return INITIAL_STATE;
     case COI_SEARCH_FAILURE:
     case FETCH_LAWSUITS_FAILURE:
     case CREATE_LAWSUIT_FAILURE:
+    case LAWSUIT_FAILURE:
       return {
         ...state,
         errorMessage: action.errorMessage,
       };
     case FETCH_LAWSUIT_TYPES_SUCCESS:
-      return { ...state, lawsuitTypes: action.response.lawsuit_types }
+      return { ...state, lawsuitTypes: action.response.lawsuit_types };
     default:
       return state;
   }

@@ -35,8 +35,7 @@ export const createClient = (params) => {
   });
 };
 
-export const deleteClient = (id) => {
-  return axios.delete(`${API_ROOT_URL}${API_CLIENTS_PATH}/${id}`, {
+export const deleteClient = (id) =>
+  axios.delete(`${API_ROOT_URL}${API_CLIENTS_PATH}/${id}`, {
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
-};

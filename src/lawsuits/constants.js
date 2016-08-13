@@ -9,3 +9,4 @@ export const COI_SEARCH_PATH = '/javskontroll';
 
 // Messages
 export const CREATE_LAWSUIT_FAILURE_MESSAGE = 'Ett okänt fel uppstod när ärende skulle sparas';
+export const DELETE_LAWSUIT_FAILURE_MESSAGE = 'Ett okänt fel uppstod när ärende skulle raderas';

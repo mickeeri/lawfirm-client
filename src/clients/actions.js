@@ -17,7 +17,7 @@ import {
   CLIENTS_PATH,
   DELETE_CLIENT_FAILURE_MESSAGE,
 } from './constants';
-
+import { CONFIRM_DELETE_MODAL_NAME } from '../shared';
 
 export const fetchClients = (props) => (dispatch) =>
   api.fetchClients(props).then(
@@ -50,7 +50,7 @@ export const toggleEdit = () => (
 export const deleteClient = (id) => (dispatch) =>
   api.deleteClient(id).then(
     () => {
-      dispatch(closeDialog('confirmDeleteDialog'));
+      dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
       dispatch({
         type: DELETE_CLIENT_SUCCESS,
       });
