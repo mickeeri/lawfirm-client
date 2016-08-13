@@ -30,6 +30,7 @@
     "redux-thunk": "^2.1.0",
     "semantic-ui-button": "^2.2.2",
     "semantic-ui-divider": "^2.2.1",
+    "semantic-ui-loader": "^2.2.1",
     "semantic-ui-table": "^2.2.1"
   },
   "scripts": {
