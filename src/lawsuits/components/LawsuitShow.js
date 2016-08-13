@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import * as actions from '../actions';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 import LawsuitInfo from './LawsuitInfo';
 
 class LawsuitShow extends Component {
@@ -12,20 +12,19 @@ class LawsuitShow extends Component {
     const { lawsuit } = this.props;
 
     return (
-      <div className="ui stackable grid">
-        <div className="two column row">
-          <div className="column">
-            <div className="ui segment">
-              <LawsuitInfo lawsuit={lawsuit} />
-            </div>
+      <div className="show-grid">
+        <div className="column">
+          <div className="segment">
+            <a>Ändra</a>
+            <LawsuitInfo lawsuit={lawsuit} />
           </div>
-          <div className="column">
-            <div className="ui segment">
-              <h2 className="ui header">Klient/Klienter</h2>
-            </div>
-            <div className="ui segment">
-              <h2 className="ui header">Mortpart/Motparter</h2>
-            </div>
+        </div>
+        <div className="column">
+          <div className="segment">
+            <h2>Klient/Klienter</h2>
+          </div>
+          <div className="segment">
+            <h2>Mortpart/Motparter</h2>
           </div>
         </div>
       </div>
@@ -35,7 +34,9 @@ class LawsuitShow extends Component {
 
 LawsuitShow.propTypes = {
   lawsuit: PropTypes.object,
-}
+  fetchLawsuits: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => (
  { lawsuit: state.lawsuits.lawsuit }

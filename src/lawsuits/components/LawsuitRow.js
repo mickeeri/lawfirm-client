@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { LAWSUITS_PATH } from '../constants';
 import moment from 'moment';
+import { LAWSUITS_PATH } from '../constants';
 import { CLIENTS_PATH } from '../../clients';
 
 

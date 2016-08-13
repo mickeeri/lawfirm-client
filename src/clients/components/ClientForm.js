@@ -31,7 +31,8 @@ const validate = values => {
 };
 
 const renderField = (field) =>
-  <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required': ''}` }>
+  // eslint-disable-next-line
+  <div className={`field ${field.touched && field.error ? 'error' : ''} ${field.input.required ? 'required' : ''}` }>
     <label htmlFor={field.name}>{field.input.placeholder}</label>
     <div className="ui input">
       <input {...field.input} />
@@ -121,10 +122,14 @@ let ClientForm = props => {
       <div className="divider" />
       {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
       <div className="button-group">
-        {edit && <button className="ui button" onClick={(e) => {
-          e.preventDefault();
-          toggleEdit();
-        }}>Avbryt</button>}
+        {edit &&
+          <button
+            className="ui button"
+            onClick={(e) => {
+              e.preventDefault();
+              toggleEdit();
+            }}
+          >Avbryt</button>}
         <button
           type="button"
           className="ui orange button" disabled={pristine || submitting}
@@ -147,7 +152,7 @@ ClientForm.propTypes = {
   submitting: PropTypes.bool,
   errorMessage: PropTypes.string,
   edit: PropTypes.bool.isRequired,
-  toggleEdit: PropTypes.func.isRequired,
+  toggleEdit: PropTypes.func,
 };
 
 ClientForm = reduxForm({

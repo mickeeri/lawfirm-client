@@ -24,10 +24,7 @@ class ClientShow extends Component {
       <div className="show-grid">
         <div className="column">
           <div className="segment">
-            <a onClick={toggleEdit}>
-              <i className="edit icon" />
-              Ändra
-            </a>
+            <a onClick={toggleEdit}>Ändra</a>
             {edit ?
               <ClientForm
                 onSubmit={createClient}
