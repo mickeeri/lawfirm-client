@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
+import LawsuitsList from '../../lawsuits/components/LawsuitsList';
 import ClientDeleteButton from './ClientDeleteButton';
 
 class ClientShow extends Component {
@@ -39,6 +40,7 @@ class ClientShow extends Component {
         </div>
         <div className="column">
           <div className="segment">
+            <LawsuitsList />
           </div>
           <div className="segment">
             <h3 >Anteckningar</h3>
