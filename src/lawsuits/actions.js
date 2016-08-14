@@ -6,11 +6,12 @@ import {
   CREATE_LAWSUIT_FAILURE,
   CREATE_LAWSUIT_SUCCESS,
   DELETE_LAWSUIT_SUCCESS,
+  FETCH_LAWSUIT_TYPES_SUCCESS,
   FETCH_LAWSUITS_FAILURE,
   FETCH_LAWSUITS_SUCCESS,
   LAWSUIT_FAILURE,
   RESET_LAWSUITS,
-  FETCH_LAWSUIT_TYPES_SUCCESS,
+  TOGGLE_LAWSUIT_EDIT,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
@@ -64,6 +65,10 @@ export const performCOISearch = (props) => (dispatch) =>
 
 export const resetLawsuits = () => (
   { type: RESET_LAWSUITS }
+);
+
+export const toggleEdit = () => (
+  { type: TOGGLE_LAWSUIT_EDIT }
 );
 
 export const fetchLawsuitTypes = () => (dispatch) =>

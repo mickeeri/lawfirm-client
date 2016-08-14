@@ -23,7 +23,7 @@ const renderField = (field) =>
 
 
 let LawsuitForm = props => {
-  const { handleSubmit, submitting, errorMessage, pristine, reset } = props;
+  const { handleSubmit, submitting, errorMessage, pristine, reset, toggleEdit } = props;
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
       <div className="field">
@@ -54,28 +54,40 @@ let LawsuitForm = props => {
 
       <div className="ui divider" />
 
-      {errorMessage && <div className="error-message">
-        <Icon name="exclamation-circle" />{errorMessage}
-      </div>}
+      {errorMessage &&
+        <div className="alert-error">
+          <p><Icon name="exclamation-circle" />{errorMessage}</p>
+        </div>}
 
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          props.dispatch(closeDialog('lawsuitFormDialog'));
-        }}
-        className="ui button"
-      ><Icon name="times" />Stäng</button>
+      <div className="button-group">
+        {toggleEdit ?
+          <button
+            className="ui button"
+            onClick={(e) => {
+              e.preventDefault();
+              toggleEdit();
+            }}
+          ><Icon name="times" />Avbryt</button> :
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              props.dispatch(closeDialog('lawsuitFormDialog'));
+            }}
+            className="ui button"
+          ><Icon name="times" />Stäng</button>
+        }
 
-      <button
-        className="ui orange button" disabled={pristine || submitting}
-        onClick={reset}
-      >Återställ</button>
+        <button
+          className="ui orange button" disabled={pristine || submitting}
+          onClick={reset}
+        >Återställ</button>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="ui button primary"
-      ><Icon name="check" />Skapa ärende</button>
+        <button
+          type="submit"
+          disabled={submitting}
+          className="ui button primary"
+        ><Icon name="check" />Skapa ärende</button>
+      </div>
     </form>
   );
 };
@@ -87,6 +99,7 @@ LawsuitForm.propTypes = {
   submitting: PropTypes.bool,
   errorMessage: PropTypes.string,
   dispatch: PropTypes.func,
+  toggleEdit: PropTypes.func,
 };
 
 LawsuitForm = reduxForm({
@@ -94,11 +107,20 @@ LawsuitForm = reduxForm({
   validate,
 }, { closeDialog })(LawsuitForm);
 
-const mapStateToProps = (state) => (
-  { initialValues: {
-    client_id: state.clients.client.id,
-    court: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.court : '',
-    case_number: state.lawsuits.lawsuit ? state.lawsuits.lawsuit.case_number : '' } }
-);
+const mapStateToProps = (state) => {
+  const client = state.clients.client;
+  const lawsuit = state.lawsuits.lawsuit;
+
+  return ({
+    initialValues: {
+      id: lawsuit ? lawsuit.id : undefined,
+      client_id: client ? client.id : lawsuit.primary_client.id,
+      court: lawsuit ? lawsuit.court : '',
+      case_number: lawsuit ? lawsuit.case_number : '',
+      lawsuit_type_id: lawsuit ? lawsuit.lawsuit_type.id : '',
+    },
+    errorMessage: state.lawsuits.errorMessage,
+  });
+};
 
 export default connect(mapStateToProps, null)(LawsuitForm);

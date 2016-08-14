@@ -34,10 +34,21 @@ export const fetchLawsuitTypes = () =>
   });
 
 
-export const createLawsuit = (params) =>
-  axios.post(`${API_ROOT_URL}${API_LAWSUITS_PATH}`, { lawsuit: params },
+export const createLawsuit = (params) => {
+  const url = `${API_ROOT_URL}${API_LAWSUITS_PATH}`;
+
+  // If id is present. Update existing lawsuit.
+  if (params.id) {
+    return axios.put(`${url}/${params.id}`, { lawsuit: params },
+      { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
+    });
+  }
+
+  // Otherwise create new lawsuit.
+  return axios.post(url, { lawsuit: params },
     { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
+};
 
 export const deleteLawsuit = (id) =>
   axios.delete(`${API_ROOT_URL}${API_LAWSUITS_PATH}/${id}`, {

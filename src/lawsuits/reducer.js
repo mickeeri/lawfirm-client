@@ -1,13 +1,14 @@
 import {
-  FETCH_LAWSUITS_SUCCESS,
-  FETCH_LAWSUITS_FAILURE,
-  COI_SEARCH_SUCCESS,
   COI_SEARCH_FAILURE,
-  RESET_LAWSUITS,
-  FETCH_LAWSUIT_TYPES_SUCCESS,
-  CREATE_LAWSUIT_SUCCESS,
+  COI_SEARCH_SUCCESS,
   CREATE_LAWSUIT_FAILURE,
+  CREATE_LAWSUIT_SUCCESS,
+  FETCH_LAWSUIT_TYPES_SUCCESS,
+  FETCH_LAWSUITS_FAILURE,
+  FETCH_LAWSUITS_SUCCESS,
   LAWSUIT_FAILURE,
+  RESET_LAWSUITS,
+  TOGGLE_LAWSUIT_EDIT,
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
   lawsuit: null,
   meta: {},
   lawsuitTypes: [],
+  edit: false,
   filter: {
     query: '',
     page: 1,
@@ -26,6 +28,12 @@ const INITIAL_STATE = {
 const lawsuitsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CREATE_LAWSUIT_SUCCESS:
+      return {
+        ...state,
+        lawsuit: action.response.lawsuit,
+        errorMessage: '',
+        edit: false,
+      };
     case FETCH_LAWSUITS_SUCCESS:
       return {
         ...state,
@@ -52,6 +60,11 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
       };
     case FETCH_LAWSUIT_TYPES_SUCCESS:
       return { ...state, lawsuitTypes: action.response.lawsuit_types };
+    case TOGGLE_LAWSUIT_EDIT:
+      return {
+        ...state,
+        edit: !state.edit,
+      };
     default:
       return state;
   }
