@@ -64,6 +64,7 @@ export const deleteClient = (id) => (dispatch) =>
     }
   );
 
+// Create new client. Also used for updating client.
 export const createClient = (params) => (dispatch) =>
   api.createClient(params).then(
     response => {

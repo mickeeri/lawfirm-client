@@ -24,6 +24,7 @@ export const fetchClients = (props) => {
 export const createClient = (params) => {
   const url = `${API_ROOT_URL}${API_CLIENTS_PATH}`;
 
+  // Update existing client.
   if (params.id) {
     return axios.put(`${url}/${params.id}`, { client: params },
       { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
