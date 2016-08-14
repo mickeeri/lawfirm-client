@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Icon from 'react-fa';
 import { connect } from 'react-redux';
 import {
   FIRST_NAME_REQ_MESSAGE,
@@ -120,7 +121,9 @@ let ClientForm = props => {
         />
       </div>
       <div className="divider" />
-      {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
+      {errorMessage && <div className="error-message">
+        <Icon name="exclamation-circle" />{errorMessage}
+      </div>}
       <div className="button-group">
         {edit &&
           <button
