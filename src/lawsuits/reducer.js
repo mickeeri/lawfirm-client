@@ -30,7 +30,7 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
     case CREATE_LAWSUIT_SUCCESS:
       return {
         ...state,
-        lawsuit: action.response.lawsuit,
+        all: [...state.all, action.response.lawsuit],
         errorMessage: '',
         edit: false,
       };

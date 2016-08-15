@@ -10,8 +10,9 @@ export const fetchLawsuits = (props) => {
     url = `${API_ROOT_URL}${API_LAWSUITS_PATH}/${props.id}`;
   // Get collection of lawsuits.
   } else {
-    const { userId = '', query = '', page = 1, status = 'active' } = props.filter;
-    const queryString = `?query=${query}&page=${page}&status=${status}&user_id=${userId}`;
+    const { userId = '', query = '', page = 1, status = 'active', clientId = '' } = props.filter;
+    // eslint-disable-next-line
+    const queryString = `?query=${query}&page=${page}&status=${status}&user_id=${userId}&client_id=${clientId}`;
     url = `${API_ROOT_URL}${API_LAWSUITS_PATH}${queryString}`;
   }
 

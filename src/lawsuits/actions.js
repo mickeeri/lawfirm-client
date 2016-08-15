@@ -109,7 +109,6 @@ export const createLawsuit = (params) => (dispatch) =>
         type: CREATE_LAWSUIT_SUCCESS,
         response: response.data,
       });
-      browserHistory.push(`${LAWSUITS_PATH}/${response.data.lawsuit.id}`);
     },
     error => {
       dispatch({

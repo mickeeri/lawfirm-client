@@ -48,7 +48,7 @@ class ClientShow extends Component {
         </div>
         <div className="column">
           <div className="segment">
-            <LawsuitsList />
+            <LawsuitsList clientId={client.id} />
           </div>
           <div className="segment">
             <h3 >Anteckningar</h3>
