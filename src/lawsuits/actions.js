@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router';
 import {
   COI_SEARCH_FAILURE,
   COI_SEARCH_SUCCESS,
-  CREATE_LAWSUIT_FAILURE,
   CREATE_LAWSUIT_SUCCESS,
   DELETE_LAWSUIT_SUCCESS,
   FETCH_LAWSUIT_TYPES_SUCCESS,
@@ -114,7 +113,7 @@ export const createLawsuit = (params) => (dispatch) =>
     },
     error => {
       dispatch({
-        type: CREATE_LAWSUIT_FAILURE,
+        type: LAWSUIT_FAILURE,
         errorMessage: error.response.data.message || CREATE_LAWSUIT_FAILURE_MESSAGE,
       });
     }

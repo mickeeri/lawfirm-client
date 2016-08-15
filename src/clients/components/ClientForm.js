@@ -121,9 +121,10 @@ let ClientForm = props => {
         />
       </div>
       <div className="divider" />
-      {errorMessage && <div className="error-message">
-        <Icon name="exclamation-circle" />{errorMessage}
-      </div>}
+      {errorMessage &&
+        <div className="alert-error">
+          <p><Icon name="exclamation-circle" />{errorMessage}</p>
+        </div>}
       <div className="button-group">
         {edit &&
           <button
@@ -163,9 +164,10 @@ ClientForm = reduxForm({
   validate,
 })(ClientForm);
 
-const mapStateToProps = (state) => (
-  { initialValues: state.clients.client,
-    edit: state.clients.edit }
-);
+const mapStateToProps = (state) => ({
+  errorMessage: state.clients.errorMessage,
+  initialValues: state.clients.client,
+  edit: state.clients.edit,
+});
 
 export default connect(mapStateToProps, null)(ClientForm);
