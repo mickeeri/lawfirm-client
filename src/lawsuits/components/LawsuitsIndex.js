@@ -92,18 +92,12 @@ LawsuitsIndex.propTypes = {
   fetchLawsuits: PropTypes.func.isRequired,
   meta: PropTypes.object,
   resetLawsuits: PropTypes.func.isRequired,
-  lawsuits: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    slug: PropTypes.string.isRequired,
-    court: PropTypes.string,
-    case_number: PropTypes.string,
-    closed: PropTypes.bool.isRequired,
-  }).isRequired).isRequired,
+  lawsuits: PropTypes.array,
   filter: PropTypes.shape({
     query: PropTypes.string,
-    page: PropTypes.number.isRequired,
-    status: PropTypes.oneOf(['active', 'all']).isRequired,
-    userId: PropTypes.string.isRequired,
+    page: PropTypes.number,
+    status: PropTypes.oneOf(['active', 'all']),
+    userId: PropTypes.string,
   }).isRequired,
 };
 

@@ -11,7 +11,7 @@ const LawsuitInfo = ({ lawsuit }) => {
 
   return (
     <div className="LawsuitInfo">
-      <p><strong>Ärendetyp:</strong> {lawsuit.type}</p>
+      <p><strong>Ärendetyp:</strong> {lawsuit.lawsuit_type.name}</p>
       <p><strong>Huvudklient:</strong> <Link to={`${CLIENTS_PATH}/${pc.id}`}>{pc.name}</Link></p>
       <p><strong>Skapat:</strong> {moment(lawsuit.created_at).format('L')}</p>
       <p><strong>Målnummer:</strong> {lawsuit.case_number}</p>
