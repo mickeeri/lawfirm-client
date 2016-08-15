@@ -378,6 +378,21 @@ h4 {
   margin-right: 5px;
 }
 
+.alert-success {
+  background-color: #FCFFF5;
+  color: #2C662D;
+  box-shadow: 0 0 0 1px #A3C293 inset,0 0 0 0 transparent;
+  padding: 1em 1.5em;
+  border-radius: .3rem;
+  position: absolute;
+  top: 66px;
+  right: 0;
+  width: 200px;
+  font-size: 1.2em;
+  font-weight: bold;
+  outline: none;
+}
+
 
 /******************************************/
 /* Misc */

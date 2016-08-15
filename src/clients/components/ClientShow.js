@@ -1,18 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { openDialog, closeDialog } from 'redux-dialog';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
 import LawsuitsList from '../../lawsuits/components/LawsuitsList';
 import ClientDeleteButton from './ClientDeleteButton';
+import SuccessMessage from '../../shared/components/SuccessMessage';
 
 class ClientShow extends Component {
   componentWillMount() {
     this.props.fetchClients({ filter: {}, id: this.props.params.id });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.successMessage !== '') {
+      this.props.dispatch(openDialog('successMessage'));
+    }
+  }
+
   render() {
-    const { client, edit, toggleEdit, createClient, errorMessage } = this.props;
+    const { client, edit, toggleEdit, createClient, dispatch } = this.props;
 
     if (!client) {
       return (
@@ -22,13 +30,16 @@ class ClientShow extends Component {
 
     return (
       <div className="show-grid">
+        <SuccessMessage
+          message={this.props.successMessage}
+          close={() => { dispatch(closeDialog('successMessage')); }}
+        />
         <div className="column">
           <div className="segment">
             <a onClick={toggleEdit}>Ändra</a>
             {edit ?
               <ClientForm
                 onSubmit={createClient}
-                errorMessage={errorMessage}
                 toggleEdit={toggleEdit}
               /> :
               <ClientInfo client={client} />
@@ -53,23 +64,20 @@ class ClientShow extends Component {
 }
 
 ClientShow.propTypes = {
-  client: PropTypes.shape({
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    personal_number: PropTypes.string.isRequired,
-    id: PropTypes.number,
-  }),
+  client: PropTypes.object,
   params: PropTypes.object.isRequired,
   fetchClients: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,
   toggleEdit: PropTypes.func,
   createClient: PropTypes.func,
-  errorMessage: PropTypes.string,
+  successMessage: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => (
- { client: state.clients.client,
-   edit: state.clients.edit }
-);
+const mapStateToProps = (state) => ({
+  successMessage: state.clients.successMessage,
+  client: state.clients.client,
+  edit: state.clients.edit,
+});
 
 export default connect(mapStateToProps, actions)(ClientShow);

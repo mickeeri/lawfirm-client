@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   client: null,
   meta: {},
   edit: false,
+  successMessage: '',
   filter: {
     query: '',
     page: 1,
@@ -37,6 +38,7 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
         client: action.response.client,
         errorMessage: '',
         edit: false,
+        successMessage: 'Klient sparad!',
       };
     case RESET_CLIENTS:
       return INITIAL_STATE;
@@ -51,6 +53,8 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         edit: !state.edit,
+        errorMessage: '',
+        successMessage: '',
       };
     default:
       return state;
