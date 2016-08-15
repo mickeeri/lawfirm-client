@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Icon from 'react-fa';
 import _ from 'lodash';
 
 const SearchBar = ({ onSearch, label }) => {
@@ -12,7 +13,7 @@ const SearchBar = ({ onSearch, label }) => {
   return (
     <div className="SearchBar">
       <label htmlFor="search">{label}</label>
-      <div className="ui icon fluid input">
+      <div className="icon-input-right">
         <input
           name="search"
           type="text"
@@ -22,8 +23,8 @@ const SearchBar = ({ onSearch, label }) => {
           }}
           ref={node => { input = node; }}
         />
-        <i
-          className="ui remove link icon"
+        <Icon
+          name="times"
           onClick={() => {
             // Click reset button to clear input field,
             // and send empty query.

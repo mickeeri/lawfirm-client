@@ -5,7 +5,7 @@ import { CLIENTS_PATH } from '../../clients';
 
 const COISearchResult = ({ lawsuits }) => {
   const renderClients = (clients) =>
-    <div>
+    <div className="coi-item">
       <strong>{`Klient${clients.length > 1 ? 'er' : ''}`}</strong>
       {clients.map(client =>
         <div key={client.id}>
@@ -17,7 +17,7 @@ const COISearchResult = ({ lawsuits }) => {
     </div>;
 
   const renderCounterparts = (counterparts) =>
-    <div>
+    <div className="coi-item">
       <strong>{`Motpart${counterparts.length > 1 ? 'er' : ''}`}</strong>
       {counterparts.map(counterpart =>
         <div key={counterpart.id}>
@@ -30,8 +30,8 @@ const COISearchResult = ({ lawsuits }) => {
   const renderResultRow = (lawsuit) => {
     const { id, slug, type, clients, counterparts } = lawsuit;
     return (
-      <div className="ui raised segment" key={id}>
-        <h4 className="ui header">
+      <div className="raised segment" key={id}>
+        <h4>
           <Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>Ärende {slug}, {type}</Link>
         </h4>
         {renderClients(clients)}
