@@ -4,6 +4,7 @@ import {
   DELETE_CLIENT_FAILURE,
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
+  UPDATE_CLIENT_SUCCESS,
   RESET_CLIENTS,
   TOGGLE_EDIT,
 } from './actionTypes';
@@ -35,10 +36,18 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
     case CREATE_CLIENT_SUCCESS:
       return {
         ...state,
-        client: action.response.client,
+        all: [...state.all, action.response.client],
         errorMessage: '',
         edit: false,
         successMessage: 'Klient sparad!',
+      };
+    case UPDATE_CLIENT_SUCCESS:
+      return {
+        ...state,
+        client: action.response.client,
+        errorMessage: '',
+        edit: false,
+        successMessage: 'Klient uppdaterad!',
       };
     case RESET_CLIENTS:
       return INITIAL_STATE;

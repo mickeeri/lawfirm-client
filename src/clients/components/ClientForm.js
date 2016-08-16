@@ -42,13 +42,28 @@ const renderField = (field) =>
   </div>;
 
 let ClientForm = props => {
-  const { handleSubmit, submitting, errorMessage, pristine, reset, edit, toggleEdit } = props;
+  const {
+    handleSubmit,
+    submitting,
+    errorMessage,
+    pristine,
+    reset,
+    edit,
+    toggleEdit,
+  } = props;
   return (
     <form
       onSubmit={handleSubmit}
       className={`ClientForm ui form ${errorMessage ? 'error' : ''}`}
       noValidate
     >
+      <Field
+        name="lawsuit_id"
+        type="text"
+        component="input"
+        hidden
+      />
+
       <div className="two-fields">
         <Field
           name="first_name"
@@ -157,6 +172,7 @@ ClientForm.propTypes = {
   errorMessage: PropTypes.string,
   edit: PropTypes.bool.isRequired,
   toggleEdit: PropTypes.func,
+  lawsuitId: PropTypes.number,
 };
 
 ClientForm = reduxForm({
@@ -164,10 +180,27 @@ ClientForm = reduxForm({
   validate,
 })(ClientForm);
 
-const mapStateToProps = (state) => ({
-  errorMessage: state.clients.errorMessage,
-  initialValues: state.clients.client,
-  edit: state.clients.edit,
-});
+const mapStateToProps = (state) => {
+  const client = state.clients.client;
+  const lawsuit = state.lawsuits.lawsuit;
+
+  return ({
+    initialValues: {
+      id: client ? client.id : undefined,
+      first_name: client ? client.first_name : '',
+      last_name: client ? client.last_name : '',
+      personal_number: client ? client.personal_number : '',
+      email: client ? client.email : '',
+      mobile: client ? client.mobile : '',
+      phone_number: client ? client.phone_number : '',
+      co: client ? client.co : '',
+      street: client ? client.street : '',
+      post_code: client ? client.post_code : '',
+      city: client ? client.city : '',
+      lawsuit_id: lawsuit ? lawsuit.id : undefined,
+    },
+    errorMessage: state.lawsuits.errorMessage,
+  });
+};
 
 export default connect(mapStateToProps, null)(ClientForm);

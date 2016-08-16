@@ -10,7 +10,7 @@ const ClientNew = props =>
   <div className="ClientNew centered">
     <div className="segment new-client">
       <h1>Lägg till ny klient</h1>
-      <ClientForm onSubmit={props.createClient} errorMessage={props.errorMessage} />
+      <ClientForm onSubmit={props.createUpdateClient} errorMessage={props.errorMessage} />
       <div className="ui divider" />
       <Link to={CLIENTS_PATH} className="ui small button">Tillbaka</Link>
     </div>
@@ -18,7 +18,7 @@ const ClientNew = props =>
 
 
 ClientNew.propTypes = {
-  createClient: PropTypes.func.isRequired,
+  createUpdateClient: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 

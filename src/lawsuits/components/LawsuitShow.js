@@ -8,6 +8,7 @@ import LawsuitDeleteButton from './LawsuitDeleteButton';
 import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
 import LawsuitArchiveButton from './LawsuitArchiveButton';
+import ClientsList from '../../clients/components/ClientsList';
 
 
 class LawsuitShow extends Component {
@@ -75,9 +76,11 @@ class LawsuitShow extends Component {
           </div>
         </div>
         <div className="column">
+
           <div className="segment">
-            <h2>Klient/Klienter</h2>
+            <ClientsList lawsuitId={lawsuit.id} />
           </div>
+
           <div className="segment">
             <h2>Mortpart/Motparter</h2>
           </div>

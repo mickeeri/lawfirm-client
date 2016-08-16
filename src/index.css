@@ -497,7 +497,7 @@ ul {
   margin-bottom: 20px;
 }
 
-.lawsuits-list li {
+.show-sub-list li {
   padding: .8em;
   font-size: 1em;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);

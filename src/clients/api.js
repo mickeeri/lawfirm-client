@@ -10,8 +10,8 @@ export const fetchClients = (props) => {
   if (props.id) {
     url = `${API_ROOT_URL}${API_CLIENTS_PATH}/${props.id}`;
   } else { // Get collection of lawsuits.
-    const { userId = '', query = '', page = 1 } = props.filter;
-    const queryString = `?query=${query}&page=${page}&user_id=${userId}`;
+    const { userId = '', query = '', page = 1, lawsuitId = '' } = props.filter;
+    const queryString = `?query=${query}&page=${page}&user_id=${userId}&lawsuit_id=${lawsuitId}`;
     url = `${API_ROOT_URL}${API_CLIENTS_PATH}${queryString}`;
   }
 
@@ -20,8 +20,8 @@ export const fetchClients = (props) => {
   });
 };
 
-// Create client post request.
-export const createClient = (params) => {
+// Create or update client post request.
+export const createUpdateClient = (params) => {
   const url = `${API_ROOT_URL}${API_CLIENTS_PATH}`;
 
   // Update existing client.
