@@ -11,6 +11,7 @@ import {
   LAWSUIT_FAILURE,
   RESET_LAWSUITS,
   TOGGLE_LAWSUIT_EDIT,
+  UPDATE_LAWSUIT_SUCCESS,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
@@ -101,14 +102,22 @@ export const deleteLawsuit = (id) => (dispatch) =>
     }
   );
 
-export const createLawsuit = (params) => (dispatch) =>
-  api.createLawsuit(params).then(
+
+export const createUpdateLawsuit = (params) => (dispatch) =>
+  api.createUpdateLawsuit(params).then(
     response => {
-      dispatch(closeDialog('lawsuitFormDialog'));
-      dispatch({
-        type: CREATE_LAWSUIT_SUCCESS,
-        response: response.data,
-      });
+      if (response.status === 201) {
+        dispatch(closeDialog('lawsuitFormDialog'));
+        dispatch({
+          type: CREATE_LAWSUIT_SUCCESS,
+          response: response.data,
+        });
+      } else {
+        dispatch({
+          type: UPDATE_LAWSUIT_SUCCESS,
+          response: response.data,
+        });
+      }
     },
     error => {
       dispatch({

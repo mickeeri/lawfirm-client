@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
+import Icon from 'react-fa';
 import { LAWSUITS_PATH } from '../constants';
 import { CLIENTS_PATH } from '../../clients';
 
@@ -18,9 +19,10 @@ const LawsuitRow = ({ lawsuit }) => {
       <td>{lawsuit.type}</td>
       <td><Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>{lawsuit.slug}</Link></td>
       <td>{moment(lawsuit.created_at).format('L')}</td>
-      <td className="center aligned">
-        {lawsuit.closed ? <i className="large red remove icon"></i> :
-          <i className="large green checkmark icon"></i>}
+      <td className="center aligned status">
+        {lawsuit.closed ?
+          <span><Icon name="archive" /></span> :
+          <span><Icon name="check" /></span>}
       </td>
     </tr>
   );

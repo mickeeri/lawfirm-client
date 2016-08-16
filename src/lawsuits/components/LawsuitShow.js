@@ -7,6 +7,7 @@ import * as actions from '../actions';
 import LawsuitDeleteButton from './LawsuitDeleteButton';
 import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
+import LawsuitArchiveButton from './LawsuitArchiveButton';
 
 
 class LawsuitShow extends Component {
@@ -15,7 +16,7 @@ class LawsuitShow extends Component {
   }
 
   render() {
-    const { lawsuit, toggleEdit, edit, createLawsuit, errorMessage } = this.props;
+    const { lawsuit, toggleEdit, edit, createUpdateLawsuit, errorMessage } = this.props;
 
     if (!lawsuit) {
       return <div className="ui big active centered inline loader" />;
@@ -25,7 +26,10 @@ class LawsuitShow extends Component {
       <div className="show-grid">
         <div className="column">
           <div className="segment">
-            <h2>Ärende {lawsuit.slug}</h2>
+            <div className="lawsuit-show-header">
+              <h2>Ärende {lawsuit.slug}</h2>
+              { lawsuit.closed && <span className="archived"><Icon name="archive" />Arkiverat</span> }
+            </div>
 
             <div className="ui divider" />
 
@@ -34,7 +38,7 @@ class LawsuitShow extends Component {
             {/* Show form or info based on bool edit */}
             {edit ?
               <LawsuitForm
-                onSubmit={createLawsuit}
+                onSubmit={createUpdateLawsuit}
                 errorMessage={errorMessage}
                 toggleEdit={toggleEdit}
                 primaryClientId={lawsuit.primary_client.id}
@@ -51,7 +55,18 @@ class LawsuitShow extends Component {
             <div className="ui section divider" />
 
             <h3>Inställningar</h3>
-            <LawsuitDeleteButton />
+
+            <div className="settings">
+              <LawsuitDeleteButton />
+
+              <LawsuitArchiveButton
+                toggleClosed={() => {
+                  createUpdateLawsuit({ id: lawsuit.id, closed: !lawsuit.closed });
+                }}
+                closed={lawsuit.closed}
+              />
+            </div>
+
             <div className="ui section divider" />
 
             <Link to={LAWSUITS_PATH}>
@@ -78,7 +93,7 @@ LawsuitShow.propTypes = {
   params: PropTypes.object.isRequired,
   toggleEdit: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,
-  createLawsuit: PropTypes.func.isRequired,
+  createUpdateLawsuit: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 

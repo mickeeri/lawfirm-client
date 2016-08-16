@@ -9,6 +9,7 @@ import {
   LAWSUIT_FAILURE,
   RESET_LAWSUITS,
   TOGGLE_LAWSUIT_EDIT,
+  UPDATE_LAWSUIT_SUCCESS,
 } from './actionTypes';
 
 const INITIAL_STATE = {
@@ -31,6 +32,13 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         all: [...state.all, action.response.lawsuit],
+        errorMessage: '',
+        edit: false,
+      };
+    case UPDATE_LAWSUIT_SUCCESS:
+      return {
+        ...state,
+        lawsuit: action.response.lawsuit,
         errorMessage: '',
         edit: false,
       };

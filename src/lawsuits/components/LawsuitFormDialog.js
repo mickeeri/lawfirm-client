@@ -4,11 +4,11 @@ import React, { PropTypes } from 'react';
 import LawsuitForm from './LawsuitForm';
 import * as actions from '../actions';
 
-let LawsuitFormDialog = ({ createLawsuit, errorMessage }) =>
+let LawsuitFormDialog = ({ createUpdateLawsuit, errorMessage }) =>
   <div className="LawsuitFormDialog">
     <h1>Skapa ett nytt ärende</h1>
     <LawsuitForm
-      onSubmit={createLawsuit}
+      onSubmit={createUpdateLawsuit}
       errorMessage={errorMessage}
     />
   </div>;
@@ -20,7 +20,7 @@ LawsuitFormDialog = reduxDialog({
 })(LawsuitFormDialog);
 
 LawsuitFormDialog.propTypes = {
-  createLawsuit: PropTypes.func.isRequired,
+  createUpdateLawsuit: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 

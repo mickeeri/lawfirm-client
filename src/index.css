@@ -375,6 +375,69 @@ input:focus {
   }
 }
 
+.settings div {
+  display: inline;
+}
+
+.archived .fa {
+  margin-right: 5px;
+}
+
+.lawsuit-show-header {
+  display: flex;
+  justify-content: space-between;
+  margin: .5em 0;
+}
+
+.archived {
+  font-size: 1.5em;
+  color: #9F3A38;
+  align-self: flex-end;
+}
+
+.lawsuit-show-header h2 {
+  align-self: flex-start;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .lawsuit-show-header {
+    display: block;
+  }
+
+  .lawsuit-show-header h2 {
+    margin: 10px 0;
+  }
+
+  .archived {
+    display: block;
+    width: 100%;
+    margin-bottom: .5em;
+    box-sizing: border-box;
+  }
+}
+
+/******************************************/
+/* Table */
+/*****************************************/
+td .fa {
+  font-size: 1.4em;
+}
+
+td .fa-archive {
+  color: #9F3A38;
+}
+
+td .fa-check {
+  color: #2C662D;
+}
+
+@media screen and (max-width: 768px) {
+  td {
+    text-align: left;
+  }
+}
+
 /******************************************/
 /* Typography */
 /*****************************************/

@@ -35,7 +35,7 @@ export const fetchLawsuitTypes = () =>
   });
 
 
-export const createLawsuit = (params) => {
+export const createUpdateLawsuit = (params) => {
   const url = `${API_ROOT_URL}${API_LAWSUITS_PATH}`;
 
   // If id is present. Update existing lawsuit.
