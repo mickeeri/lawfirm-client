@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { openDialog } from 'redux-dialog';
 import { Link } from 'react-router';
 import LawsuitFormDialog from './LawsuitFormDialog';
-import { LAWSUITS_PATH } from '../../lawsuits';
+import { LAWSUITS_PATH } from '../constants';
 import { fetchLawsuits, resetLawsuits } from '../actions';
 
 
@@ -27,7 +27,7 @@ class LawsuitsList extends Component {
     return (
       <div className="LawsuitsList">
         <h2>Ärenden</h2>
-        <ul className="lawsuits-list">
+        <ul className="show-sub-list">
           {lawsuits.map(lawsuit =>
             <li key={lawsuit.id}>
               <Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>
