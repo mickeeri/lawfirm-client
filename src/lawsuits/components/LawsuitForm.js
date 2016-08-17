@@ -23,7 +23,7 @@ const renderField = (field) =>
 
 
 let LawsuitForm = props => {
-  const { handleSubmit, submitting, errorMessage, pristine, reset, toggleEdit } = props;
+  const { handleSubmit, submitting, errorMessage, pristine, reset, toggleEdit, edit } = props;
   return (
     <form onSubmit={handleSubmit} className={`ui form ${errorMessage ? 'error' : ''}`} noValidate>
       <div className="field">
@@ -86,7 +86,7 @@ let LawsuitForm = props => {
           type="submit"
           disabled={submitting}
           className="ui button primary"
-        ><Icon name="check" />Skapa ärende</button>
+        ><Icon name="check" />{edit ? 'Spara ändringar' : 'Skapa ärende'}</button>
       </div>
     </form>
   );
@@ -120,6 +120,7 @@ const mapStateToProps = (state) => {
       lawsuit_type_id: lawsuit ? lawsuit.lawsuit_type.id : '',
     },
     errorMessage: state.lawsuits.errorMessage,
+    edit: state.lawsuits.edit,
   });
 };
 

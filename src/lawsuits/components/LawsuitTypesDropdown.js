@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { Field } from 'redux-form';
 
 class LawsuitTypesDropdown extends Component {
   componentWillMount() {
@@ -12,14 +12,14 @@ class LawsuitTypesDropdown extends Component {
     const { lawsuitTypes } = this.props;
 
     if (!lawsuitTypes) {
-      return;
+      return false;
     }
 
     return (
       <div className="LawsuitTypesDropdown">
         <label htmlFor="lawsuit_type_id">Ärendetyp</label>
         <Field
-          className="ui fluid dropdown"
+          className="dropdown"
           name="lawsuit_type_id"
           component="select"
           defaultValue="0"
@@ -36,12 +36,11 @@ class LawsuitTypesDropdown extends Component {
 
 LawsuitTypesDropdown.propTypes = {
   lawsuitTypes: PropTypes.array,
-}
-
-const mapStateToProps = (state) => {
-  return (
-    { lawsuitTypes: state.lawsuits.lawsuitTypes }
-  );
+  fetchLawsuitTypes: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  lawsuitTypes: state.lawsuits.lawsuitTypes,
+});
 
 export default connect(mapStateToProps, actions)(LawsuitTypesDropdown);
