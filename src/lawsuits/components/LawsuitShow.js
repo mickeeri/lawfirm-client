@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { openDialog } from 'redux-dialog';
 import Icon from 'react-fa';
 import { LAWSUITS_PATH } from '../constants';
 import * as actions from '../actions';
@@ -9,7 +10,7 @@ import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
 import LawsuitArchiveButton from './LawsuitArchiveButton';
 import ClientsList from '../../clients/components/ClientsList';
-
+import { CLIENT_FORM_MODAL_NAME, CLIENTS_DROPDOWN_MODAL_NAME } from '../../clients';
 
 class LawsuitShow extends Component {
   componentWillMount() {
@@ -17,7 +18,14 @@ class LawsuitShow extends Component {
   }
 
   render() {
-    const { lawsuit, toggleEdit, edit, createUpdateLawsuit, errorMessage } = this.props;
+    const {
+      lawsuit,
+      toggleEdit,
+      edit,
+      createUpdateLawsuit,
+      errorMessage,
+      dispatch,
+    } = this.props;
 
     if (!lawsuit) {
       return <div className="ui big active centered inline loader" />;
@@ -29,7 +37,8 @@ class LawsuitShow extends Component {
           <div className="segment">
             <div className="lawsuit-show-header">
               <h2>Ärende {lawsuit.slug}</h2>
-              { lawsuit.closed && <span className="archived"><Icon name="archive" />Arkiverat</span> }
+              { lawsuit.closed &&
+                <span className="archived"><Icon name="archive" />Arkiverat</span> }
             </div>
 
             <div className="ui divider" />
@@ -78,7 +87,13 @@ class LawsuitShow extends Component {
         <div className="column">
 
           <div className="segment">
-            <ClientsList lawsuitId={lawsuit.id} />
+            <ClientsList
+              openClientFormModal={() => { dispatch(openDialog(CLIENT_FORM_MODAL_NAME)); }}
+              openClientsDropdownModal={
+                () => { dispatch(openDialog(CLIENTS_DROPDOWN_MODAL_NAME)); }
+              }
+              clients={lawsuit.clients}
+            />
           </div>
 
           <div className="segment">
@@ -98,6 +113,7 @@ LawsuitShow.propTypes = {
   edit: PropTypes.bool.isRequired,
   createUpdateLawsuit: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

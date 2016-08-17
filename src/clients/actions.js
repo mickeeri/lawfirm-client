@@ -8,6 +8,7 @@ import {
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
   UPDATE_CLIENT_SUCCESS,
+  ADD_CLIENT_TO_LAWSUIT,
   RESET_CLIENTS,
   TOGGLE_EDIT,
 } from './actionTypes';
@@ -18,6 +19,7 @@ import {
   CLIENTS_PATH,
   DELETE_CLIENT_FAILURE_MESSAGE,
   CLIENT_FORM_MODAL_NAME,
+  CLIENTS_DROPDOWN_MODAL_NAME,
 } from './constants';
 import { CONFIRM_DELETE_MODAL_NAME } from '../shared';
 
@@ -66,22 +68,40 @@ export const deleteClient = (id) => (dispatch) =>
     }
   );
 
+// Add client to lawsuit. Uses same api method as createUpdateClient.
+export const addClientToLawsuit = (params) => (dispatch) =>
+  api.createUpdateClient(params).then(
+    response => {
+      if (response.status === 201) {
+        dispatch(closeDialog(CLIENT_FORM_MODAL_NAME));
+      } else {
+        dispatch(closeDialog(CLIENTS_DROPDOWN_MODAL_NAME));
+      }
+
+      dispatch({
+        type: ADD_CLIENT_TO_LAWSUIT,
+        response: response.data,
+      });
+    },
+    error => {
+      dispatch({
+        type: CREATE_CLIENT_FAILURE,
+        errorMessage: error.response.data.message || 'Okänt fel uppstod.',
+      });
+    }
+  );
+
 // Create new client. Also used for updating client.
 export const createUpdateClient = (params) => (dispatch) =>
   api.createUpdateClient(params).then(
     response => {
       if (response.status === 201) {
-
         dispatch({
           type: CREATE_CLIENT_SUCCESS,
           response: response.data,
         });
-        // Redirect if client is not created from a lawsuit show page.
-        if (response.data.client.lawsuit_ids.length === 0) {
-          browserHistory.push(`${CLIENTS_PATH}/${response.data.client.id}`);
-        } else {
-          dispatch(closeDialog(CLIENT_FORM_MODAL_NAME));
-        }
+        // Redirect to client page.
+        browserHistory.push(`${CLIENTS_PATH}/${response.data.client.id}`);
       } else {
         dispatch({
           type: UPDATE_CLIENT_SUCCESS,

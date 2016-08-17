@@ -4,11 +4,12 @@ import React, { PropTypes } from 'react';
 import ClientForm from './ClientForm';
 import * as actions from '../actions';
 
-let ClientFormModal = ({ createUpdateClient, errorMessage }) =>
+// Modal that let's user add client from lawuit show page.
+let ClientFormModal = ({ addClientToLawsuit, errorMessage }) =>
   <div className="ClientFormmodal">
     <h1>Lägg till klient till ärende</h1>
     <ClientForm
-      onSubmit={createUpdateClient}
+      onSubmit={addClientToLawsuit}
       errorMessage={errorMessage}
     />
   </div>;
@@ -20,7 +21,7 @@ ClientFormModal = reduxDialog({
 })(ClientFormModal);
 
 ClientFormModal.propTypes = {
-  createUpdateClient: PropTypes.func,
+  addClientToLawsuit: PropTypes.func,
   errorMessage: PropTypes.string,
 };
 

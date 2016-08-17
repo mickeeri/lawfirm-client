@@ -12,6 +12,10 @@ import {
   UPDATE_LAWSUIT_SUCCESS,
 } from './actionTypes';
 
+import {
+  ADD_CLIENT_TO_LAWSUIT,
+} from '../clients/actionTypes';
+
 const INITIAL_STATE = {
   all: [],
   lawsuit: null,
@@ -50,6 +54,16 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
         meta: action.response.meta,
         filter: action.filter,
         errorMessage: '',
+      };
+    case ADD_CLIENT_TO_LAWSUIT:
+      // Return the lawsuit unchanged, expect for one new client added
+      // to the lawsuits array of clients.
+      return {
+        ...state,
+        lawsuit: {
+          ...state.lawsuit,
+          clients: [...state.lawsuit.clients, action.response.client],
+        },
       };
     case COI_SEARCH_SUCCESS:
       return {
