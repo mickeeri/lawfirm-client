@@ -13,4 +13,8 @@ This application is the frontend for a Ruby on Rails backend api found in this [
 Email: test@mail.com
 Password: password
 ```
+
+### Screenshots
+Finns [här](https://github.com/mickeeri/lawfirm-client/blob/master/screenshots/screenshots.md).
+
  ***
