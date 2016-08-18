@@ -19,7 +19,7 @@ const LawsuitRow = ({ lawsuit }) => {
       <td>{lawsuit.type}</td>
       <td><Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>{lawsuit.slug}</Link></td>
       <td>{moment(lawsuit.created_at).format('L')}</td>
-      <td className="center aligned status">
+      <td className="status-row">
         {lawsuit.closed ?
           <span><Icon name="archive" /></span> :
           <span><Icon name="check" /></span>}

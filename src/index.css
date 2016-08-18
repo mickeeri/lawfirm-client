@@ -442,9 +442,17 @@ td .fa-check {
   color: #2C662D;
 }
 
+.status-row {
+  text-align: center !important;
+}
+
 @media screen and (max-width: 768px) {
   td {
     text-align: left;
+  }
+
+  .status-row {
+    text-align: left !important;
   }
 }
 
