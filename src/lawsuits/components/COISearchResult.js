@@ -21,18 +21,20 @@ const COISearchResult = ({ lawsuits }) => {
       <strong>{`Motpart${counterparts.length > 1 ? 'er' : ''}`}</strong>
       {counterparts.map(counterpart =>
         <div key={counterpart.id}>
-          {counterpart.first_name} {counterpart.last_name} {counterpart.personal_number}
+          <a href="#">
+            {counterpart.first_name} {counterpart.last_name} {counterpart.personal_number}
+          </a>
         </div>
       )}
     </div>;
 
 
   const renderResultRow = (lawsuit) => {
-    const { id, slug, type, clients, counterparts } = lawsuit;
+    const { id, slug, lawsuit_type, clients, counterparts } = lawsuit;
     return (
       <div className="raised segment" key={id}>
         <h4>
-          <Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>Ärende {slug}, {type}</Link>
+          <Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>Ärende {slug}, {lawsuit_type.name}</Link>
         </h4>
         {renderClients(clients)}
         {renderCounterparts(counterparts)}
