@@ -45,12 +45,6 @@ const ClientInfo = ({ client }) =>
     <a onClick={() => generateLetterTemplate(client)}>
       <Icon name="envelope" />Brevmall
     </a>
-
-    <div className="ui section divider" />
-
-    <Link to={CLIENTS_PATH}>
-      <Icon name="chevron-left" />Tillbaka till klientregister
-    </Link>
   </div>
 
 
