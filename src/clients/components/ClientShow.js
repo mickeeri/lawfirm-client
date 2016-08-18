@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
+import { Link } from 'react-router';
+import Icon from 'react-fa';
 import * as actions from '../actions';
 import ClientInfo from './ClientInfo';
 import ClientForm from './ClientForm';
 import LawsuitsList from '../../lawsuits/components/LawsuitsList';
 import ClientDeleteButton from './ClientDeleteButton';
 import SuccessMessage from '../../shared/components/SuccessMessage';
+import { CLIENTS_PATH } from '../constants';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -44,6 +47,12 @@ class ClientShow extends Component {
               /> :
               <ClientInfo client={client} />
             }
+
+            <div className="ui section divider" />
+
+            <Link to={CLIENTS_PATH}>
+              <Icon name="chevron-left" />Tillbaka till klientregister
+            </Link>
           </div>
         </div>
         <div className="column">

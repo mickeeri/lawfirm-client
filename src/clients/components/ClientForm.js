@@ -200,6 +200,7 @@ const mapStateToProps = (state) => {
       lawsuit_id: lawsuit ? lawsuit.id : undefined,
     },
     errorMessage: state.lawsuits.errorMessage,
+    edit: state.clients.edit,
   });
 };
 
