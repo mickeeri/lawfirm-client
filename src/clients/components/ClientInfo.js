@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import Icon from 'react-fa';
 import { generateLetterTemplate } from '../../shared';
-import { CLIENTS_PATH } from '../constants';
 
 
 const ClientInfo = ({ client }) =>
@@ -45,7 +43,7 @@ const ClientInfo = ({ client }) =>
     <a onClick={() => generateLetterTemplate(client)}>
       <Icon name="envelope" />Brevmall
     </a>
-  </div>
+  </div>;
 
 
 ClientInfo.propTypes = {
