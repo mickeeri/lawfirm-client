@@ -23,7 +23,7 @@ class ClientShow extends Component {
   }
 
   render() {
-    const { client, edit, toggleEdit, createClient, dispatch } = this.props;
+    const { client, edit, toggleEdit, createUpdateClient, dispatch } = this.props;
 
     if (!client) {
       return (
@@ -42,7 +42,7 @@ class ClientShow extends Component {
             <a onClick={toggleEdit}>Ändra</a>
             {edit ?
               <ClientForm
-                onSubmit={createClient}
+                onSubmit={createUpdateClient}
                 toggleEdit={toggleEdit}
               /> :
               <ClientInfo client={client} />
@@ -78,7 +78,7 @@ ClientShow.propTypes = {
   fetchClients: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,
   toggleEdit: PropTypes.func,
-  createClient: PropTypes.func,
+  createUpdateClient: PropTypes.func,
   successMessage: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
 };
