@@ -521,6 +521,18 @@ ul {
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 
+.show-sub-list .fa-times {
+  float: right;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.show-sub-list .fa-times:hover {
+  color: #9F3A38;
+}
+
+
+
 
 /******************************************/
 /* Misc */

@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { CLIENTS_PATH } from '../constants';
 import ClientFormModal from './ClientFormModal';
 import ClientsDropdownModal from './ClientsDropdownModal';
+import DeleteFromButton from '../../shared/components/DeleteFromButton';
 
 const ClientsList = ({
   clients,
@@ -18,6 +19,7 @@ const ClientsList = ({
           <Link to={`${CLIENTS_PATH}/${client.id}`}>
             {client.first_name} {client.last_name}, {client.personal_number}
           </Link>
+          <DeleteFromButton clientId={client.id} />
         </li>
       )}
     </ul>
