@@ -10,6 +10,7 @@ const ClientsList = ({
   clients,
   openClientFormModal,
   openClientsDropdownModal,
+  primaryClientId,
 }) =>
   <div className="ClientsList">
     <h2>Klienter</h2>
@@ -19,7 +20,8 @@ const ClientsList = ({
           <Link to={`${CLIENTS_PATH}/${client.id}`}>
             {client.first_name} {client.last_name}, {client.personal_number}
           </Link>
-          <DeleteFromButton clientId={client.id} />
+          {primaryClientId === client.id && <span className="muted">, huvudklient</span> }
+          {primaryClientId !== client.id && <DeleteFromButton clientId={client.id} />}
         </li>
       )}
     </ul>
