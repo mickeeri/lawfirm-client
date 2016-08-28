@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ClientRow from './ClientRow';
 
 const ClientsTable = ({ clients }) => (
-  <table className="ui celled table">
+  <table className="ClientsTable ui celled table">
     <thead>
       <tr>
         <th>Namn</th>
