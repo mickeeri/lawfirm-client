@@ -68,8 +68,8 @@ Header.propTypes = {
   authenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => {
-  return { authenticated: state.users.authenticated };
-};
+const mapStateToProps = (state) => ({
+  authenticated: state.users.authenticated,
+});
 
 export default connect(mapStateToProps)(Header);
