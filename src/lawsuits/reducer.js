@@ -14,6 +14,7 @@ import {
 
 import {
   ADD_CLIENT_TO_LAWSUIT,
+  DELETE_CLIENT_FROM_LAWSUIT,
 } from '../clients/actionTypes';
 
 const INITIAL_STATE = {
@@ -65,6 +66,23 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
           clients: [...state.lawsuit.clients, action.response.client],
         },
       };
+    case DELETE_CLIENT_FROM_LAWSUIT: {
+      // Return the lawsuit unchanged, expect for one new client removed
+      // from the lawsuits array of clients.
+      const index = state.lawsuit.clients.map((client) => (
+        client.id
+      )).indexOf(action.response.client.id);
+      return {
+        ...state,
+        lawsuit: {
+          ...state.lawsuit,
+          clients: [
+            ...state.lawsuit.clients.slice(0, index),
+            ...state.lawsuit.clients.slice(index + 1),
+          ],
+        },
+      };
+    }
     case COI_SEARCH_SUCCESS:
       return {
         ...state,
