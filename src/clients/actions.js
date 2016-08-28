@@ -11,7 +11,7 @@ import {
   ADD_CLIENT_TO_LAWSUIT,
   RESET_CLIENTS,
   TOGGLE_EDIT,
-  DELETE_CLIENT_FORM_LAWSUIT,
+  DELETE_CLIENT_FROM_LAWSUIT,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
@@ -53,13 +53,11 @@ export const toggleEdit = () => (
 );
 
 export const deleteClient = (id) => (dispatch) =>
-  api.deleteClient(id, undefined).then(
+  api.deleteClient(id, null).then(
     () => {
       dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
-      dispatch({
-        type: DELETE_CLIENT_SUCCESS,
-      });
       browserHistory.push(CLIENTS_PATH);
+      dispatch({ type: DELETE_CLIENT_SUCCESS });
     },
     error => {
       dispatch({
@@ -73,7 +71,7 @@ export const deleteClientFromLawsuit = (id, lawsuitId) => (dispatch) =>
 api.deleteClient(id, lawsuitId).then(
   response => {
     dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
-    dispatch({ type: DELETE_CLIENT_FORM_LAWSUIT, response: response.data });
+    dispatch({ type: DELETE_CLIENT_FROM_LAWSUIT, response: response.data });
   },
   error => {
     dispatch({
@@ -84,8 +82,8 @@ api.deleteClient(id, lawsuitId).then(
 );
 
 // Add client to lawsuit. Uses same api method as createUpdateClient.
-export const addClientToLawsuit = (params) => (dispatch) =>
-  api.createUpdateClient(params).then(
+export const addClientToLawsuit = (params, lawsuitId) => (dispatch) =>
+  api.createUpdateClient(params, lawsuitId).then(
     response => {
       if (response.status === 201) {
         dispatch(closeDialog(CLIENT_FORM_MODAL_NAME));
@@ -94,7 +92,7 @@ export const addClientToLawsuit = (params) => (dispatch) =>
       }
 
       dispatch({
-        type: ADD_CLIENT_TO_LAWSUIT,
+        type: ADD_CLIENT_TO_LAWSUIT, // Reponse in lawsuit reducer
         response: response.data,
       });
     },
