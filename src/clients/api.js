@@ -21,22 +21,26 @@ export const fetchClients = (props) => {
 };
 
 // Create or update client post request.
-export const createUpdateClient = (params) => {
+export const createUpdateClient = (params, lawsuitId = null) => {
   const url = `${API_ROOT_URL}${API_CLIENTS_PATH}`;
 
   // Update existing client.
   if (params.id) {
-    return axios.put(`${url}/${params.id}`, { client: params },
+    return axios.put(`${url}/${params.id}`, { client: params, lawsuit_id: lawsuitId },
       { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
     });
   }
 
-  return axios.post(url, { client: params },
+
+  return axios.post(url, { client: params, lawsuit_id: lawsuitId },
     { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 };
 
-export const deleteClient = (id) =>
-  axios.delete(`${API_ROOT_URL}${API_CLIENTS_PATH}/${id}`, {
-    headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
-  });
+export const deleteClient = (id, lawsuitId) => {
+  // eslint-disable-next-line
+  const url = `${API_ROOT_URL}${API_CLIENTS_PATH}/${id}${lawsuitId ? `?lawsuit_id=${lawsuitId}` : ''}`;
+  const authToken = localStorage.getItem(AUTH_TOKEN_LS_KEY);
+
+  return axios.delete(url, { headers: { Authorization: authToken } });
+};

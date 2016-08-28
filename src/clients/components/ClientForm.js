@@ -57,13 +57,6 @@ let ClientForm = props => {
       className={`ClientForm ui form ${errorMessage ? 'error' : ''}`}
       noValidate
     >
-      <Field
-        name="lawsuit_id"
-        type="text"
-        component="input"
-        hidden
-      />
-
       <div className="two-fields">
         <Field
           name="first_name"
@@ -172,7 +165,6 @@ ClientForm.propTypes = {
   errorMessage: PropTypes.string,
   edit: PropTypes.bool.isRequired,
   toggleEdit: PropTypes.func,
-  lawsuitId: PropTypes.number,
 };
 
 ClientForm = reduxForm({
@@ -182,7 +174,6 @@ ClientForm = reduxForm({
 
 const mapStateToProps = (state) => {
   const client = state.clients.client;
-  const lawsuit = state.lawsuits.lawsuit;
 
   return ({
     initialValues: {
@@ -197,9 +188,8 @@ const mapStateToProps = (state) => {
       street: client ? client.street : '',
       post_code: client ? client.post_code : '',
       city: client ? client.city : '',
-      lawsuit_id: lawsuit ? lawsuit.id : undefined,
     },
-    errorMessage: state.lawsuits.errorMessage,
+    errorMessage: state.clients.errorMessage,
     edit: state.clients.edit,
   });
 };
