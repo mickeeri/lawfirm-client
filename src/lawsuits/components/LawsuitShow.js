@@ -1,16 +1,18 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { openDialog } from 'redux-dialog';
 import Icon from 'react-fa';
+import React, { Component, PropTypes } from 'react';
+
+import { CLIENT_FORM_MODAL_NAME, CLIENTS_DROPDOWN_MODAL_NAME } from '../../clients';
 import { LAWSUITS_PATH } from '../constants';
 import * as actions from '../actions';
+import ClientsList from '../../clients/components/ClientsList';
+import CounterpartsList from '../../counterparts/components/CounterpartsList';
+import LawsuitArchiveButton from './LawsuitArchiveButton';
 import LawsuitDeleteButton from './LawsuitDeleteButton';
 import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
-import LawsuitArchiveButton from './LawsuitArchiveButton';
-import ClientsList from '../../clients/components/ClientsList';
-import { CLIENT_FORM_MODAL_NAME, CLIENTS_DROPDOWN_MODAL_NAME } from '../../clients';
 
 class LawsuitShow extends Component {
   componentWillMount() {
@@ -93,11 +95,12 @@ class LawsuitShow extends Component {
                 () => { dispatch(openDialog(CLIENTS_DROPDOWN_MODAL_NAME)); }
               }
               clients={lawsuit.clients}
+              primaryClientId={lawsuit.primary_client.id}
             />
           </div>
 
           <div className="segment">
-            <h2>Mortpart/Motparter</h2>
+            <CounterpartsList counterparts={lawsuit.counterparts} />
           </div>
         </div>
       </div>
