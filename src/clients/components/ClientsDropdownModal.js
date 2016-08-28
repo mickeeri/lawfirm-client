@@ -23,10 +23,7 @@ class ClientsDropdown extends Component {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(addClientToLawsuit({
-            id: parseInt(selectedClientId, 10),
-            lawsuit_id: lawsuitId,
-          }));
+          dispatch(addClientToLawsuit({ id: parseInt(selectedClientId, 10) }, lawsuitId));
         }}
       >
         <h2>Välj en klient att lägga till ärendet</h2>

@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { openDialog, closeDialog } from 'redux-dialog';
 import { Link } from 'react-router';
 import Icon from 'react-fa';
-import * as actions from '../actions';
-import ClientInfo from './ClientInfo';
-import ClientForm from './ClientForm';
-import LawsuitsList from '../../lawsuits/components/LawsuitsList';
-import ClientDeleteButton from './ClientDeleteButton';
-import SuccessMessage from '../../shared/components/SuccessMessage';
+
 import { CLIENTS_PATH } from '../constants';
+import * as actions from '../actions';
+import ClientDeleteButton from './ClientDeleteButton';
+import ClientForm from './ClientForm';
+import ClientInfo from './ClientInfo';
+import CounterpartsList from '../../counterparts/components/CounterpartsList';
+import LawsuitsList from '../../lawsuits/components/LawsuitsList';
+import SuccessMessage from '../../shared/components/SuccessMessage';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -20,6 +22,10 @@ class ClientShow extends Component {
     if (nextProps.successMessage !== '') {
       this.props.dispatch(openDialog('successMessage'));
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetClients();
   }
 
   render() {
@@ -60,6 +66,9 @@ class ClientShow extends Component {
             <LawsuitsList clientId={client.id} />
           </div>
           <div className="segment">
+            <CounterpartsList counterparts={client.counterparts} />
+          </div>
+          <div className="segment">
             <h3 >Anteckningar</h3>
             <p>{ client ? client.note : ''}</p>
           </div>
@@ -81,6 +90,7 @@ ClientShow.propTypes = {
   createUpdateClient: PropTypes.func,
   successMessage: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
+  resetClients: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

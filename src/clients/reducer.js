@@ -2,6 +2,7 @@ import {
   CREATE_CLIENT_FAILURE,
   CREATE_CLIENT_SUCCESS,
   DELETE_CLIENT_FAILURE,
+  DELETE_CLIENT_SUCCESS,
   FETCH_CLIENTS_FAILURE,
   FETCH_CLIENTS_SUCCESS,
   UPDATE_CLIENT_SUCCESS,
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
   meta: {},
   edit: false,
   successMessage: '',
+  errorMessage: '',
   filter: {
     query: '',
     page: 1,
@@ -49,6 +51,12 @@ const clientsReducer = (state = INITIAL_STATE, action) => {
         edit: false,
         successMessage: 'Klient uppdaterad!',
       };
+    case DELETE_CLIENT_SUCCESS:
+      return {
+        ...state,
+        client: null,
+        successMessage: 'Klient raderad',
+      }
     case RESET_CLIENTS:
       return INITIAL_STATE;
     case CREATE_CLIENT_FAILURE:
