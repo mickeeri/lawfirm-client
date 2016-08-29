@@ -1,4 +1,4 @@
-import { FETCH_COUNTERPARTS_SUCCESS, COUNTERPART_ERROR } from './actionTypes';
+import { FETCH_COUNTERPARTS_SUCCESS, COUNTERPARTS_FAILURE } from './actionTypes';
 
 const initialState = {
   all: [],
@@ -6,7 +6,7 @@ const initialState = {
   successMessage: '',
   errorMessage: '',
   filter: {
-    lawsuitId: null,
+    lawsuitId: '',
   },
 };
 
@@ -15,10 +15,16 @@ const counterpartsReducer = (state = initialState, action) => {
     case FETCH_COUNTERPARTS_SUCCESS:
       return {
         ...state,
-        all: action.response.counteparts,
-        client: action.response.counterpart,
+        all: action.response.counterparts,
+        counterpart: action.response.counterpart,
         filter: action.filter,
         errorMessage: '',
+      };
+    case COUNTERPARTS_FAILURE:
+      return {
+        ...state,
+        errorMessage: action.errorMessage,
+        successMessage: '',
       };
     default:
       return state;

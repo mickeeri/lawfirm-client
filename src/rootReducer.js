@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   clients: clientsReducer,
   dialogs: dialogReducer,
-  counteparts: counterpartsReducer,
+  counterparts: counterpartsReducer,
 });
 
 export default rootReducer;
