@@ -13,10 +13,15 @@ import LawsuitArchiveButton from './LawsuitArchiveButton';
 import LawsuitDeleteButton from './LawsuitDeleteButton';
 import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
+import { COUNTERPARTS_DROPDOWN_MODAL_NAME } from '../../counterparts';
 
 class LawsuitShow extends Component {
   componentWillMount() {
     this.props.fetchLawsuits({ filter: {}, id: this.props.params.id });
+  }
+
+  componentWillUnmount() {
+    this.props.resetLawsuits();
   }
 
   render() {
@@ -100,7 +105,12 @@ class LawsuitShow extends Component {
           </div>
 
           <div className="segment">
-            <CounterpartsList counterparts={lawsuit.counterparts} />
+            <CounterpartsList
+              counterparts={lawsuit.counterparts}
+              openDropdownModal={
+                () => { dispatch(openDialog(COUNTERPARTS_DROPDOWN_MODAL_NAME)); }
+              }
+            />
           </div>
         </div>
       </div>
@@ -117,6 +127,7 @@ LawsuitShow.propTypes = {
   createUpdateLawsuit: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
+  resetLawsuits: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
