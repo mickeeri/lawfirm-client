@@ -17,6 +17,10 @@ import {
   DELETE_CLIENT_FROM_LAWSUIT,
 } from '../clients/actionTypes';
 
+import {
+  ADD_COUNTERPART_TO_LAWSUIT,
+} from '../counterparts/actionTypes';
+
 const INITIAL_STATE = {
   all: [],
   lawsuit: null,
@@ -79,6 +83,18 @@ const lawsuitsReducer = (state = INITIAL_STATE, action) => {
           clients: [
             ...state.lawsuit.clients.slice(0, index),
             ...state.lawsuit.clients.slice(index + 1),
+          ],
+        },
+      };
+    }
+    case ADD_COUNTERPART_TO_LAWSUIT: {
+      return {
+        ...state,
+        lawsuit: {
+          ...state.lawsuit,
+          counterparts: [ // Add new counterpart to lawsuit.
+            ...state.lawsuit.counterparts,
+            action.response.counterpart,
           ],
         },
       };
