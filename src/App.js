@@ -6,6 +6,7 @@ import 'semantic-ui-loader/loader.css';
 import './shared/styles/modal.css';
 import './shared/styles/header.css';
 import Header from './shared/components/Header';
+import AlertMessage from './shared/components/AlertMessage';
 
 const App = (props) =>
   <div className="App">
@@ -14,6 +15,7 @@ const App = (props) =>
     </header>
     <main>
       <div className="content">
+        <AlertMessage />
         {props.children}
       </div>
     </main>

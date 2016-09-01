@@ -5,6 +5,7 @@ import { lawsuitsReducer } from './lawsuits';
 import { usersReducer } from './users';
 import { clientsReducer } from './clients';
 import { counterpartsReducer } from './counterparts';
+import sharedReducer from './shared/reducer';
 
 const rootReducer = combineReducers({
   form,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   clients: clientsReducer,
   dialogs: dialogReducer,
   counterparts: counterpartsReducer,
+  shared: sharedReducer,
 });
 
 export default rootReducer;

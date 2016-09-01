@@ -33,6 +33,7 @@
     "react-fa": "^4.1.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
+    "react-s-alert": "^1.1.4",
     "redux": "^3.5.2",
     "redux-dialog": "0.0.7",
     "redux-form": "6.0.0-rc.3",
