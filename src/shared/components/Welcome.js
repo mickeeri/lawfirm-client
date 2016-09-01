@@ -5,7 +5,6 @@ import { LAWSUITS_PATH } from '../../lawsuits';
 import { AUTH_TOKEN_LS_KEY } from '../../shared';
 
 const Welcome = () => {
-
   // Don't show this page if signed in.
   if (localStorage.getItem(AUTH_TOKEN_LS_KEY)) {
     browserHistory.push(LAWSUITS_PATH);
@@ -19,10 +18,10 @@ const Welcome = () => {
       </p>
       <Link className="ui huge primary button" to={USER_SIGNUP_PATH}>Registera mig nu!</Link>
       <br />
-      <p></p>
+      <p />
       <p>Redan medlem? <Link to={USER_SIGNIN_PATH}>Logga in</Link></p>
     </div>
   );
-}
+};
 
 export default Welcome;

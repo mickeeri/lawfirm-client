@@ -27,14 +27,12 @@ const requireAuth = (ComposedComponent) => {
   }
 
   Authentication.propTypes = {
-    authenticated: PropTypes.bool,
+    authenticated: PropTypes.bool.isRequired,
   };
 
-  const mapStateToProps = (state) => {
-    return (
-      { authenticated: state.users.authenticated }
-    );
-  };
+  const mapStateToProps = (state) => ({
+    authenticated: state.users.authenticated,
+  });
 
   return connect(mapStateToProps)(Authentication);
 };

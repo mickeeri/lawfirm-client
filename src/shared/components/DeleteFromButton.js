@@ -3,20 +3,28 @@ import Icon from 'react-fa';
 import { openDialog, closeDialog } from 'redux-dialog';
 import { connect } from 'react-redux';
 import { deleteClientFromLawsuit } from '../../clients/actions';
+import { deleteCounterpartFromLawsuit } from '../../counterparts/actions';
 import { CONFIRM_DELETE_MODAL_NAME } from '../constants';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
-const DeleteFromButton = ({ dispatch, clientId, lawsuitId, clientErrorMessage }) => {
+const DeleteFromButton = ({ dispatch, clientId, lawsuitId, counterpartId, label }) => {
   const handleOnClick = () => {
     dispatch(openDialog(CONFIRM_DELETE_MODAL_NAME));
+  };
+
+  const handleOnDelete = () => {
+    if (clientId) {
+      dispatch(deleteClientFromLawsuit(clientId, lawsuitId));
+    } else if (counterpartId) {
+      dispatch(deleteCounterpartFromLawsuit(counterpartId, lawsuitId));
+    }
   };
 
   return (
     <span>
       <ConfirmDeleteDialog
-        deleteFunc={() => { dispatch(deleteClientFromLawsuit(clientId, lawsuitId)); }}
-        label="klient från ärende"
-        errorMessage={clientErrorMessage}
+        deleteFunc={() => handleOnDelete()}
+        label={label}
         close={() => { dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME)); }}
       />
       <Icon
@@ -24,19 +32,19 @@ const DeleteFromButton = ({ dispatch, clientId, lawsuitId, clientErrorMessage })
         onClick={() => handleOnClick()}
       />
     </span>
-
   );
 };
 
 DeleteFromButton.propTypes = {
+  clientId: PropTypes.number,
+  counterpartId: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
-  clientId: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
   lawsuitId: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   lawsuitId: state.lawsuits.lawsuit.id,
-  clientErrorMessage: state.clients.errorMessage,
 });
 
 export default connect(mapStateToProps, null)(DeleteFromButton);
