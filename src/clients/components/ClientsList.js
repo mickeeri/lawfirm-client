@@ -21,7 +21,7 @@ const ClientsList = ({
             {client.first_name} {client.last_name}, {client.personal_number}
           </Link>
           {primaryClientId === client.id && <span className="muted">, huvudklient</span> }
-          {primaryClientId !== client.id && <DeleteFromButton clientId={client.id} />}
+          {primaryClientId !== client.id && <DeleteFromButton clientId={client.id} label="klient från ärende" />}
         </li>
       )}
     </ul>
@@ -47,6 +47,7 @@ ClientsList.propTypes = {
   clients: PropTypes.array.isRequired,
   openClientFormModal: PropTypes.func.isRequired,
   openClientsDropdownModal: PropTypes.func.isRequired,
+  primaryClientId: PropTypes.number.isRequired,
 };
 
 export default ClientsList;

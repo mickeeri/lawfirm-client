@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { openDialog, closeDialog } from 'redux-dialog';
 import { Link } from 'react-router';
 import Icon from 'react-fa';
+import Alert from 'react-s-alert';
 
 import { CLIENTS_PATH } from '../constants';
 import * as actions from '../actions';
@@ -11,7 +11,6 @@ import ClientForm from './ClientForm';
 import ClientInfo from './ClientInfo';
 import CounterpartsList from '../../counterparts/components/CounterpartsList';
 import LawsuitsList from '../../lawsuits/components/LawsuitsList';
-import SuccessMessage from '../../shared/components/SuccessMessage';
 
 class ClientShow extends Component {
   componentWillMount() {
@@ -19,8 +18,8 @@ class ClientShow extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.successMessage !== '') {
-      this.props.dispatch(openDialog('successMessage'));
+    if (nextProps.successMessage) {
+      Alert.success(nextProps.successMessage);
     }
   }
 
@@ -29,7 +28,7 @@ class ClientShow extends Component {
   }
 
   render() {
-    const { client, edit, toggleEdit, createUpdateClient, dispatch } = this.props;
+    const { client, edit, toggleEdit, createUpdateClient } = this.props;
 
     if (!client) {
       return (
@@ -39,10 +38,6 @@ class ClientShow extends Component {
 
     return (
       <div className="show-grid">
-        <SuccessMessage
-          message={this.props.successMessage}
-          close={() => { dispatch(closeDialog('successMessage')); }}
-        />
         <div className="column">
           <div className="segment">
             <a onClick={toggleEdit}>Ändra</a>
