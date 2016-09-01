@@ -12,6 +12,8 @@ import {
   RESET_LAWSUITS,
   TOGGLE_LAWSUIT_EDIT,
   UPDATE_LAWSUIT_SUCCESS,
+  CREATE_LAWSUITS_REQUEST,
+  FETCH_LAWSUITS_REQUEST,
 } from './actionTypes';
 import * as api from './api';
 import { signOutUser } from '../users';
@@ -22,8 +24,9 @@ import {
 } from './constants';
 import { CONFIRM_DELETE_MODAL_NAME } from '../shared';
 
-export const fetchLawsuits = (props) => (dispatch) =>
-  api.fetchLawsuits(props).then(
+export const fetchLawsuits = (props) => (dispatch) => {
+  dispatch({ type: FETCH_LAWSUITS_REQUEST });
+  return api.fetchLawsuits(props).then(
     response => {
       dispatch({
         type: FETCH_LAWSUITS_SUCCESS,
@@ -42,6 +45,7 @@ export const fetchLawsuits = (props) => (dispatch) =>
       });
     }
   );
+};
 
 export const performCOISearch = (props) => (dispatch) =>
   api.performCOISearch(props).then(
@@ -103,8 +107,9 @@ export const deleteLawsuit = (id) => (dispatch) =>
   );
 
 
-export const createUpdateLawsuit = (params) => (dispatch) =>
-  api.createUpdateLawsuit(params).then(
+export const createUpdateLawsuit = (params) => (dispatch) => {
+  dispatch({ type: CREATE_LAWSUITS_REQUEST });
+  return api.createUpdateLawsuit(params).then(
     response => {
       if (response.status === 201) {
         dispatch(closeDialog('lawsuitFormDialog'));
@@ -126,3 +131,4 @@ export const createUpdateLawsuit = (params) => (dispatch) =>
       });
     }
   );
+};

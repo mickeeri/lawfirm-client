@@ -13,7 +13,7 @@ import LawsuitArchiveButton from './LawsuitArchiveButton';
 import LawsuitDeleteButton from './LawsuitDeleteButton';
 import LawsuitForm from './LawsuitForm';
 import LawsuitInfo from './LawsuitInfo';
-import { COUNTERPARTS_DROPDOWN_MODAL_NAME } from '../../counterparts';
+import { COUNTERPARTS_DROPDOWN_MODAL_NAME, COUNTERPARTS_FORM_MODAL_NAME } from '../../counterparts';
 
 class LawsuitShow extends Component {
   componentWillMount() {
@@ -109,6 +109,9 @@ class LawsuitShow extends Component {
               counterparts={lawsuit.counterparts}
               openDropdownModal={
                 () => { dispatch(openDialog(COUNTERPARTS_DROPDOWN_MODAL_NAME)); }
+              }
+              openFormModal={
+                () => { dispatch(openDialog(COUNTERPARTS_FORM_MODAL_NAME)); }
               }
             />
           </div>
