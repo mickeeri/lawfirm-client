@@ -1,23 +1,20 @@
 import { closeDialog } from 'redux-dialog';
-import {
-  FETCH_COUNTERPARTS_SUCCESS,
-  COUNTERPARTS_FAILURE,
-  ADD_COUNTERPART_TO_LAWSUIT,
-} from './actionTypes';
+import * as types from './actionTypes';
 import { signOutUser } from '../users';
 import * as api from './api';
 import {
   COUNTERPARTS_FORM_MODAL_NAME,
   COUNTERPARTS_DROPDOWN_MODAL_NAME,
 } from './constants';
+import { CONFIRM_DELETE_MODAL_NAME } from '../shared';
 
-const handleError = (error, dispatch) => {
+const counterpartsFailure = (error, dispatch) => {
   if (error.response.status === 401) {
     dispatch(signOutUser());
   }
 
   dispatch({
-    type: COUNTERPARTS_FAILURE,
+    type: types.COUNTERPARTS_FAILURE,
     errorMessage: error.response.data.message || 'Ett okänt fel uppstod.',
   });
 };
@@ -26,12 +23,12 @@ export const fetchCounterparts = (props) => (dispatch) =>
   api.fetchCounterparts(props).then(
     response => {
       dispatch({
-        type: FETCH_COUNTERPARTS_SUCCESS,
+        type: types.FETCH_COUNTERPARTS_SUCCESS,
         response: response.data,
       });
     },
     error => {
-      handleError(error, dispatch);
+      counterpartsFailure(error, dispatch);
     }
   );
 
@@ -45,11 +42,36 @@ export const addCounterpartToLawsuit = (params, lawsuitId) => (dispatch) =>
       }
 
       dispatch({
-        type: ADD_COUNTERPART_TO_LAWSUIT,
+        type: types.ADD_COUNTERPART_TO_LAWSUIT,
         response: response.data,
       });
     },
     error => {
-      handleError(error, dispatch);
+      counterpartsFailure(error, dispatch);
     }
   );
+
+const counterpartsRequest = () => ({
+  type: types.COUNTERPARTS_REQUEST,
+});
+
+const deleteCounterpartFromLawsuitSuccess = (dispatch, payload) => {
+  dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
+  return {
+    type: types.DELETE_COUNTERPART_FROM_LAWSUIT_SUCCESS,
+    payload,
+    successMessage: 'Motpart raderad från ärende',
+  };
+};
+
+export const deleteCounterpartFromLawsuit = (id, lawsuitId) => (dispatch) => {
+  dispatch(counterpartsRequest());
+  return api.deleteCounterpart(id, lawsuitId).then(
+    response => {
+      dispatch(deleteCounterpartFromLawsuitSuccess(dispatch, response.data));
+    },
+    error => {
+      counterpartsFailure(error, dispatch);
+    }
+  );
+};

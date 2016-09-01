@@ -30,3 +30,11 @@ export const createUpdateCounterpart = (params, lawsuitId = null) => {
     { headers: { Authorization: authToken },
   });
 };
+
+export const deleteCounterpart = (id, lawsuitId) => {
+  // eslint-disable-next-line
+  const url = `${API_ROOT_URL}${API_COUNTERPARTS_PATH}/${id}${lawsuitId ? `?lawsuit_id=${lawsuitId}` : ''}`;
+  const authToken = localStorage.getItem(AUTH_TOKEN_LS_KEY);
+
+  return axios.delete(url, { headers: { Authorization: authToken } });
+};

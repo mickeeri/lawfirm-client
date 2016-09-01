@@ -1,9 +1,10 @@
-import { FETCH_COUNTERPARTS_SUCCESS, COUNTERPARTS_FAILURE } from './actionTypes';
+import * as types from './actionTypes';
 
 const initialState = {
   all: [],
   counterpart: null,
   successMessage: '',
+  edit: false,
   errorMessage: '',
   filter: {
     lawsuitId: '',
@@ -12,7 +13,7 @@ const initialState = {
 
 const counterpartsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_COUNTERPARTS_SUCCESS:
+    case types.FETCH_COUNTERPARTS_SUCCESS:
       return {
         ...state,
         all: action.response.counterparts,
@@ -20,7 +21,7 @@ const counterpartsReducer = (state = initialState, action) => {
         filter: action.filter,
         errorMessage: '',
       };
-    case COUNTERPARTS_FAILURE:
+    case types.COUNTERPARTS_FAILURE:
       return {
         ...state,
         errorMessage: action.errorMessage,
