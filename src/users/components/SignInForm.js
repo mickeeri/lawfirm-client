@@ -1,19 +1,20 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Icon from 'react-fa';
-import { EMAIL_REQ_MESSAGE, PASSWORD_REQ_MESSAGE, EMAIL_INVALID_MESSAGE } from '../../shared';
+import * as messages from '../../shared/messages';
+import ErrorAlertBox from '../../shared/components/ErrorAlertBox';
 
 const validate = values => {
   const errors = {};
 
   if (!values.email) {
-    errors.email = EMAIL_REQ_MESSAGE;
+    errors.email = messages.EMAIL_REQ_MESSAGE;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = EMAIL_INVALID_MESSAGE;
+    errors.email = messages.EMAIL_INVALID_MESSAGE;
   }
 
   if (!values.password) {
-    errors.password = PASSWORD_REQ_MESSAGE;
+    errors.password = messages.PASSWORD_REQ_MESSAGE;
   }
 
   return errors;
@@ -48,7 +49,7 @@ const SignInForm = (props) => {
         component={renderField}
         placeholder="Lösenord"
       />
-      {errorMessage && <div className="ui error message"><p>{errorMessage}</p></div>}
+      <ErrorAlertBox errorMessage={errorMessage} />
       <div>
         <button type="submit" disabled={submitting} className="ui button primary">Logga in</button>
       </div>

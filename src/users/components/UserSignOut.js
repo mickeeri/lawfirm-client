@@ -9,16 +9,17 @@ class SignOut extends Component {
 
   render() {
     return (
-      <div className="ui segment">
+      <div className="segment">
         <h3>Du är nu utloggad</h3>
         <p>Kom tillbaka snart.</p>
       </div>
-    )
+    );
   }
 }
 
 SignOut.propTypes = {
   signInUser: PropTypes.func.isRequired,
+  signOutUser: PropTypes.func.isRequired,
 };
 
 export default connect(null, actions)(SignOut);
