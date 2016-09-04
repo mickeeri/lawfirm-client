@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Icon from 'react-fa';
+// import Icon from 'react-fa';
 import { connect } from 'react-redux';
 import * as messages from '../../shared/messages';
 
@@ -98,10 +98,6 @@ let CounterpartForm = props => {
         placeholder="Kontaktinfo"
       />
       <div className="divider" />
-      {/* {errorMessage &&
-        <div className="alert-error">
-          <p><Icon name="exclamation-circle" />{errorMessage}</p>
-        </div>} */}
       <div className="button-group">
         {edit &&
           <button
@@ -149,6 +145,7 @@ const mapStateToProps = (state) => {
       id: counterpart ? counterpart.id : undefined,
       first_name: counterpart ? counterpart.first_name : '',
       last_name: counterpart ? counterpart.last_name : '',
+      personal_number: counterpart ? counterpart.personal_number : '',
       representative: counterpart ? counterpart.representative : '',
       info: counterpart ? counterpart.info : '',
     },

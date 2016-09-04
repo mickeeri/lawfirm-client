@@ -10,35 +10,42 @@ const CounterpartsList = ({
   openDropdownModal,
   openFormModal,
 }) =>
-  <div className="CounterpartsList">
-    <h2>Motparter</h2>
-    <ul className="show-sub-list">
-      {counterparts.map(counterpart =>
-        <li key={counterpart.id}>
-          <Link to={`${COUNTERPARTS_PATH}/${counterpart.id}`}>
-            {counterpart.first_name} {counterpart.last_name}, {counterpart.personal_number}
-          </Link>
-          {openDropdownModal &&
-            <DeleteFromButton counterpartId={counterpart.id} label="motpart från ärende" />
-          }
-        </li>
-      )}
-    </ul>
-    {openDropdownModal &&
-      <div>
-        <CounterpartFormModal />
-        <button
-          className="ui small primary button"
-          onClick={openFormModal}
-        >Lägg till ny motpart
-        </button>
-        <CounterpartsDropdownModal />
-        <button
-          className="ui small primary button"
-          onClick={openDropdownModal}
-        >Lägg till befintlig motpart</button>
-      </div>
-    }
+  <div className="card">
+    <div className="card-header">
+      <h3>Motparter</h3>
+    </div>
+
+    <div className="card-content">
+      <ul className="card-list">
+        {counterparts.map(counterpart =>
+          <li key={counterpart.id}>
+            <Link to={`${COUNTERPARTS_PATH}/${counterpart.id}`}>
+              {counterpart.first_name} {counterpart.last_name}
+            </Link>
+            {openDropdownModal &&
+              <DeleteFromButton counterpartId={counterpart.id} label="motpart från ärende" />
+            }
+            <p>{counterpart.personal_number}</p>
+          </li>
+        )}
+      </ul>
+      {openDropdownModal &&
+        <div>
+          <CounterpartFormModal />
+          <button
+            className="link-button add"
+            onClick={openFormModal}
+          >Lägg till ny motpart
+          </button>
+          <span className="vertical-divider" />
+          <CounterpartsDropdownModal />
+          <button
+            className="link-button add"
+            onClick={openDropdownModal}
+          >Lägg till befintlig motpart</button>
+        </div>
+      }
+    </div>
   </div>;
 
 CounterpartsList.propTypes = {

@@ -21,11 +21,22 @@ const counterpartsReducer = (state = initialState, action) => {
         filter: action.filter,
         errorMessage: '',
       };
+    case types.UPDATE_COUNTERPART_SUCCESS:
+      return {
+        ...state,
+        edit: false,
+        counterpart: action.payload.counterpart,
+      };
     case types.COUNTERPARTS_FAILURE:
       return {
         ...state,
         errorMessage: action.errorMessage,
         successMessage: '',
+      };
+    case types.TOGGLE_EDIT_COUNTERPART:
+      return {
+        ...state,
+        edit: !state.edit,
       };
     default:
       return state;

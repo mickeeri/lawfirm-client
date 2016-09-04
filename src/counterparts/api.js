@@ -6,7 +6,7 @@ export const fetchCounterparts = (props) => {
   let url;
 
   if (props && props.id) { // Get single counterpart
-    url = `${API_ROOT_URL}${API_COUNTERPARTS_PATH}${props.id}`;
+    url = `${API_ROOT_URL}${API_COUNTERPARTS_PATH}/${props.id}`;
   } else {
     const { lawsuitId = '' } = props.filter;
     const queryString = `?lawsuit_id=${lawsuitId}`;
