@@ -31,23 +31,15 @@ const sharedReducer = (state = initialState, action) => {
     case lawsuitTypes.RESET_LAWSUITS:
       return initialState;
     case lawsuitTypes.CREATE_LAWSUIT_SUCCESS:
-      return {
-        successMessage: 'Ärende sparat',
-        errorMessage: '',
-        infoMessage: '',
-      };
     case counterpartTypes.DELETE_COUNTERPART_FROM_LAWSUIT_SUCCESS:
+    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT_SUCCESS:
     case clientTypes.DELETE_CLIENT_FROM_LAWSUIT_SUCCESS:
     case clientTypes.CREATE_CLIENT_SUCCESS:
+    case counterpartTypes.UPDATE_COUNTERPART_SUCCESS:
       return {
         successMessage: action.successMessage,
         errorMessage: '',
         infoMessage: '',
-      };
-    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT:
-      return {
-        errorMessage: '',
-        successMessage: action.response.message,
       };
     case counterpartTypes.COUNTERPARTS_FAILURE:
       return {

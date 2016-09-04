@@ -68,14 +68,14 @@ const lawsuitsReducer = (state = initialState, action) => {
         },
       };
     }
-    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT: {
+    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT_SUCCESS: {
       return {
         ...state,
         lawsuit: {
           ...state.lawsuit,
           counterparts: [ // Add new counterpart to lawsuit.
             ...state.lawsuit.counterparts,
-            action.response.counterpart,
+            action.payload.counterpart,
           ],
         },
       };
