@@ -27,12 +27,13 @@ class LawsuitsList extends Component {
     return (
       <div className="LawsuitsList">
         <h2>Ärenden</h2>
-        <ul className="show-sub-list">
+        <ul className="show-list">
           {lawsuits.map(lawsuit =>
             <li key={lawsuit.id}>
               <Link to={`${LAWSUITS_PATH}/${lawsuit.id}`}>
-                {lawsuit.type}, {lawsuit.slug}
+                {lawsuit.slug}
               </Link>
+              <p>{lawsuit.type}</p>
             </li>
           )}
         </ul>

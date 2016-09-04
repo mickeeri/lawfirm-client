@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Icon from 'react-fa';
+// import Icon from 'react-fa';
 import { Link } from 'react-router';
 import { CLIENTS_PATH } from '../constants';
 import ClientFormModal from './ClientFormModal';
@@ -12,35 +12,43 @@ const ClientsList = ({
   openClientsDropdownModal,
   primaryClientId,
 }) =>
-  <div className="ClientsList">
-    <h2>Klienter</h2>
-    <ul className="show-sub-list">
-      {clients.map(client =>
-        <li key={client.id}>
-          <Link to={`${CLIENTS_PATH}/${client.id}`}>
-            {client.first_name} {client.last_name}, {client.personal_number}
-          </Link>
-          {primaryClientId === client.id && <span className="muted">, huvudklient</span> }
-          {primaryClientId !== client.id && <DeleteFromButton clientId={client.id} label="klient från ärende" />}
-        </li>
-      )}
-    </ul>
+  <div className="card">
+    <div className="card-header">
+      <h3>Klienter</h3>
+    </div>
+    <div className="card-content">
+      <ul className="card-list">
+        {clients.map(client =>
+          <li key={client.id}>
+            <Link to={`${CLIENTS_PATH}/${client.id}`}>
+              {client.first_name} {client.last_name}
+            </Link>
+            {primaryClientId === client.id &&
+              <span className="muted">, huvudklient</span>
+            }
+            {primaryClientId !== client.id &&
+              <DeleteFromButton clientId={client.id} label="klient från ärende" />
+            }
+            <p>{client.personal_number}</p>
+          </li>
+        )}
+      </ul>
+      <ClientFormModal />
+      <button
+        className="link-button add"
+        onClick={openClientFormModal}
+      >Lägg till ny klient
+      </button>
 
-    <ClientFormModal />
-    <button
-      className="ui small primary button"
-      onClick={openClientFormModal}
-    >
-      <Icon name="plus" />Lägg till ny klient
-    </button>
+      <span className="vertical-divider" />
 
-    <ClientsDropdownModal />
-    <button
-      className="ui small primary button"
-      onClick={openClientsDropdownModal}
-    >
-      <Icon name="plus" />Lägg till befintlig klient
-    </button>
+      <ClientsDropdownModal />
+      <button
+        className="link-button add"
+        onClick={openClientsDropdownModal}
+      >Lägg till befintlig klient
+      </button>
+    </div>
   </div>;
 
 ClientsList.propTypes = {
