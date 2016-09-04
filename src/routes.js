@@ -15,6 +15,8 @@ import { LAWSUITS_PATH, LawsuitsIndex, LawsuitShow, COISearch, COI_SEARCH_PATH }
 import { ClientShow, ClientsIndex, ClientNew, CLIENTS_PATH, CLIENT_NEW_PATH } from './clients';
 import requireAuth from './shared/hocs/requireAuth';
 import beforeAuth from './shared/hocs/beforeAuth';
+import { COUNTERPARTS_PATH } from './counterparts/constants';
+import CounterpartShow from './counterparts/components/CounterpartShow';
 
 export default (
   <Route path="/" component={App} >
@@ -23,6 +25,8 @@ export default (
     <Route path={USER_SIGNOUT_PATH} components={UserSignOut} />
     <Route path={USER_SIGNUP_PATH} components={beforeAuth(UserSignUp)} />
 
+    <Route path={`${COUNTERPARTS_PATH}/:id`} components={requireAuth(CounterpartShow)} />
+
     <Route path={LAWSUITS_PATH} components={requireAuth(LawsuitsIndex)} />
     <Route path={`${LAWSUITS_PATH}/:id`} component={requireAuth(LawsuitShow)} />
     <Route path={COI_SEARCH_PATH} components={requireAuth(COISearch)} />
@@ -30,5 +34,7 @@ export default (
     <Route path={CLIENT_NEW_PATH} components={requireAuth(ClientNew)} />
     <Route path={CLIENTS_PATH} components={requireAuth(ClientsIndex)} />
     <Route path={`${CLIENTS_PATH}/:id`} components={requireAuth(ClientShow)} />
+
+
   </Route>
 );
