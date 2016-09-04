@@ -9,7 +9,7 @@ import * as actions from '../actions';
 import ClientDeleteButton from './ClientDeleteButton';
 import ClientForm from './ClientForm';
 import ClientInfo from './ClientInfo';
-import CounterpartsList from '../../counterparts/components/CounterpartsList';
+import ClientCounterpartsList from './ClientCounterpartsList';
 import LawsuitsList from '../../lawsuits/components/LawsuitsList';
 
 class ClientShow extends Component {
@@ -61,7 +61,7 @@ class ClientShow extends Component {
             <LawsuitsList clientId={client.id} />
           </div>
           <div className="segment">
-            <CounterpartsList counterparts={client.counterparts} />
+            <ClientCounterpartsList counterparts={client.counterparts} />
           </div>
           <div className="segment">
             <h3 >Anteckningar</h3>
