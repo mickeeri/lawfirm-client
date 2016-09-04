@@ -31,7 +31,6 @@ export const createUpdateClient = (params, lawsuitId = null) => {
     });
   }
 
-
   return axios.post(url, { client: params, lawsuit_id: lawsuitId },
     { headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });

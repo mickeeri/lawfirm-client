@@ -34,7 +34,6 @@ export const fetchLawsuitTypes = () =>
     headers: { Authorization: localStorage.getItem(AUTH_TOKEN_LS_KEY) },
   });
 
-
 export const createUpdateLawsuit = (params) => {
   const url = `${API_ROOT_URL}${API_LAWSUITS_PATH}`;
 
