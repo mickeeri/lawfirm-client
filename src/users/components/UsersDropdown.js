@@ -21,7 +21,7 @@ class UsersDropdown extends Component {
         <select
           name="users"
           className="ui fluid dropdown"
-          defaultValue={currentUserId}
+          value={currentUserId}
           ref={node => { dropdown = node; }}
           onChange={(e) => {
             dropdown.value = e.target.value;
@@ -47,7 +47,7 @@ UsersDropdown.propTypes = {
     id: PropTypes.number.isRequired,
     full_name: PropTypes.string.isRequired,
   }).isRequired),
-  currentUserId: PropTypes.number,
+  currentUserId: PropTypes.number.isRequired,
   onDropdownChange: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
 };
