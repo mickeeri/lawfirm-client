@@ -5,8 +5,8 @@
 
 body {
   background-color: #F9F9F9;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-size: .9em;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 14px;
   color: #676a6c;
 }
 
@@ -100,6 +100,11 @@ input, button, a, .checkbox {
   padding: 6px 10px !important;
 }
 
+/*.segment button {
+  padding: 5px 15px !important;
+  font-weight: normal !important;
+}*/
+
 /******************************************/
 /* Segment */
 /*****************************************/
@@ -141,12 +146,20 @@ input, button, a, .checkbox {
   margin-top: 20px;
   border: 1px solid #d9d9d9;
   box-shadow: 0 1px 1px 1px rgba(0,0,0,0.04);
+  border-radius: 6px;
+}
+
+.archived .card-header {
+  background-color: #808080;
 }
 
 .card-header {
   padding: 10px 15px;
-  background-color: #6fa8dc;
+  /*background-color: #6fa8dc;*/
+  background-color: #273135;
   color: white;
+  border-radius: 6px 4px 0 0;
+  margin: -1px;
 }
 
 .card-header h3 {
@@ -181,14 +194,17 @@ input, button, a, .checkbox {
   text-decoration: none;
   position: relative;
   border: 1px solid #d9d9d9;
-  border-bottom: 0;
   margin-right: 6px;
   border-radius: 5px 5px 0 0;
+  margin-bottom: -1px;
 }
 
 .tabs li a.active {
-  bottom: -1px;
+  /*bottom: -1px;*/
   /*background: linear-gradient(top, white, #eee);*/
+  background: white;
+  border-top-color: orange;
+  border-bottom-color: transparent;
 }
 
 .tabs li a:hover {
@@ -205,8 +221,9 @@ input, button, a, .checkbox {
 }
 
 .tabbed.segment {
-  border-top: none;
   margin-top: 0;
+  padding-top: 2px;
+  border-top: 0;
 }
 
 .segment-menu a {
@@ -516,7 +533,7 @@ input:focus, textarea:focus {
   display: inline;
 }
 
-.archived .fa {
+.archived-icon .fa {
   margin-right: 5px;
 }
 
@@ -528,10 +545,15 @@ input:focus, textarea:focus {
   color: white;
 }
 
-.archived {
+.lawsuit-show h2 {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.archived-icon {
   font-size: 1.5em;
   color: #9F3A38;
-  align-self: flex-end;
 }
 
 .lawsuit-show-header h2 {
@@ -685,6 +707,10 @@ ul {
 
 .show-list p, .card-list p {
   margin: 5px 0;
+}
+
+.show-list a {
+  font-weight: bold;
 }
 
 
