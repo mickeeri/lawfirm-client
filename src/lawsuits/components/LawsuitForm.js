@@ -4,6 +4,7 @@ import Icon from 'react-fa';
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import LawsuitTypesDropdown from './LawsuitTypesDropdown';
+import { Button } from '../../shared';
 
 const validate = values => {
   const errors = {};
@@ -61,32 +62,30 @@ let LawsuitForm = props => {
 
       <div className="button-group">
         {toggleEdit ?
-          <button
-            className="ui button"
+          <Button
+            type="basic"
             onClick={(e) => {
               e.preventDefault();
               toggleEdit();
             }}
-          ><Icon name="times" />Avbryt</button> :
-          <button
+          ><Icon name="times" />Avbryt</Button> :
+          <Button
             onClick={(e) => {
               e.preventDefault();
               props.dispatch(closeDialog('lawsuitFormDialog'));
             }}
-            className="ui button"
-          ><Icon name="times" />Stäng</button>
+            type="basic"
+          ><Icon name="times" />Stäng</Button>
         }
-
-        <button
-          className="ui orange button" disabled={pristine || submitting}
+        <Button
+          type="basic"
+          disabled={pristine || submitting}
           onClick={reset}
-        >Återställ</button>
-
-        <button
-          type="submit"
+        >Återställ</Button>
+        <Button
           disabled={submitting}
-          className="ui button primary"
-        ><Icon name="check" />{edit ? 'Spara ändringar' : 'Skapa ärende'}</button>
+          type="success"
+        ><Icon name="check" />{edit ? 'Spara ändringar' : 'Skapa ärende'}</Button>
       </div>
     </form>
   );

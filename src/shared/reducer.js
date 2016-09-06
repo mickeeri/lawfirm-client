@@ -8,6 +8,7 @@ const initialState = {
   successMessage: '',
   errorMessage: '',
   closeAllAlerts: true,
+  modalIsOpen: false,
 };
 
 const sharedReducer = (state = initialState, action) => {
@@ -30,12 +31,14 @@ const sharedReducer = (state = initialState, action) => {
     case lawsuitTypes.CREATE_LAWSUITS_REQUEST:
     case lawsuitTypes.RESET_LAWSUITS:
       return initialState;
-    case lawsuitTypes.CREATE_LAWSUIT_SUCCESS:
-    case counterpartTypes.DELETE_COUNTERPART_FROM_LAWSUIT_SUCCESS:
-    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT_SUCCESS:
-    case clientTypes.DELETE_CLIENT_FROM_LAWSUIT_SUCCESS:
     case clientTypes.CREATE_CLIENT_SUCCESS:
+    case clientTypes.DELETE_CLIENT_FROM_LAWSUIT_SUCCESS:
+    case clientTypes.DELETE_CLIENT_SUCCESS:
+    case counterpartTypes.ADD_COUNTERPART_TO_LAWSUIT_SUCCESS:
+    case counterpartTypes.DELETE_COUNTERPART_FROM_LAWSUIT_SUCCESS:
     case counterpartTypes.UPDATE_COUNTERPART_SUCCESS:
+    case lawsuitTypes.CREATE_LAWSUIT_SUCCESS:
+    case lawsuitTypes.DELETE_LAWSUIT_SUCCESS:
       return {
         successMessage: action.successMessage,
         errorMessage: '',
@@ -45,6 +48,11 @@ const sharedReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessage: action.errorMessage,
+      };
+    case 'TOGGLE_MODAL':
+      return {
+        ...state,
+        modalIsOpen: !state.modalIsOpen,
       };
     default:
       return state;

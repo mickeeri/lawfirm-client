@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import Icon from 'react-fa';
 import * as messages from '../../shared/messages';
 import ErrorAlertBox from '../../shared/components/ErrorAlertBox';
+import { Button } from '../../shared';
 
 const validate = values => {
   const errors = {};
@@ -51,7 +52,7 @@ const SignInForm = (props) => {
       />
       <ErrorAlertBox errorMessage={errorMessage} />
       <div>
-        <button type="submit" disabled={submitting} className="ui button primary">Logga in</button>
+        <Button type="floating success">Logga in</Button>
       </div>
     </form>
   );

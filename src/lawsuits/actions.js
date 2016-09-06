@@ -95,7 +95,7 @@ export const deleteLawsuit = (id) => (dispatch) =>
   api.deleteLawsuit(id).then(
     () => {
       dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
-      dispatch({ type: DELETE_LAWSUIT_SUCCESS });
+      dispatch({ type: DELETE_LAWSUIT_SUCCESS, successMessage: 'Ärende raderat' });
       browserHistory.push(LAWSUITS_PATH);
     },
     error => {
