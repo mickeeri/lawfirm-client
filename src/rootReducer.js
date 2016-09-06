@@ -6,6 +6,7 @@ import { usersReducer } from './users';
 import { clientsReducer } from './clients';
 import { counterpartsReducer } from './counterparts';
 import sharedReducer from './shared/reducer';
+import modalReducer from './modals/reducer';
 
 const rootReducer = combineReducers({
   form,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   dialogs: dialogReducer,
   counterparts: counterpartsReducer,
   shared: sharedReducer,
+  modals: modalReducer,
 });
 
 export default rootReducer;
