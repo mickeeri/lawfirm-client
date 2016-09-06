@@ -9,7 +9,7 @@ const ClientCounterpartsList = ({ counterparts }) =>
       {counterparts.map(counterpart =>
         <li key={counterpart.id}>
           <Link to={`${COUNTERPARTS_PATH}/${counterpart.id}`}>
-            <strong>{counterpart.first_name} {counterpart.last_name}</strong>
+            {counterpart.first_name} {counterpart.last_name}
           </Link>
           <p>{counterpart.personal_number}</p>
         </li>
@@ -18,11 +18,11 @@ const ClientCounterpartsList = ({ counterparts }) =>
   </div>;
 
 ClientCounterpartsList.propTypes = {
-  counterparts: PropTypes.shape({
+  counterparts: PropTypes.arrayOf(PropTypes.shape({
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
     personal_number: PropTypes.string.isRequired,
-  }).isRequired,
+  })),
 };
 
 export default ClientCounterpartsList;

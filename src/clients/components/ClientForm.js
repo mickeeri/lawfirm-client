@@ -2,30 +2,26 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Icon from 'react-fa';
 import { connect } from 'react-redux';
-import {
-  FIRST_NAME_REQ_MESSAGE,
-  LAST_NAME_REQ_MESSAGE,
-  EMAIL_INVALID_MESSAGE,
-  PERSONAL_NUMBER_REQ_MESSAGE,
-} from '../../shared';
+import * as messages from '../../shared/messages';
+
 
 const validate = values => {
   const errors = {};
 
   // Name validation
   if (!values.first_name) {
-    errors.first_name = FIRST_NAME_REQ_MESSAGE;
+    errors.first_name = messages.FIRST_NAME_REQ_MESSAGE;
   }
   if (!values.last_name) {
-    errors.last_name = LAST_NAME_REQ_MESSAGE;
+    errors.last_name = messages.LAST_NAME_REQ_MESSAGE;
   }
 
   if (!values.personal_number) {
-    errors.personal_number = PERSONAL_NUMBER_REQ_MESSAGE;
+    errors.personal_number = messages.PERSONAL_NUMBER_REQ_MESSAGE;
   }
 
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = EMAIL_INVALID_MESSAGE;
+    errors.email = messages.EMAIL_INVALID_MESSAGE;
   }
 
   return errors;

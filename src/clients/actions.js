@@ -52,9 +52,12 @@ export const toggleEdit = () => ({
 });
 
 const deleteClientSucess = (dispatch) => {
-  dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME));
+  dispatch(closeDialog(constants.DELETE_CLIENT_MODAL_NAME));
   browserHistory.push(constants.CLIENTS_PATH);
-  return { type: types.DELETE_CLIENT_SUCCESS };
+  return {
+    type: types.DELETE_CLIENT_SUCCESS,
+    successMessage: 'Klient raderad',
+  };
 };
 
 // DELETE

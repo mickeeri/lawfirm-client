@@ -1,23 +1,41 @@
 import React, { PropTypes } from 'react';
 import Icon from 'react-fa';
+import reduxDialog, { openDialog, closeDialog } from 'redux-dialog';
 import { connect } from 'react-redux';
-import { openDialog, closeDialog } from 'redux-dialog';
 import ConfirmDeleteDialog from '../../shared/components/ConfirmDeleteDialog';
-import { CONFIRM_DELETE_MODAL_NAME } from '../../shared';
 import { deleteClient } from '../actions';
+import { DELETE_CLIENT_MODAL_NAME } from '../constants';
 
-const ClientDeleteButton = ({ dispatch, clientId, errorMessage }) =>
-  <div className="ClientDeleteButton">
-    <h3 >Inställningar</h3>
+let DeleteClientModal = ({ handleDelete, close }) =>
+  <div>
     <ConfirmDeleteDialog
       label="klient"
-      errorMessage={errorMessage}
-      deleteFunc={() => { dispatch(deleteClient(clientId)); }}
-      close={() => { dispatch(closeDialog(CONFIRM_DELETE_MODAL_NAME)); }}
+      deleteFunc={handleDelete}
+      close={close}
+    />
+  </div>;
+
+DeleteClientModal.propTypes = {
+  handleDelete: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+};
+
+DeleteClientModal = reduxDialog({
+  name: DELETE_CLIENT_MODAL_NAME,
+  className: 'modal confirm-delete-modal',
+  overlayClassName: 'modal-overlay',
+})(DeleteClientModal);
+
+const ClientDeleteButton = ({ dispatch, clientId }) =>
+  <div className="ClientDeleteButton">
+    <h3 >Inställningar</h3>
+    <DeleteClientModal
+      handleDelete={() => { dispatch(deleteClient(clientId)); }}
+      close={() => { dispatch(closeDialog(DELETE_CLIENT_MODAL_NAME)); }}
     />
     <button
       className="negative ui button"
-      onClick={() => dispatch(openDialog(CONFIRM_DELETE_MODAL_NAME))}
+      onClick={() => dispatch(openDialog(DELETE_CLIENT_MODAL_NAME))}
     >
       <Icon name="user-times" />Radera
     </button>
@@ -29,9 +47,9 @@ ClientDeleteButton.propTypes = {
   errorMessage: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => (
-  { clientId: state.clients.client.id,
-    errorMessage: state.clients.errorMessage }
-);
+const mapStateToProps = (state) => ({
+  clientId: state.clients.client.id,
+  errorMessage: state.clients.errorMessage,
+});
 
-export default connect(mapStateToProps, null)(ClientDeleteButton);
+export default connect(mapStateToProps)(ClientDeleteButton);
