@@ -1,28 +1,17 @@
-/* global document */
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import createLogger from 'redux-logger';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import thunk from 'redux-thunk';
 import './index.css';
 import { AUTH_TOKEN_LS_KEY } from './shared';
 import { SIGNIN_SUCCESS } from './users';
-import reducers from './rootReducer';
 import routes from './routes';
+import configureStore from './configureStore';
 
-const middlewares = [thunk];
-if (process.env.NODE_ENV !== 'production' || false) {
-  middlewares.push(createLogger());
-}
-const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
-const store = createStoreWithMiddleware(reducers);
-
-const token = localStorage.getItem(AUTH_TOKEN_LS_KEY);
+const store = configureStore();
 
 // If user is signed in...
-if (token) {
+if (localStorage.getItem(AUTH_TOKEN_LS_KEY)) {
   // ...update application state.
   store.dispatch({ type: SIGNIN_SUCCESS });
 }
