@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import DeleteCounterpartModal from '../../counterparts/components/DeleteCounterpartModal';
 import LawsuitDeleteModal from '../../lawsuits/components/LawsuitDeleteModal';
 
 const MODAL_COMPONENTS = {
-  DELETE_COUNTERPART: DeleteCounterpartModal,
   DELETE_LAWSUIT: LawsuitDeleteModal,
 };
 
